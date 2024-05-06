@@ -1,0 +1,123 @@
+.login-container,
+.forgot-password-container,
+.register-container {
+  height: auto;
+  width: 24rem;
+  margin: auto;
+  margin-top: 20px;
+  padding: 2rem;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.main-content-container {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 15px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.form-field,
+.checkbox-container,
+.links-container,
+.button-container {
+  margin-top: 15px;
+  /* Adds space between each section */
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="password"],
+.form-field input[type="number"],
+.form-field input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  /* Ensure padding doesn't affect overall width */
+}
+
+
+/* Align buttons and links inside their containers */
+.button-container button,
+.links-container a {
+  display: block;
+  /* Make them block elements to take the full width */
+  /* Center them horizontally */
+  padding: 5px 5px;
+  /* Add some padding */
+}
+
+.button-container button,
+.button-logout {
+  display: block;
+  /* Full-width block elements */
+  width: 100%;
+  /* Full container width */
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  /* Space between buttons */
+  font-size: 16px;
+  /* Readable font size */
+  font-weight: bold;
+  /* Bold font for the button text */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
+  transition: background-color 0.3s;
+  /* Smooth background color transition for hover effect */
+}
+
+
+/* Style links to look more like buttons (if needed) */
+.links-container a {
+  background-color: transparent;
+  color: blue;
+  text-decoration: none;
+}
+
+.reset-password-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+input[readonly] {
+  background-color: #e9ecef;
+  color: #495057;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+input:not([readonly]) {
+  background-color: #ffffff;
+}
+
+#save-button {
+  padding: 10px 20px;
+  background-color: #00704A;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

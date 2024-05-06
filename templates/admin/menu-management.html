@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/static/css/admin/general.css">
+  <link rel="stylesheet" href="/static/css/admin/sidebar.css">
+  <link rel="stylesheet" href="/static/css/admin/main.css">
+
+  <title>Menu Management: Ones Café</title>
+  <link rel="icon" type="image/png" href="/static/images/icons/cafe.png">
+
+</head>
+
+<body>
+
+  <div class="whole-page">
+    <nav class="sidebar">
+      <div class="image-text">
+          <span class="image">
+              <img src="/static/images/icons/cafe.png" alt="Dashboard Icon">
+          </span>
+          <div class="text">Dashboard</div>
+      </div>
+      <ul id="js-menu-links" class="nav-links"></ul>
+  </nav>
+
+
+    <div class="main">
+      <div class="search-section">
+
+        <div class="title-part">Menu Management</div>
+
+        <div class="search-part">
+          <input class="search-bar" type="text" placeholder="Search">
+          <button class="search-button">
+            <i class='bx bx-search '></i>
+            <div class="tooltip">Search</div>
+          </button>
+          <div class="add-menu">
+            <a href="add-menu.html">
+              <button class="menu-adding">Add Menu</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-section flex-layout">
+        <div class="menu-elements"></div>
+        <div class="categories">
+          <div class="title">Categories</div>
+          <ul>
+            <li class="category"><a href="#" data-category="Soups">Soups</a></li>
+            <li class="category"><a href="#" data-category="Burgers">Burgers</a></li>
+            <li class="category"><a href="#" data-category="Pastas">Pastas</a></li>
+            <li class="category"><a href="#" data-category="Pizzas">Pizzas</a></li>
+            <li class="category"><a href="#" data-category="Mains">Mains</a></li>
+            <li class="category"><a href="#" data-category="Desserts">Desserts</a></li>
+            <li class="category"><a href="#" data-category="Smoothies">Smoothies</a></li>
+            <li class="category"><a href="#" data-category="Soft Drinks">Soft Drinks</a></li>
+            <li class="category"><a href="#" data-category="Coffee">Coffee</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
+    <script src="/static/js/admin/category.js"></script>
+    <script src="/static/js/menu/menuData.js"></script>
+    <script src="/static/js/admin/menu.js"></script>
+    <script src="/static/js/admin/main.js"></script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
+  <link rel="stylesheet" href="/static/css/admin/general.css">
+  <link rel="stylesheet" href="/static/css/admin/sidebar.css">
+  <link rel="stylesheet" href="/static/css/admin/main.css">
+  <link rel="stylesheet" href="/static/css/admin/add-menu.css">
+
+  <title>Add Menu: Ones Café</title>
+  <link rel="icon" type="image/png" href="/static/images/icons/cafe.png">
+
+</head>
+
+<body>
+
+  <div class="whole-page">
+    <nav class="sidebar">
+      <div class="image-text">
+        <span class="image">
+          <img src="/static/images/icons/cafe.png" alt="Dashboard Icon">
+        </span>
+        <div class="text">Dashboard</div>
+      </div>
+      <ul id="js-menu-links" class="nav-links"></ul>
+    </nav>
+
+    <div class="main">
+      <div class="main-section">
+        <h2 class="page-title">Add menu</h2>
+        <div class="add-text title">
+          <label>Title</label>
+          <input value="" type="text" name="title" class="text-input">
+
+        </div>
+        <div class="add-text">
+          <label>Details/Contents</label>
+          <textarea class="body" name="body"></textarea>
+        </div>
+        <div class="add-text">
+          <label>Image</label>
+          <input type="file" name="image" class="text-input">
+        </div>
+        <div class="add-text">
+          <label>Category</label>
+          <select name="topic_id" class="text-input">
+            <option value="">Soups</option>
+            <option value="">Burgers</option>
+            <option value="">Pastas</option>
+            <option value="">Pizzas</option>
+            <option value="">Mains</option>
+            <option value="">Desserts</option>
+            <option value="">Smoothies</option>
+            <option value="">Soft Drinks</option>
+            <option value="">Coffee</option>
+          </select>
+        </div>
+        <div class="add-text btn-place">
+          <button onclick="addMenu()" type="submit" class="add-menu">Add menu</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
+  <script src="/static/js/admin/category.js"></script>
+  <script src="/static/js/admin/main.js"></script>
+
+  <script>
+    function addMenu() {
+      console.log("Menu added");
+      alert("Menu has been added successfully.");
+
+      window.location.href = "/templates/admin/menu-management.html";
+    }
+
+    ClassicEditor
+      .create(document.querySelector('.body'), {
+        toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+        heading: {
+          options: [
+            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+          ]
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+  </script>
+</body>
+
+</html>

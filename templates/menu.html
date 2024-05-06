@@ -1,0 +1,185 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu: Ones Café</title>
+    <link rel="icon" type="image/png" href="/static/images/icons/cafe.png">
+    <link rel="stylesheet" href="/static/css/menu.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="/templates/index.html">
+                    <img src="/static/images/icons/cafe.png" alt="">
+                    <span>Ones Café</span>
+                </a>
+            </div>
+
+            <ul class="navbar-nav-left">
+                <li>
+                    <a href="/templates/home.html">Home</a>
+                </li>
+                <li class="navbar-nav-left-current">
+                    <a href="/templates/menu.html">Menu</a>
+                </li>
+                <li>
+                    <a href="/templates/rewards.html">Rewards</a>
+                </li>
+                <li>
+                    <a href="/templates/feedback.html">Feedback</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav-right">
+                <li>
+                    <a
+                        href="https://www.google.com/maps/place/45,+Jalan+17%2F45,+Seksyen+17,+46300+Petaling+Jaya,+Selangor,+Malaysia/@3.120318,101.62997,15z/data=!4m6!3m5!1s0x31cc495affc74ddd:0x1a0a8ad39581aad1!8m2!3d3.1203175!4d101.6299695!16s%2Fg%2F11h79rh_ky?hl=en&entry=ttu">
+                        <img src="/static/images/icons/navbar-location.svg" alt="">
+                        <span>Locate Us</span>
+                    </a>
+                </li>
+                <li>
+                    <button class="button btn-dark-outline" id="signInBtn"
+                        onclick="location.href='/templates/profile/profile.html';">Profile</button>
+                    <button class="button btn-dark" id="joinNowBtn" onclick="location.href='/templates/index.html';">Log
+                        Out</button>
+                </li>
+            </ul>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="menu-navbar">
+        <nav class="categories">
+            <a class="active" href="#soups">Soups</a>
+            <a href="#burgers">Burgers</a>
+            <a href="#pastas">Pastas</a>
+            <a href="#pizzas">Pizzas</a>
+            <a href="#mains">Mains</a>
+            <a href="#desserts">Desserts</a>
+            <a href="#smoothies">Smoothies</a>
+            <a href="#softDrinks">Soft Drinks</a>
+            <a href="#coffee">Coffee</a>
+        </nav>
+    </div>
+
+    <div id="menuContainer">
+        <!-- menu will be render here -->
+    </div>
+
+    <button class="fixed-button">
+        <a href="/templates/checkout.html">
+            <img src="/static/images/icons/checkout.svg" alt="">
+        </a>
+    </button>
+
+
+    <div id="order-modal" class="modal" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+        <div class="modal-content" tabindex="-1">
+            <span class="close-btn" aria-label="Close">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <div class="image">
+                <img id="modalImage" src="" alt="Product Image">
+            </div>
+            <p id="modalDescription"></p>
+            <span id="modalPrice" class="price"></span>
+            <br>
+            <textarea id="Instructions" name="Instructions" required aria-required="true"></textarea>
+            <p id="remark">Special Instructions</p>
+            <div class="quantity-container">
+                <button class="quantity-btn" id="decrease-quantity" aria-label="Decrease quantity">-</button>
+                <input type="text" id="quantity-input" value="1" aria-labelledby="quantity-label">
+                <button class="quantity-btn" id="increase-quantity" aria-label="Increase quantity">+</button>
+                <label id="quantity-label" class="visually-hidden" for="quantity-input">Quantity</label>
+            </div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+    </div>
+
+
+    <div class="divider"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="column">
+                    <div class="about">
+                        <div class="footer-phone">
+                            <p><img src="/static/images/icons/about-phone.svg" alt="">
+                                Mobile:&nbsp;<a href="https://wa.me/60163799597?Hello%20there!">016-3799597</a>
+                            </p>
+                        </div>
+                        <div class="footer-email">
+                            <p><img src="/static/images/icons/about-email.svg" alt="">
+                                Email:&nbsp;<a href="mailto:Onescafe@gmail.com">Onescafe@gmail.com</a>
+                            </p>
+                        </div>
+                        <div class="footer-time">
+                            <p><img src="/static/images/icons/about-clock.svg" alt="">
+                                Operation Hour:
+                            </p>
+                            <p class="time">
+                                Monday - Saturday
+                                <br>
+                                10:00 - 22:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="address">
+                        <div class="footer-address">
+                            <p><img src="/static/images/icons/navbar-location.svg" alt="">
+                                Address:
+                            </p>
+                            <p class="address">
+                                45, Jalan 17/45,
+                                <br>
+                                Seksyen 17,
+                                <br>
+                                46400 Petaling Jaya, Selangor
+                            </p>
+                        </div>
+                        <div class="footer-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed/v1/place?q=45%2C+Jalan+17%2F45%2C+Seksyen+17%2C+46400+Petaling+Jaya%2C+Selangor&key=AIzaSyAXlem_NLqSctq8xc_LozuyZCDmFxftxCw"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="social">
+                        <a href="https://spotify.com">
+                            <img src="/static/images/icons/social-spotify.svg" alt="">
+                        </a>
+                        <a href="https://www.facebook.com">
+                            <img src="/static/images/icons/social-facebook.svg" alt="">
+                        </a>
+                        <a href="https://www.pinterest.com">
+                            <img src="/static/images/icons/social-pinterest.svg" alt="">
+                        </a>
+                        <a href="https://www.instagram.com">
+                            <img src="/static/images/icons/social-instagram.svg" alt="">
+                        </a>
+                        <a href="https://www.youtube.com">
+                            <img src="/static/images/icons/social-youtube.svg" alt="">
+                        </a>
+                        <a href="https://www.twitter.com">
+                            <img src="/static/images/icons/social-twitter.svg" alt="">
+                        </a>
+                    </div>
+                    <p>© 2024 Ones Café Company. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/menu/menu.js"></script>
+    <script src="/static/js/menu/menuData.js"></script>
+</body>
+
+</html>

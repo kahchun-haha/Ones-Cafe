@@ -1,0 +1,193 @@
+.main {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.summary-module {
+  float: right;
+  width: 29%;
+  margin-left: 5% auto;
+}
+
+.ordersummary {
+  border: 2px solid var(--black);
+  padding: 5px;
+  margin-top: 15px;
+  border-radius: .5rem;
+}
+
+.order-summary div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.apply-btn,
+.confirm-btn {
+  font-family: "Nunito", sans-serif;
+  display: inline-block;
+  background: #907a68;
+  color: white;
+  border-radius: .5rem;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+}
+
+.apply-btn:hover,
+.confirm-btn:hover {
+  background: #514738;
+  letter-spacing: .1rem;
+  transition: all .2s linear;
+}
+
+.total {
+  margin-bottom: .5rem;
+}
+
+#promo-code {
+  width: 18rem;
+  border-radius: .5rem;
+  padding: .5rem;
+}
+
+.order-module {
+  width: 70%;
+  margin: 80 auto;
+  height: auto;
+  min-height: 250px;
+}
+
+.MyOrder {
+  border: 2px solid #ccc;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.cart {
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin-top: 15px;
+  border: 2px solid var(--black);
+  border-radius: .3rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.item-details {
+  display: flex;
+}
+
+.item-image {
+  width: 250px;
+  height: auto;
+  margin-right: 1.5rem;
+  border-radius: 1.5rem;
+}
+
+.item-info {
+  padding: 1.4rem;
+}
+
+.item-info h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.item-info p {
+  color: var(--light-color);
+  font-size: 1rem;
+}
+
+.item-info p.price {
+  color: var(--black);
+  font-weight: bold;
+}
+
+.item-actions .quantity-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--black);
+}
+
+.item-actions .quantity-btn {
+  width: 25px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.item-actions .quantity-input {
+  text-align: center;
+  width: 30px;
+  border: 1px solid #ccc;
+}
+
+.quantity-btn {
+  width: 25px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+
+.item-actions {
+  text-align: right;
+}
+
+.remove-btn {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.item-price {
+  font-weight: bold;
+  margin: 10px
+}
+
+.promo-code {
+  border-top: 2px solid #ccc;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Total-Price {
+  border-top: 2px solid #ccc;
+  padding: 10px;
+  margin-top: 15px;
+  text-align: right;
+}
+
+.quantity-btn {
+  width: 25px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+#quantity-input {
+  text-align: center;
+  width: 30px;
+  border: 1px solid #ccc;
+}
+
+.item-info h3{
+  text-transform: capitalize;
+}

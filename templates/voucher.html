@@ -1,0 +1,155 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards: Ones Café</title>
+    <link rel="icon" type="image/png" href="/static/images/icons/cafe.png">
+    <link rel="stylesheet" href="/static/css/rewards.css">
+    <link rel="stylesheet" href="/static/css/navbar-footer.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="/templates/index.html">
+                    <img src="/static/images/icons/cafe.png" alt="">
+                    <span>Ones Café</span>
+                </a>
+            </div>
+
+            <ul class="navbar-nav-left">
+                <li>
+                    <a href="/templates/index.html">Home</a>
+                </li>
+                <li>
+                    <a href="/templates/menu.html">Menu</a>
+                </li>
+                <li class="navbar-nav-left-current">
+                    <a href="/templates/rewards.html">Rewards</a>
+                </li>
+                <li>
+                    <a href="/templates/feedback.html">Feedback</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav-right">
+                <li>
+                    <a
+                        href="https://www.google.com/maps/place/45,+Jalan+17%2F45,+Seksyen+17,+46300+Petaling+Jaya,+Selangor,+Malaysia/@3.120318,101.62997,15z/data=!4m6!3m5!1s0x31cc495affc74ddd:0x1a0a8ad39581aad1!8m2!3d3.1203175!4d101.6299695!16s%2Fg%2F11h79rh_ky?hl=en&entry=ttu">
+                        <img src="/static/images/icons/navbar-location.svg" alt="">
+                        <span>Locate Us</span>
+                    </a>
+                </li>
+                <li>
+                    <button class="btn btn-dark-outline" id="signInBtn"
+                        onclick="location.href='/templates/profile/profile.html';">Profile</button>
+                    <button class="btn btn-dark" id="joinNowBtn" onclick="location.href='/templates/index.html';">Log
+                        Out</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="loyalty-points">
+        <h2>Your Loyalty Points: <span id="points-display">0</span></h2>
+        <p>Redeem vouchers with your points. Each voucher redemption requires points.</p>
+    </div>
+
+    <div class="notifications">
+        <h2>Latest Promotions</h2>
+        <ul id="promotion-notifications">
+        </ul>
+    </div>
+
+    <div class="Promotions">
+        <h1 class="promotion-title">Collected Vouchers</h1>
+        <div class="promotion-container" id="voucher-collector">
+            <ul class="voucher-detail"></ul>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="column">
+                    <div class="about">
+                        <div class="footer-phone">
+                            <p><img src="/static/images/icons/about-phone.svg" alt="">
+                                Mobile:&nbsp;<a href="https://wa.me/60163799597?Hello%20there!">016-3799597</a>
+                            </p>
+                        </div>
+                        <div class="footer-email">
+                            <p><img src="/static/images/icons/about-email.svg" alt="">
+                                Email:&nbsp;<a href="mailto:Onescafe@gmail.com">Onescafe@gmail.com</a>
+                            </p>
+                        </div>
+                        <div class="footer-time">
+                            <p><img src="/static/images/icons/about-clock.svg" alt="">
+                                Operation Hour:
+                            </p>
+                            <p class="time">
+                                Monday - Saturday
+                                <br>
+                                10:00 - 22:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="address">
+                        <div class="footer-address">
+                            <p><img src="/static/images/icons/navbar-location.svg" alt="">
+                                Address:
+                            </p>
+                            <p class="address">
+                                45, Jalan 17/45,
+                                <br>
+                                Seksyen 17,
+                                <br>
+                                46400 Petaling Jaya, Selangor
+                            </p>
+                        </div>
+                        <div class="footer-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed/v1/place?q=45%2C+Jalan+17%2F45%2C+Seksyen+17%2C+46400+Petaling+Jaya%2C+Selangor&key=AIzaSyAXlem_NLqSctq8xc_LozuyZCDmFxftxCw"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="social">
+                        <a href="https://spotify.com">
+                            <img src="/static/images/icons/social-spotify.svg" alt="">
+                        </a>
+                        <a href="https://www.facebook.com">
+                            <img src="/static/images/icons/social-facebook.svg" alt="">
+                        </a>
+                        <a href="https://www.pinterest.com">
+                            <img src="/static/images/icons/social-pinterest.svg" alt="">
+                        </a>
+                        <a href="https://www.instagram.com">
+                            <img src="/static/images/icons/social-instagram.svg" alt="">
+                        </a>
+                        <a href="https://www.youtube.com">
+                            <img src="/static/images/icons/social-youtube.svg" alt="">
+                        </a>
+                        <a href="https://www.twitter.com">
+                            <img src="/static/images/icons/social-twitter.svg" alt="">
+                        </a>
+                    </div>
+                    <p>© 2024 Ones Café Company. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/rewards/rewards.js"></script>
+
+</body>
+
+</html>x

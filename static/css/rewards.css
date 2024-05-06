@@ -1,0 +1,152 @@
+:root {
+    --peaches1: #dfd3c2;
+    --peaches2: #dfcfb5;
+    --peaches3: #daba9e;
+    --peaches4: #d6ae7e;
+    --peaches5: #c69468;
+    --background: #f1ede967;
+    --footer: #eeeff2;
+    --black: #1c1c1c;
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+.promotion-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(30rem, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+    margin: 10px;
+    overflow-x: hidden;
+}
+
+.promotion {
+    background: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.promotion-image {
+    height: 25rem;
+    width: 100%;
+    padding: 1.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.Promotions {
+    color: var(--black);
+    margin: 20px;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 2rem;
+    font-family: "Nunito", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px;
+    border: none;
+}
+
+.title p {
+    font-size: 25px;
+    font-style: var(--black);
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+}
+
+.voucher-collector-container {
+    padding-left: 10px;
+    margin: 20px 0;
+}
+
+.voucher-collector-img {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.voucher-collector-img img {
+    width: 50px;
+}
+
+.voucher-collector-img:hover {
+    transform: scale(1.05);
+}
+
+.voucher-collector-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: auto;
+}
+
+.voucher {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.promotion button {
+    background: #d6ae7e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.promotion button:hover {
+    background: #d6ae7e;
+}
+
+p {
+    font-size: 14px;
+}
+
+.notifications{
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.notifications ul,
+.promotion-container {
+    list-style-type: none;
+    padding: 0;
+}
+
+.voucher {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.voucher-detail {
+    align-items: center;
+    border: 2px dashed #aaa;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.loyalty-points {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
