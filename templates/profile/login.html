@@ -1,36 +1,38 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page: Ones Café</title>
-    <link rel="icon" type="image/png" href="/static/images/icons/cafe.png">
-    <link rel="stylesheet" href="/static/css/profile.css">
-    <link rel="stylesheet" href="/static/css/navbar-footer.css">
-    </head>
-    <body>
+    <link rel="icon" type="image/png" href="/images/icons/cafe.png">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/navbar-footer.css">
+</head>
+
+<body>
 
     <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-brand">
-                <a href="/templates/index.html">
-                    <img src="/static/images/icons/cafe.png" alt="">
+                <a href="/">
+                    <img src="/images/icons/cafe.png" alt="">
                     <span>Ones Café</span>
                 </a>
             </div>
 
             <ul class="navbar-nav-left">
                 <li>
-                    <a href="/templates/home.html">Home</a>
+                    <a href="/home">Home</a>
                 </li>
                 <li>
-                    <a href="/templates/menu.html">Menu</a>
+                    <a href="/menu">Menu</a>
                 </li>
                 <li>
-                    <a href="/templates/rewards.html">Rewards</a>
+                    <a href="/rewards">Rewards</a>
                 </li>
                 <li>
-                    <a href="/templates/feedback.html">Feedback</a>
+                    <a href="/feedback">Feedback</a>
                 </li>
             </ul>
 
@@ -38,13 +40,15 @@
                 <li>
                     <a
                         href="https://www.google.com/maps/place/45,+Jalan+17%2F45,+Seksyen+17,+46300+Petaling+Jaya,+Selangor,+Malaysia/@3.120318,101.62997,15z/data=!4m6!3m5!1s0x31cc495affc74ddd:0x1a0a8ad39581aad1!8m2!3d3.1203175!4d101.6299695!16s%2Fg%2F11h79rh_ky?hl=en&entry=ttu">
-                        <img src="/static/images/icons/navbar-location.svg" alt="">
+                        <img src="/images/icons/navbar-location.svg" alt="">
                         <span>Locate Us</span>
                     </a>
                 </li>
                 <li>
-                    <button class="btn btn-dark-outline" onclick="location.href='/templates/profile/login.html';">Sign in</button>
-                    <button class="btn btn-dark" onclick="location.href='/templates/profile/register.html';">Join now</button>
+                    <button class="btn btn-dark-outline" onclick="location.href='/login';">Sign
+                        in</button>
+                    <button class="btn btn-dark" onclick="location.href='/register';">Join
+                        now</button>
                 </li>
             </ul>
         </div>
@@ -63,12 +67,13 @@
             <label for="keep-signed-in">Keep me signed in.</label>
         </div>
         <div class="links-container">
-            <a href="/templates/profile/forgotPassword.html">Forgot your password?</a>
-            <a href="/templates/profile/register.html">Register</a>
+            <a href="/forgotPassword">Forgot your password?</a>
+            <a href="/register">Register</a>
         </div>
         <div class="button-container">
             <button type="submit" id="login">Sign in</button>
-            <button type="submit" id="login" onclick="location.href='/templates/admin/menu-management.html'">Log in as Admin</button>
+            <button type="submit" id="loginAdmin" onclick="location.href='/admin/menu-management'">Log in as
+                Admin</button>
         </div>
         </form>
     </div>
@@ -81,17 +86,17 @@
                 <div class="column">
                     <div class="about">
                         <div class="footer-phone">
-                            <p><img src="/static/images/icons/about-phone.svg" alt="">
+                            <p><img src="/images/icons/about-phone.svg" alt="Phone Icon">
                                 Mobile:&nbsp;<a href="https://wa.me/60163799597?Hello%20there!">016-3799597</a>
                             </p>
                         </div>
                         <div class="footer-email">
-                            <p><img src="/static/images/icons/about-email.svg" alt="">
+                            <p><img src="/images/icons/about-email.svg" alt="Email Icon">
                                 Email:&nbsp;<a href="mailto:Onescafe@gmail.com">Onescafe@gmail.com</a>
                             </p>
                         </div>
                         <div class="footer-time">
-                            <p><img src="/static/images/icons/about-clock.svg" alt="">
+                            <p><img src="/images/icons/about-clock.svg" alt="Clock Icon">
                                 Operation Hour:
                             </p>
                             <p class="time">
@@ -105,7 +110,7 @@
                 <div class="column">
                     <div class="address">
                         <div class="footer-address">
-                            <p><img src="/static/images/icons/navbar-location.svg" alt="">
+                            <p><img src="/images/icons/navbar-location.svg" alt="Location Icon">
                                 Address:
                             </p>
                             <p class="address">
@@ -119,7 +124,7 @@
                         <div class="footer-map">
                             <iframe
                                 src="https://www.google.com/maps/embed/v1/place?q=45%2C+Jalan+17%2F45%2C+Seksyen+17%2C+46400+Petaling+Jaya%2C+Selangor&key=AIzaSyAXlem_NLqSctq8xc_LozuyZCDmFxftxCw"
-                                allowfullscreen>
+                                title="Ones Café Location" allowfullscreen>
                             </iframe>
                         </div>
                     </div>
@@ -127,22 +132,22 @@
                 <div class="column">
                     <div class="social">
                         <a href="https://spotify.com">
-                            <img src="/static/images/icons/social-spotify.svg" alt="">
+                            <img src="/images/icons/social-spotify.svg" alt="Spotify">
                         </a>
                         <a href="https://www.facebook.com">
-                            <img src="/static/images/icons/social-facebook.svg" alt="">
+                            <img src="/images/icons/social-facebook.svg" alt="Facebook">
                         </a>
                         <a href="https://www.pinterest.com">
-                            <img src="/static/images/icons/social-pinterest.svg" alt="">
+                            <img src="/images/icons/social-pinterest.svg" alt="Pinterest">
                         </a>
                         <a href="https://www.instagram.com">
-                            <img src="/static/images/icons/social-instagram.svg" alt="">
+                            <img src="/images/icons/social-instagram.svg" alt="Instagram">
                         </a>
                         <a href="https://www.youtube.com">
-                            <img src="/static/images/icons/social-youtube.svg" alt="">
+                            <img src="/images/icons/social-youtube.svg" alt="YouTube">
                         </a>
                         <a href="https://www.twitter.com">
-                            <img src="/static/images/icons/social-twitter.svg" alt="">
+                            <img src="/images/icons/social-twitter.svg" alt="Twitter">
                         </a>
                     </div>
                     <p>© 2024 Ones Café Company. All rights reserved</p>
@@ -152,20 +157,20 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const loginButton = document.getElementById('login');
             if (loginButton) {
-                loginButton.addEventListener('click', function(event) {
+                loginButton.addEventListener('click', function (event) {
                     event.preventDefault(); // Prevent the form from submitting traditionally
                     const email = document.getElementById('login-email').value;
                     const password = document.getElementById('login-password').value;
                     // Assuming 'user' was stored as an object {email, password} during registration
                     const storedUser = JSON.parse(localStorage.getItem('user'));
-    
+
                     if (storedUser && email === storedUser.email && password === storedUser.password) {
                         localStorage.setItem('isLoggedIn', 'true');
                         alert('Login successful!');
-                        window.location.href = '/templates/home.html'; // Redirect after successful login
+                        window.location.href = '/'; // Redirect after successful login
                     } else {
                         alert('Invalid credentials. Please try again.');
                     }
@@ -174,5 +179,6 @@
         });
     </script>
 
-    </body>
-    </html>
+</body>
+
+</html>

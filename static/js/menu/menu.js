@@ -93,49 +93,50 @@ document.addEventListener("DOMContentLoaded", function () {
       let item = btn.closest(".box");
       let itemName = item.querySelector("h3").textContent;
       let itemDescription = item.querySelector("p").textContent;
-      let itemPrice = item.querySelector(".price").textContent; 
+      let itemPrice = item.querySelector(".price").textContent;
       let itemImage = item.querySelector(".image img").src;
-  
+
       modalTitle.textContent = itemName;
       modalDescription.textContent = itemDescription;
       document.getElementById("modalPrice").textContent = itemPrice;
       document.getElementById("modalImage").src = itemImage;
-  
+
       modal.style.display = "block";
     });
   });
-  
+
   addToCartButton.addEventListener("click", function (event) {
     event.preventDefault();
     let itemName = modalTitle.textContent;
     let itemQuantity = parseInt(quantityInput.value);
     let itemDescription = modalDescription.textContent;
-    let itemPrice = parseFloat(document.getElementById('modalPrice').textContent.replace(/[^\d.]/g, ''));
-    let itemImage = document.getElementById('modalImage').src;
-  
+    let itemPrice = parseFloat(
+      document.getElementById("modalPrice").textContent.replace(/[^\d.]/g, "")
+    );
+    let itemImage = document.getElementById("modalImage").src;
+
     let cartItem = {
       name: itemName,
       description: itemDescription,
       quantity: itemQuantity,
       price: itemPrice,
-      image: itemImage
+      image: itemImage,
     };
-  
+
     addToLocalStorage(cartItem);
-  
+
     alert(itemQuantity + " x " + itemName + " added to the cart");
     modal.style.display = "none";
     quantityInput.value = 1;
     document.getElementById("Instructions").value = "";
   });
-  
+
   function addToLocalStorage(item) {
-    let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
     cart.push(item);
-    localStorage.setItem('cartItems', JSON.stringify(cart));
+    localStorage.setItem("cartItems", JSON.stringify(cart));
   }
 
-  
   closeButton.onclick = () => {
     modal.style.display = "none";
     quantityInput.value = 1;

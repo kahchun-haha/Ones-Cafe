@@ -56,16 +56,32 @@ app.get('/rewards', (req, res) => {
   sendFileWithLogging(res, path.join(__dirname, 'templates', 'rewards.html'));
 });
 
+app.get('/voucher', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'voucher.html'));
+});
+
 app.get('/feedback', (req, res) => {
   sendFileWithLogging(res, path.join(__dirname, 'templates', 'feedback.html'));
 });
 
-app.get('/profile/login', (req, res) => {
+app.get('/login', (req, res) => {
   sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'login.html'));
 });
 
-app.get('/profile/register', (req, res) => {
+app.get('/register', (req, res) => {
   sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'register.html'));
+});
+
+app.get('/forgotPassword', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'forgotPassword.html'));
+});
+
+app.get('/resetPassword', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'resetPassword.html'));
+});
+
+app.get('/profile', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'profile.html'));
 });
 
 // Fallback route for handling 404 errors
