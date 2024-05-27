@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
                               <div class="category-for-menu-item"><i class='bx bx-category'></i> Category: ${cat.category}</div>
                               <div class="cost"><i class='bx bx-dollar-circle'></i> Price: ${item.price}</div>
                           </div>
-                          <a href="/templates/admin/change-menu.html" class="read-more">Change</a>
+                          <a href="/admin/changeMenu" class="read-more">Change</a>
                       </div>
                   </div>`;
         });

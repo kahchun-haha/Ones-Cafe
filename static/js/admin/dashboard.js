@@ -1,9 +1,9 @@
 const categories = [
-  { id: "1", icon: "bx bx-food-menu", name: "Menu Management", link: "menu-management.html" },
-  { id: "2", icon: "bx bxs-book-content", name: "Order Management", link: "order-management.html" },
-  { id: "3", icon: "bx bxs-shopping-bag", name: "Inventory Management", link: "inventory.html" },
-  { id: "4", icon: "bx bx-pie-chart-alt", name: "Sales reporting", link: "sales-report.html" },
-  { id: "5", icon: "bx bx-log-out", name: "Log Out", link: "/templates/index.html" }
+  { id: "1", icon: "bx bx-food-menu", name: "Menu Management", link: "/admin/menuManagement" },
+  { id: "2", icon: "bx bxs-book-content", name: "Order Management", link: "/admin/orderManagement" },
+  { id: "3", icon: "bx bxs-shopping-bag", name: "Inventory Management", link: "/admin/inventory" },
+  { id: "4", icon: "bx bx-pie-chart-alt", name: "Sales reporting", link: "/admin/salesReport" },
+  { id: "5", icon: "bx bx-log-out", name: "Log Out", link: "/" }
 ];
 
 function initSidebar() {

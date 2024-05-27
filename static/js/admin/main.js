@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     menu.forEach((element) => {
         MenuHTML += `<div class="container">
             <div class="picture">
-                <img src="/static/images/menu/${element.id}.jpg" alt="${element.title}">
+                <img src="/images/menu/${element.id}.jpg" alt="${element.title}">
             </div>
             <div class="text">
                 <div class="title">

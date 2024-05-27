@@ -71,7 +71,7 @@ function applyPromoCode() {
   if (promoCode === validPromoCode) {
     const discount = subtotal() * 0.1;
     cartItems.push({
-      image: "/static/images/checkout/Discount.webp",
+      image: "/images/checkout/Discount.webp",
       name: "One Cafes Discount",
       description: "Opening Special Discount",
       price: -discount
@@ -103,7 +103,7 @@ function confirmOrder() {
   localStorage.removeItem('cartItems');
 
   // Redirect to menu page
-  window.location.href = "/templates/menu.html";
+  window.location.href = "/menu";
 }
 
 

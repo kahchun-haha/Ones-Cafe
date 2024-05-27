@@ -84,6 +84,30 @@ app.get('/profile', (req, res) => {
   sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'profile.html'));
 });
 
+app.get('/admin/menuManagement', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'menuManagement.html'));
+});
+
+app.get('/admin/orderManagement', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'orderManagement.html'));
+});
+
+app.get('/admin/addMenu', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'addMenu.html'));
+});
+
+app.get('/admin/changeMenu', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'changeMenu.html'));
+});
+
+app.get('/admin/inventory', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'inventory.html'));
+});
+
+app.get('/admin/salesReport', (req, res) => {
+  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'salesReport.html'));
+});
+
 // Fallback route for handling 404 errors
 app.use((req, res) => {
   sendFileWithLogging(res, path.join(__dirname, 'templates', '404.html'));

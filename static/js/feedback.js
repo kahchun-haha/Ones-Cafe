@@ -40,10 +40,10 @@ const buttons = document.querySelectorAll('.footer_btn');
         // Function to fill the stars up to the specified rating
         function fillStars(rating) {
             for (let i = 0; i < rating; i++) {
-                stars[i].src = "/static/images/feedback/starfilled.png";
+                stars[i].src = "/images/feedback/starfilled.png";
             }
             for (let i = rating; i < stars.length; i++) {
-                stars[i].src = "/static/images/icons/star.svg";
+                stars[i].src = "/images/icons/star.svg";
             }
         }
     }
