@@ -1,3 +1,9 @@
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const Menu = require('./models/Menu');
+
+dotenv.config();
+
 const menuData = [
     {
         category: 'Soups',
@@ -333,3 +339,18 @@ const menuData = [
         ]
     }
 ];
+
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(async () => {
+    console.log('Connected to MongoDB');
+    
+    await Menu.deleteMany({}); // Clear existing data
+    await Menu.insertMany(menuData); // Insert new data
+    
+    console.log('Menu data inserted');
+    mongoose.connection.close();
+}).catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+});

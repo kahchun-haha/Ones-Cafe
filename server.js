@@ -1,7 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
-const dotenv = require('dotenv');
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -10,20 +10,34 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'static'))); // Serve static files with /static prefix
+app.use(express.static(path.join(__dirname, "static"))); // Serve static files with /static prefix
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose
+  .connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB");
   })
-  .catch(err => {
-    console.error('Error connecting to MongoDB', err);
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
   });
 
+// Menu model
+const Menu = require("./models/Menu");
+
 // Define routes
-const userRoutes = require('./routes/users');
-app.use('/api/users', userRoutes);
+app.use("/api/users", require("./routes/users"));
+
+// API endpoint to get menu data
+app.get('/api/menu', async (req, res) => {
+  try {
+    const menuData = await Menu.find({});
+    res.json(menuData);
+  } catch (err) {
+    console.error('Error fetching menu data:', err);
+    res.status(500).send('Server Error');
+  }
+});
 
 // Serve HTML files for specific routes
 const sendFileWithLogging = (res, filePath) => {
@@ -36,81 +50,37 @@ const sendFileWithLogging = (res, filePath) => {
   });
 };
 
-app.get('/', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'index.html'));
-});
+// Define route handlers for serving HTML files
+const routes = [
+  { path: "/", file: "index.html" },
+  { path: "/home", file: "home.html" },
+  { path: "/menu", file: "menu.html" },
+  { path: "/checkout", file: "checkout.html" },
+  { path: "/rewards", file: "rewards.html" },
+  { path: "/voucher", file: "voucher.html" },
+  { path: "/feedback", file: "feedback.html" },
+  { path: "/login", file: "profile/login.html" },
+  { path: "/register", file: "profile/register.html" },
+  { path: "/forgotPassword", file: "profile/forgotPassword.html" },
+  { path: "/resetPassword", file: "profile/resetPassword.html" },
+  { path: "/profile", file: "profile/profile.html" },
+  { path: "/admin/menuManagement", file: "admin/menuManagement.html" },
+  { path: "/admin/orderManagement", file: "admin/orderManagement.html" },
+  { path: "/admin/addMenu", file: "admin/addMenu.html" },
+  { path: "/admin/changeMenu", file: "admin/changeMenu.html" },
+  { path: "/admin/inventory", file: "admin/inventory.html" },
+  { path: "/admin/salesReport", file: "admin/salesReport.html" },
+];
 
-app.get('/home', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'home.html'));
-});
-
-app.get('/menu', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'menu.html'));
-});
-
-app.get('/checkout', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'checkout.html'));
-});
-
-app.get('/rewards', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'rewards.html'));
-});
-
-app.get('/voucher', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'voucher.html'));
-});
-
-app.get('/feedback', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'feedback.html'));
-});
-
-app.get('/login', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'login.html'));
-});
-
-app.get('/register', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'register.html'));
-});
-
-app.get('/forgotPassword', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'forgotPassword.html'));
-});
-
-app.get('/resetPassword', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'resetPassword.html'));
-});
-
-app.get('/profile', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'profile', 'profile.html'));
-});
-
-app.get('/admin/menuManagement', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'menuManagement.html'));
-});
-
-app.get('/admin/orderManagement', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'orderManagement.html'));
-});
-
-app.get('/admin/addMenu', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'addMenu.html'));
-});
-
-app.get('/admin/changeMenu', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'changeMenu.html'));
-});
-
-app.get('/admin/inventory', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'inventory.html'));
-});
-
-app.get('/admin/salesReport', (req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', 'admin', 'salesReport.html'));
+routes.forEach(route => {
+  app.get(route.path, (req, res) => {
+    sendFileWithLogging(res, path.join(__dirname, "templates", route.file));
+  });
 });
 
 // Fallback route for handling 404 errors
 app.use((req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, 'templates', '404.html'));
+  sendFileWithLogging(res, path.join(__dirname, "templates", "404.html"));
 });
 
 app.listen(PORT, () => {
