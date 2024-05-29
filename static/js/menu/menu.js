@@ -114,7 +114,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addToLocalStorage(item) {
       const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-      cart.push(item);
+      const existingItemIndex = cart.findIndex(cartItem => cartItem.name === item.name);
+
+      if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += item.quantity;
+      } else {
+        cart.push(item);
+      }
+
       localStorage.setItem("cartItems", JSON.stringify(cart));
     }
 
