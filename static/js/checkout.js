@@ -21,6 +21,7 @@ function updateCartDisplay() {
           <p class="price">Price: RM ${item.price.toFixed(2)}</p>
         </div>
       </div>
+      ${item.name !== "Ones Café Discount" ? `
       <div class="item-actions">
         <div class="quantity-container">
           <button class="quantity-btn" onclick="changeItemQuantity(${index}, -1)" aria-label="Decrease quantity">-</button>
@@ -29,6 +30,7 @@ function updateCartDisplay() {
           <label id="quantity-label-${index}" class="visually-hidden">Quantity</label>
         </div>
       </div>
+      ` : ''}
     </div>
   `).join("");
 
@@ -66,27 +68,34 @@ function calculateServiceTax(subtotal) {
 }
 
 function applyPromoCode() {
-  const promoCode = document.getElementById("promo-code").value;
+  const promoCodeInput = document.getElementById("promo-code");
+  const promoCode = promoCodeInput.value;
   const validPromoCode = "10%OnesCafe";
+
   if (promoCode === validPromoCode) {
-    const discount = subtotal() * 0.1;
-    cartItems.push({
-      image: "/images/checkout/Discount.webp",
-      name: "One Cafes Discount",
-      description: "Opening Special Discount",
-      price: -discount
-    });
+    const discountItemIndex = cartItems.findIndex(item => item.name === "Ones Café Discount");
 
-    // Set quantity of all items in the cart to 1
-    cartItems.forEach(item => {
-      item.quantity = 1;
-    });
+    if (discountItemIndex === -1) {
+      const discount = subtotal() * 0.1;
+      cartItems.push({
+        image: "/images/checkout/Discount.webp",
+        name: "Ones Café Discount",
+        description: "Opening Special Discount",
+        price: -discount,
+        quantity: 1
+      });
 
-    updateCartDisplay();
-    alert("Promo code applied!");
+      updateCartDisplay();
+      alert("Promo code applied!");
+    } else {
+      alert("Promo code already applied!");
+    }
   } else {
     alert("Invalid promo code");
   }
+
+  // Clear the input field
+  promoCodeInput.value = "";
 }
 
 function confirmOrder() {
@@ -105,8 +114,6 @@ function confirmOrder() {
   // Redirect to menu page
   window.location.href = "/menu";
 }
-
-
 
 function subtotal() {
   return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
