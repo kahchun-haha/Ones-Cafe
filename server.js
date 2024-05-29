@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "static"))); // Serve static files with /static prefix
+app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 
 // MongoDB connection
 mongoose
@@ -83,6 +83,8 @@ app.use((req, res) => {
   sendFileWithLogging(res, path.join(__dirname, "templates", "404.html"));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
+  const open = (await import('open')).default;
+  open(`http://localhost:${PORT}`);
 });

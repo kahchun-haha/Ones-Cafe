@@ -14,18 +14,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function createMenuItem(item) {
     return `
-          <div class="box">
-              <div class="image">
-                  <img src="${item.image}" alt="${item.name}">
-              </div>
-              <div class="content">
-                  <h3>${item.name}</h3>
-                  <p>${item.description}</p>
-                  <button class="btn" aria-label="Add ${item.name} to cart">Add to cart</button>
-                  <span class="price">${item.price}</span>
-              </div>
-          </div>
-      `;
+      <div class="box">
+        <div class="image">
+          <img src="${item.image}" alt="${item.name}">
+        </div>
+        <div class="content">
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <button class="btn" aria-label="Add ${item.name} to cart">Add to cart</button>
+          <span class="price">${item.price}</span>
+        </div>
+      </div>
+    `;
   }
 
   function renderMenu(menuData) {
@@ -33,20 +33,22 @@ document.addEventListener("DOMContentLoaded", function () {
     container.innerHTML = ""; // Clear any existing content
     menuData.forEach((category) => {
       const itemsHTML = category.items.map(createMenuItem).join("");
+      const categoryID = category.category.toLowerCase().replace(" ", "-");
       const categoryHTML = `
-              <section class="${category.category.toLowerCase()}" id="${category.category.toLowerCase()}">
-                  <div class="menu">
-                      <h1 class="heading">${category.category}</h1>
-                      <div class="box-container">
-                          ${itemsHTML}
-                      </div>
-                  </div>
-              </section>
-          `;
+        <section class="${categoryID}" id="${categoryID}">
+          <div class="menu">
+            <h1 class="heading">${category.category}</h1>
+            <div class="box-container">
+              ${itemsHTML}
+            </div>
+          </div>
+        </section>
+      `;
       container.innerHTML += categoryHTML;
     });
 
     attachModalHandlers();
+    attachScrollSpy();
   }
 
   function attachModalHandlers() {
@@ -133,40 +135,45 @@ document.addEventListener("DOMContentLoaded", function () {
     decreaseButton.addEventListener("click", () => updateQuantity(-1));
   }
 
+  function attachScrollSpy() {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".categories a");
+    const menu = document.querySelector(".menu-navbar");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 60) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").substring(1) === current) {
+          link.classList.add("active");
+        }
+      });
+
+      menu.style.display = window.scrollY > 5 ? "flex" : "none";
+    });
+  }
+
   fetchMenuData();
 
-  const menu = document.querySelector(".menu-navbar");
-  const navbar = document.querySelector(".categories");
-
-  menu.onclick = () => {
-    navbar.classList.toggle("active");
-  };
-
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll(".menu-navbar .categories a");
-
-  window.onscroll = () => {
-    navbar.classList.remove("active");
-
-    menu.style.display = window.scrollY > 5 ? "flex" : "none";
-
-    sections.forEach((sec) => {
-      const top = window.scrollY;
-      const offset = sec.offsetTop - 150;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute("id");
-
-      if (top >= offset && top < offset + height) {
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-        });
-        const activeLink = document.querySelector(
-          `.menu-navbar .categories a[href='#${id}']`
-        );
-        if (activeLink) {
-          activeLink.classList.add("active");
-        }
-      }
+  // Add smooth scroll for navbar links
+  const navLinks = document.querySelectorAll(".categories a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const targetId = this.getAttribute("href").substring(1);
+      const targetElement = document.getElementById(targetId);
+      window.scrollTo({
+        top: targetElement.offsetTop - 50,
+        behavior: "smooth",
+      });
     });
-  };
+  });
 });
