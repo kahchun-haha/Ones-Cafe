@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   async function fetchMenuData() {
     try {
-      const response = await fetch("/api/menu");
+      const response = await fetch("/api/menus");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

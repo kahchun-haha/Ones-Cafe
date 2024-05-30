@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
+const menuRoutes = require('./routes/menus');
 
 dotenv.config();
 
@@ -11,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "static"))); // Serve static files
+
+// Use the menu routes
+app.use(menuRoutes);
 
 // MongoDB connection
 mongoose
@@ -22,22 +26,8 @@ mongoose
     console.error("Error connecting to MongoDB:", err);
   });
 
-// Menu model
-const Menu = require("./models/Menu");
-
 // Define routes
 app.use("/api/users", require("./routes/users"));
-
-// API endpoint to get menu data
-app.get('/api/menu', async (req, res) => {
-  try {
-    const menuData = await Menu.find({});
-    res.json(menuData);
-  } catch (err) {
-    console.error('Error fetching menu data:', err);
-    res.status(500).send('Server Error');
-  }
-});
 
 // Serve HTML files for specific routes
 const sendFileWithLogging = (res, filePath) => {
