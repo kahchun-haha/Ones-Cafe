@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
 const menuRoutes = require('./routes/menus');
+const userRoutes = require('./routes/users'); // Ensure you have this line
+const orderRoutes = require('./routes/orders'); // Add this line
 
 dotenv.config();
 
@@ -15,6 +17,10 @@ app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 
 // Use the menu routes
 app.use(menuRoutes);
+// Use the user routes
+app.use(userRoutes); // Add this line
+// Use the order routes
+app.use(orderRoutes); // Add this line
 
 // MongoDB connection
 mongoose

@@ -1,16 +1,26 @@
-const express = require('express');
-const router = express.Router();
-const Order = require('../models/Order');
+const express = require("express");
+const mongoose = require("mongoose");
+const Order = require("../models/Order"); // Adjust the path as needed
 
-// Create a new order
-router.post('/', async (req, res) => {
-    try {
-        const order = new Order(req.body);
-        await order.save();
-        res.status(201).send(order);
-    } catch (error) {
-        res.status(400).send(error);
-    }
+const router = express.Router();
+
+router.post("/api/orders", async (req, res) => {
+  const { userId, items, totalAmount } = req.body;
+
+  try {
+    const newOrder = new Order({
+      userId,
+      items,
+      totalAmount,
+    });
+
+    await newOrder.save();
+    res
+      .status(201)
+      .send({ message: "Order placed successfully", order: newOrder });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to place order", error });
+  }
 });
 
 module.exports = router;

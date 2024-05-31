@@ -94,25 +94,50 @@ function applyPromoCode() {
     alert("Invalid promo code");
   }
 
-  // Clear the input field
   promoCodeInput.value = "";
 }
 
-function confirmOrder() {
-  console.log("Order confirmed", cartItems);
-  alert("Order has been placed successfully.");
-  
-  // Clear the cartItems array
-  cartItems = [];
+async function confirmOrder() {
+  // const userId = 'someUserId'; // Replace with actual user ID
+  const orderData = {
+      items: cartItems.map(item => ({
+          menuItemId: item.id,
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+      })),
+      totalAmount: (subtotal() + calculateServiceTax(subtotal())).toFixed(2)
+  };
 
-  // Update the cart display to reflect the changes
-  updateCartDisplay();
+  try {
+      const response = await fetch('/api/orders', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(orderData)
+      });
 
-  // Clear the cartItems from local storage
-  localStorage.removeItem('cartItems');
+      if (response.ok) {
+          console.log('Order confirmed', cartItems);
+          alert('Order has been placed successfully.');
 
-  // Redirect to menu page
-  window.location.href = "/menu";
+          // Clear the cartItems array
+          cartItems = [];
+          // Update the cart display to reflect the changes
+          updateCartDisplay();
+          // Clear the cartItems from local storage
+          localStorage.removeItem('cartItems');
+          // Redirect to menu page
+          window.location.href = '/menu';
+      } else {
+          const result = await response.json();
+          alert(`Failed to place order: ${result.message}`);
+      }
+  } catch (error) {
+      alert('Error placing order. Please try again.');
+      console.error('Error:', error);
+  }
 }
 
 function subtotal() {
