@@ -132,7 +132,7 @@ async function confirmOrder() {
           window.location.href = '/menu';
       } else {
           const result = await response.json();
-          alert(`Failed to place order: ${result.message}`);
+          alert(`${result.message}`);
       }
   } catch (error) {
       alert('Error placing order. Please try again.');
