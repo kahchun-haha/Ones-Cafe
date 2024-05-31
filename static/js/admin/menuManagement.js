@@ -2,6 +2,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const menuElements = document.querySelector(".menu-elements");
   const categoryLinks = document.querySelectorAll(".category a");
   let currentCategory = null;
+  let menuData = [];
+
+  async function fetchMenuData() {
+    try {
+      const response = await fetch("/api/menus");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      menuData = await response.json();
+      displayMenuItems(currentCategory);
+    } catch (error) {
+      console.error("Error fetching menu data:", error);
+    }
+  }
 
   function displayMenuItems(category) {
     if (category === currentCategory) {
@@ -48,4 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
       displayMenuItems(selectedCategory);
     });
   });
+
+  fetchMenuData();
 });
