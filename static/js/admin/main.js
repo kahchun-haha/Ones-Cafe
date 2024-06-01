@@ -2,7 +2,7 @@ function reloadPage() {
     localStorage.setItem('scrollPosition', window.scrollY || window.pageYOffset);
     window.location.reload();
 }
-ad
+
 function restoreScrollPosition() {
     const savedPosition = localStorage.getItem('scrollPosition');
     if (savedPosition) {

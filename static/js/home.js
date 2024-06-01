@@ -10,6 +10,10 @@ var swiper = new Swiper(".home-slider", {
     clickable: true,
   },
   loop: true,
+  navigation: {
+    nextEl: ".home-button-next",
+    prevEl: ".home-button-prev",
+  },
 });
 
 var swiper = new Swiper(".review-slider", {
@@ -33,5 +37,9 @@ var swiper = new Swiper(".review-slider", {
     1024: {
       slidesPerView: 3,
     },
+  },
+  navigation: {
+    nextEl: ".review-button-next",
+    prevEl: ".review-button-prev",
   },
 });

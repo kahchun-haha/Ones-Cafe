@@ -341,13 +341,15 @@ const menuData = [
 ];
 
 mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
 }).then(async () => {
     console.log('Connected to MongoDB');
     
     await Menu.deleteMany({}); // Clear existing data
-    await Menu.insertMany(menuData); // Insert new data
+
+    for (const categoryData of menuData) {
+        const menu = new Menu(categoryData);
+        await menu.save();
+    }
     
     console.log('Menu data inserted');
     mongoose.connection.close();

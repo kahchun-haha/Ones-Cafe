@@ -21,6 +21,7 @@ function updateCartDisplay() {
           <p class="price">Price: RM ${item.price.toFixed(2)}</p>
         </div>
       </div>
+      ${item.name !== "Ones Café Discount" ? `
       <div class="item-actions">
         <div class="quantity-container">
           <button class="quantity-btn" onclick="changeItemQuantity(${index}, -1)" aria-label="Decrease quantity">-</button>
@@ -29,6 +30,7 @@ function updateCartDisplay() {
           <label id="quantity-label-${index}" class="visually-hidden">Quantity</label>
         </div>
       </div>
+      ` : ''}
     </div>
   `).join("");
 
@@ -66,47 +68,77 @@ function calculateServiceTax(subtotal) {
 }
 
 function applyPromoCode() {
-  const promoCode = document.getElementById("promo-code").value;
+  const promoCodeInput = document.getElementById("promo-code");
+  const promoCode = promoCodeInput.value;
   const validPromoCode = "10%OnesCafe";
+
   if (promoCode === validPromoCode) {
-    const discount = subtotal() * 0.1;
-    cartItems.push({
-      image: "/images/checkout/Discount.webp",
-      name: "One Cafes Discount",
-      description: "Opening Special Discount",
-      price: -discount
-    });
+    const discountItemIndex = cartItems.findIndex(item => item.name === "Ones Café Discount");
 
-    // Set quantity of all items in the cart to 1
-    cartItems.forEach(item => {
-      item.quantity = 1;
-    });
+    if (discountItemIndex === -1) {
+      const discount = subtotal() * 0.1;
+      cartItems.push({
+        image: "/images/checkout/Discount.webp",
+        name: "Ones Café Discount",
+        description: "Opening Special Discount",
+        price: -discount,
+        quantity: 1
+      });
 
-    updateCartDisplay();
-    alert("Promo code applied!");
+      updateCartDisplay();
+      alert("Promo code applied!");
+    } else {
+      alert("Promo code already applied!");
+    }
   } else {
     alert("Invalid promo code");
   }
+
+  promoCodeInput.value = "";
 }
 
-function confirmOrder() {
-  console.log("Order confirmed", cartItems);
-  alert("Order has been placed successfully.");
-  
-  // Clear the cartItems array
-  cartItems = [];
+async function confirmOrder() {
+  // const userId = 'someUserId'; // Replace with actual user ID
+  const orderData = {
+      items: cartItems.map(item => ({
+          menuItemId: item.id,
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+      })),
+      totalAmount: (subtotal() + calculateServiceTax(subtotal())).toFixed(2)
+  };
 
-  // Update the cart display to reflect the changes
-  updateCartDisplay();
+  try {
+      const response = await fetch('/api/orders', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(orderData)
+      });
 
-  // Clear the cartItems from local storage
-  localStorage.removeItem('cartItems');
+      if (response.ok) {
+          console.log('Order confirmed', cartItems);
+          alert('Order has been placed successfully.');
 
-  // Redirect to menu page
-  window.location.href = "/menu";
+          // Clear the cartItems array
+          cartItems = [];
+          // Update the cart display to reflect the changes
+          updateCartDisplay();
+          // Clear the cartItems from local storage
+          localStorage.removeItem('cartItems');
+          // Redirect to menu page
+          window.location.href = '/menu';
+      } else {
+          const result = await response.json();
+          alert(`${result.message}`);
+      }
+  } catch (error) {
+      alert('Error placing order. Please try again.');
+      console.error('Error:', error);
+  }
 }
-
-
 
 function subtotal() {
   return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);

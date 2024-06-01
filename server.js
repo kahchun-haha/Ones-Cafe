@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
+const menuRoutes = require('./routes/menus');
+const userRoutes = require('./routes/users'); // Ensure you have this line
+const orderRoutes = require('./routes/orders'); // Add this line
 
 dotenv.config();
 
@@ -10,7 +13,14 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "static"))); // Serve static files with /static prefix
+app.use(express.static(path.join(__dirname, "static"))); // Serve static files
+
+// Use the menu routes
+app.use(menuRoutes);
+// Use the user routes
+app.use(userRoutes); // Add this line
+// Use the order routes
+app.use(orderRoutes); // Add this line
 
 // MongoDB connection
 mongoose
@@ -22,22 +32,8 @@ mongoose
     console.error("Error connecting to MongoDB:", err);
   });
 
-// Menu model
-const Menu = require("./models/Menu");
-
 // Define routes
 app.use("/api/users", require("./routes/users"));
-
-// API endpoint to get menu data
-app.get('/api/menu', async (req, res) => {
-  try {
-    const menuData = await Menu.find({});
-    res.json(menuData);
-  } catch (err) {
-    console.error('Error fetching menu data:', err);
-    res.status(500).send('Server Error');
-  }
-});
 
 // Serve HTML files for specific routes
 const sendFileWithLogging = (res, filePath) => {
@@ -70,6 +66,7 @@ const routes = [
   { path: "/admin/changeMenu", file: "admin/changeMenu.html" },
   { path: "/admin/inventory", file: "admin/inventory.html" },
   { path: "/admin/salesReport", file: "admin/salesReport.html" },
+  { path: "/404", file: "404.html" },
 ];
 
 routes.forEach(route => {
@@ -83,6 +80,8 @@ app.use((req, res) => {
   sendFileWithLogging(res, path.join(__dirname, "templates", "404.html"));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
+  const open = (await import('open')).default;
+  open(`http://localhost:${PORT}`);
 });
