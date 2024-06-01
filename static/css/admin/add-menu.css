@@ -17,12 +17,6 @@
     margin-bottom: 1.5rem;
 }
 
-
-.main-section .title label{
-	font-size: 20px;
-	font-weight: 700;
-}
-
 .add-text{
 	display: flex;
 	flex-direction: column;
@@ -30,6 +24,7 @@
 }
 .add-text label{
   margin: 10px 0px;
+  font-weight: bold;
 }
 .btn-place {
   display: flex;

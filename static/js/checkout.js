@@ -14,14 +14,14 @@ function updateCartDisplay() {
   cartItemsContainer.innerHTML = cartItems.map((item, index) => `
     <div class="cart-item">
       <div class="item-details">
-        <img src="${item.image}" alt="${item.name}" class="item-image">
+        <img src="${item.image}" alt="${item.title}" class="item-image">
         <div class="item-info">
-          <h3>${item.name}</h3>
+          <h3>${item.title}</h3>
           <p>${item.description}</p>
           <p class="price">Price: RM ${item.price.toFixed(2)}</p>
         </div>
       </div>
-      ${item.name !== "Ones Café Discount" ? `
+      ${item.title !== "Ones Café Discount" ? `
       <div class="item-actions">
         <div class="quantity-container">
           <button class="quantity-btn" onclick="changeItemQuantity(${index}, -1)" aria-label="Decrease quantity">-</button>
@@ -73,13 +73,13 @@ function applyPromoCode() {
   const validPromoCode = "10%OnesCafe";
 
   if (promoCode === validPromoCode) {
-    const discountItemIndex = cartItems.findIndex(item => item.name === "Ones Café Discount");
+    const discountItemIndex = cartItems.findIndex(item => item.title === "Ones Café Discount");
 
     if (discountItemIndex === -1) {
       const discount = subtotal() * 0.1;
       cartItems.push({
         image: "/images/checkout/Discount.webp",
-        name: "Ones Café Discount",
+        title: "Ones Café Discount",
         description: "Opening Special Discount",
         price: -discount,
         quantity: 1
@@ -102,7 +102,7 @@ async function confirmOrder() {
   const orderData = {
       items: cartItems.map(item => ({
           menuItemId: item.id,
-          name: item.name,
+          title: item.title,
           quantity: item.quantity,
           price: item.price,
       })),

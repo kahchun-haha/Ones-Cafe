@@ -31,18 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
         cat.items.forEach((item) => {
           MenuHTML += `<div class="container">
                       <div class="picture">
-                          <img src="${item.image}" alt="${item.name}">
+                          <img src="${item.image}" alt="${item.title}">
                       </div>
                       <div class="text">
                           <div class="title">
-                              <div class="after-user-text">${item.name}</div>
+                              <div class="after-user-text">${item.title}</div>
                           </div>
                           <div class="description">
                               ${item.description}
                           </div>
                           <div class="inner-details">
                               <div class="category-for-menu-item"><i class='bx bx-category'></i> Category: ${cat.category}</div>
-                              <div class="cost"><i class='bx bx-dollar-circle'></i> Price: ${item.price}</div>
+                              <div class="cost"><i class='bx bx-dollar-circle'></i> Price: RM ${item.price}</div>
                           </div>
                           <a href="/admin/changeMenu" class="read-more">Change</a>
                       </div>

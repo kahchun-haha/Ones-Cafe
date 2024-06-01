@@ -4,21 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
   <link rel="stylesheet" href="/css/admin/general.css">
   <link rel="stylesheet" href="/css/admin/sidebar.css">
   <link rel="stylesheet" href="/css/admin/main.css">
   <link rel="stylesheet" href="/css/admin/add-menu.css">
-
   <title>Add Menu: Ones Café</title>
   <link rel="icon" type="image/png" href="/images/icons/cafe.png">
-
 </head>
 
 <body>
-
   <div class="whole-page">
     <nav class="sidebar">
       <div class="image-text">
@@ -29,67 +24,70 @@
       </div>
       <ul id="js-menu-links" class="nav-links"></ul>
     </nav>
-
     <div class="main">
       <div class="main-section">
         <h2 class="page-title">Add menu</h2>
-        <div class="add-text title">
-          <label for="menu-title">Title</label>
-          <input id="menu-title" value="" type="text" name="title" class="text-input" placeholder="Enter menu title">
-        </div>
-        <div class="add-text">
-          <label for="menu-details">Details/Contents</label>
-          <textarea id="menu-details" class="body" name="body" placeholder="Enter menu details"></textarea>
-        </div>
-        <div class="add-text">
-          <label for="menu-image">Image</label>
-          <input id="menu-image" type="file" name="image" class="text-input" title="Choose an image">
-        </div>
-        <div class="add-text">
-          <label for="menu-category">Category</label>
-          <select id="menu-category" name="topic_id" class="text-input" title="Select a category">
-            <option value="soups">Soups</option>
-            <option value="burgers">Burgers</option>
-            <option value="pastas">Pastas</option>
-            <option value="pizzas">Pizzas</option>
-            <option value="mains">Mains</option>
-            <option value="desserts">Desserts</option>
-            <option value="smoothies">Smoothies</option>
-            <option value="softDrinks">Soft Drinks</option>
-            <option value="coffee">Coffee</option>
-          </select>
-        </div>
-        <div class="add-text btn-place">
-          <button onclick="addMenu()" type="submit" class="add-menu">Add menu</button>
-        </div>
+        <form id="add-menu-form" enctype="multipart/form-data">
+          <div class="add-text title">
+            <label for="menu-title">Title</label>
+            <input id="menu-title" type="text" name="title" class="text-input" placeholder="Enter menu title" required>
+          </div>
+          <div class="add-text">
+            <label for="menu-description">Description</label>
+            <textarea id="menu-description" name="description" class="text-input"
+              placeholder="Enter menu description"></textarea>
+          </div>
+          <div class="add-text">
+            <label for="menu-price">Price</label>
+            <input id="menu-price" type="text" name="price" class="text-input" placeholder="Enter price" required>
+          </div>
+          <div class="add-text">
+            <label for="menu-image">Image</label>
+            <input id="menu-image" type="file" name="image" class="text-input" title="Choose an image">
+          </div>
+          <div class="add-text">
+            <label for="menu-category">Category</label>
+            <select id="menu-category" name="topic_id" class="text-input" title="Select a category">
+              <option value="Soups">Soups</option>
+              <option value="Burgers">Burgers</option>
+              <option value="Pastas">Pastas</option>
+              <option value="Pizzas">Pizzas</option>
+              <option value="Mains">Mains</option>
+              <option value="Desserts">Desserts</option>
+              <option value="Smoothies">Smoothies</option>
+              <option value="Soft Drinks">Soft Drinks</option>
+              <option value="Coffee">Coffee</option>
+            </select>
+          </div>
+          <div class="add-text btn-place">
+            <button type="submit" class="add-menu">Add menu</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
   <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
   <script src="/js/admin/dashboard.js"></script>
   <script src="/js/admin/main.js"></script>
-
   <script>
-    function addMenu() {
-      console.log("Menu added");
-      alert("Menu has been added successfully.");
-      window.location.href = "/admin/menuManagement";
-    }
+    document.getElementById('add-menu-form').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+      const formData = new FormData(this);
 
-    ClassicEditor
-      .create(document.querySelector('.body'), {
-        toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-        heading: {
-          options: [
-            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-          ]
-        }
+      fetch('/api/menus', {
+        method: 'POST',
+        body: formData
       })
-      .catch(error => {
-        console.log(error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          alert('Menu added successfully!');
+          window.location.href = "/admin/menuManagement";
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to add menu');
+        });
+    });
   </script>
 </body>
 

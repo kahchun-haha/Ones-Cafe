@@ -2,9 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
+const multer = require("multer");
 const menuRoutes = require('./routes/menus');
-const userRoutes = require('./routes/users'); // Ensure you have this line
-const orderRoutes = require('./routes/orders'); // Add this line
+const userRoutes = require('./routes/users');
+const orderRoutes = require('./routes/orders');
 
 dotenv.config();
 
@@ -13,14 +14,13 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 
-// Use the menu routes
+// Use the defined routes for menus, users, and orders
 app.use(menuRoutes);
-// Use the user routes
-app.use(userRoutes); // Add this line
-// Use the order routes
-app.use(orderRoutes); // Add this line
+app.use(userRoutes);
+app.use(orderRoutes);
 
 // MongoDB connection
 mongoose
@@ -32,13 +32,10 @@ mongoose
     console.error("Error connecting to MongoDB:", err);
   });
 
-// Define routes
-app.use("/api/users", require("./routes/users"));
-
 // Serve HTML files for specific routes
 const sendFileWithLogging = (res, filePath) => {
   console.log(`Serving file: ${filePath}`);
-  res.sendFile(filePath, (err) => {
+  res.sendFile(filePath, { root: path.join(__dirname, "templates") }, (err) => {
     if (err) {
       console.error(`Error sending file: ${filePath}`, err);
       res.status(err.status || 500).end();
@@ -70,18 +67,17 @@ const routes = [
 ];
 
 routes.forEach(route => {
-  app.get(route.path, (req, res) => {
-    sendFileWithLogging(res, path.join(__dirname, "templates", route.file));
-  });
+  app.get(route.path, (req, res) => sendFileWithLogging(res, route.file));
 });
 
 // Fallback route for handling 404 errors
-app.use((req, res) => {
-  sendFileWithLogging(res, path.join(__dirname, "templates", "404.html"));
-});
+app.use((req, res) => sendFileWithLogging(res, "404.html"));
 
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  const open = (await import('open')).default;
-  open(`http://localhost:${PORT}`);
+
+  (async () => {
+    const open = (await import('open')).default;
+    open(`http://localhost:${PORT}`);
+  })();
 });

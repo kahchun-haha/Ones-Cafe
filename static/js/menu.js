@@ -16,17 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
     return `
             <div class="box">
                 <div class="image">
-                    <img src="${item.image}" alt="${item.name}">
+                    <img src="${item.image}" alt="${item.title}">
                 </div>
                 <div class="content">
-                    <h3>${item.name}</h3>
+                    <h3>${item.title}</h3>
                     <p>${item.description}</p>
-                    <button class="btn" aria-label="Add ${item.name} to cart">Add to cart</button>
-                    <span class="price">${item.price}</span>
+                    <button class="btn" aria-label="Add ${item.title} to cart">Add to cart</button>
+                    <span class="price">RM${item.price}</span>
                 </div>
             </div>
         `;
-  }
+}
 
   function renderMenu(menuData) {
     const container = document.getElementById("menuContainer");
@@ -72,12 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.addEventListener("click", function (event) {
         event.preventDefault();
         const item = btn.closest(".box");
-        const itemName = item.querySelector("h3").textContent;
+        const itemTitle = item.querySelector("h3").textContent;
         const itemDescription = item.querySelector("p").textContent;
         const itemPrice = item.querySelector(".price").textContent;
         const itemImage = item.querySelector(".image img").src;
 
-        modalTitle.textContent = itemName;
+        modalTitle.textContent = itemTitle;
         modalDescription.textContent = itemDescription;
         document.getElementById("modalPrice").textContent = itemPrice;
         document.getElementById("modalImage").src = itemImage;
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addToCartButton.addEventListener("click", function (event) {
       event.preventDefault();
-      const itemName = modalTitle.textContent;
+      const itemTitle = modalTitle.textContent;
       const itemQuantity = parseInt(quantityInput.value);
       const itemDescription = modalDescription.textContent;
       const itemPrice = parseFloat(
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const itemImage = document.getElementById("modalImage").src;
 
       const cartItem = {
-        name: itemName,
+        title: itemTitle,
         description: itemDescription,
         quantity: itemQuantity,
         price: itemPrice,
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       addToLocalStorage(cartItem);
 
-      alert(itemQuantity + " x " + itemName + " added to the cart");
+      alert(itemQuantity + " x " + itemTitle + " added to the cart");
       modal.style.display = "none";
       quantityInput.value = 1;
       document.getElementById("Instructions").value = "";
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addToLocalStorage(item) {
       const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-      const existingItemIndex = cart.findIndex(cartItem => cartItem.name === item.name);
+      const existingItemIndex = cart.findIndex(cartItem => cartItem.title === item.title);
 
       if (existingItemIndex > -1) {
         cart[existingItemIndex].quantity += item.quantity;
