@@ -4,17 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
   <link rel="stylesheet" href="/css/admin/general.css">
   <link rel="stylesheet" href="/css/admin/sidebar.css">
   <link rel="stylesheet" href="/css/admin/menuManagement.css">
   <link rel="stylesheet" href="/css/admin/add-menu.css">
-
   <title>Modify Menu: Ones Café</title>
   <link rel="icon" type="image/png" href="/images/icons/cafe.png">
-
 </head>
 
 <body>
@@ -32,9 +29,10 @@
       <div class="main-section">
         <h2 class="page-title">Modify menu</h2>
         <form id="modify-menu-form" enctype="multipart/form-data">
+          <input type="hidden" id="menu-id" name="id">
           <div class="add-text title">
             <label for="menu-title">Title</label>
-            <input id="menu-title" type="text" name="title" class="text-input" placeholder="Enter menu title" required>
+            <input id="menu-title" type="text" name="title" class="text-input" placeholder="Enter menu title">
           </div>
           <div class="add-text">
             <label for="menu-description">Description</label>
@@ -43,7 +41,7 @@
           </div>
           <div class="add-text">
             <label for="menu-price">Price</label>
-            <input id="menu-price" type="text" name="price" class="text-input" placeholder="Enter price" required>
+            <input id="menu-price" type="text" name="price" class="text-input" placeholder="Enter price">
           </div>
           <div class="add-text">
             <label for="menu-image">Image</label>
@@ -70,16 +68,8 @@
       </div>
     </div>
   </div>
-
   <script src="/js/admin/dashboard.js"></script>
-
-  <script>
-    function modifyMenu() {
-      console.log("Menu modified");
-      alert("Menu has been modified successfully.");
-      window.location.href = "/admin/menuManagement";
-    }
-  </script>
+  <script src="/js/admin/modifyMenu.js"></script>
 </body>
 
 </html>
