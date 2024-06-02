@@ -33,7 +33,8 @@
   padding: 10px;
 }
 
-.add-menu {
+.add-menu,
+.modify-menu {
   margin-top: 10px;
   border: none;
   display: inline-block;
@@ -49,7 +50,8 @@
   transition: all .2s linear;
 }
 
-.add-menu:hover {
+.add-menu:hover,
+.modify-menu:hover {
   background: #514738;
   letter-spacing: .1rem;
 }

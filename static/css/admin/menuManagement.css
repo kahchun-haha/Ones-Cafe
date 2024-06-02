@@ -260,7 +260,7 @@
   flex-direction: column;
 }
 
-.text .description{
+.text .description {
   margin: 15px 0;
   color: #666;
 }
@@ -295,13 +295,12 @@
   margin-right: 20px;
 }
 
-.read-more {
+.modify-button {
   display: inline-block;
   text-decoration: none;
   position: absolute;
-  bottom: 1rem;
-  right: 12px;
-  padding: 10px 15px;
+  bottom: .5rem;
+  right: 6.5rem;
   color: #fff;
   background: #907a68;
   border-radius: .5rem;
@@ -310,7 +309,28 @@
   transition: all .2s linear;
 }
 
-.read-more:hover {
+.modify-button:hover {
   background: #514738;
+  letter-spacing: .1rem;
+}
+
+.delete-button {
+  display: inline-block;
+  text-decoration: none;
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+  color: #fff;
+  background: #df2525;
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  transition: all .2s linear;
+  font-size: 16px;
+  border: none;
+}
+
+.delete-button:hover {
+  opacity: 0.8;
   letter-spacing: .1rem;
 }

@@ -1,17 +1,17 @@
-const Menu = require('../models/Menu');
-const multer = require('multer');
-const path = require('path');
+const Menu = require("../models/Menu");
+const multer = require("multer");
+const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadPath = path.join(__dirname, '..', 'static', 'images', 'menu');
+    const uploadPath = path.join(__dirname, "..", "static", "images", "menu");
     cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); // Prefixing the filename with a timestamp to avoid name conflicts
-  }
+  },
 });
-const upload = multer({ storage: storage }).single('image');
+const upload = multer({ storage: storage }).single("image");
 
 // Function to retrieve all menu items
 exports.getMenu = async (req, res) => {
@@ -27,10 +27,12 @@ exports.getMenu = async (req, res) => {
 exports.addMenuItem = (req, res) => {
   upload(req, res, async (err) => {
     if (err) {
-      return res.status(500).json({ message: "Error in file upload: " + err.message });
+      return res
+        .status(500)
+        .json({ message: "Error in file upload: " + err.message });
     }
     const { title, description, price, topic_id } = req.body;
-    const image = req.file ? `/images/menu/${req.file.filename}` : '';
+    const image = req.file ? `/images/menu/${req.file.filename}` : "";
 
     try {
       let category = await Menu.findOne({ category: topic_id });
@@ -46,4 +48,26 @@ exports.addMenuItem = (req, res) => {
       res.status(400).json({ message: "Error adding item: " + error.message });
     }
   });
+};
+
+// Function to delete a menu item
+exports.deleteMenuItem = async (req, res) => {
+  const { category, itemId } = req.params;
+  try {
+    const menu = await Menu.findOne({ category });
+    if (!menu) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+    const itemIndex = menu.items.findIndex(
+      (item) => item._id.toString() === itemId
+    );
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    menu.items.splice(itemIndex, 1); // Remove the item from the array
+    await menu.save(); // Save the updated menu
+    res.status(200).json({ message: "Item deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting item: " + error.message });
+  }
 };

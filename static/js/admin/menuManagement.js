@@ -44,13 +44,38 @@ document.addEventListener("DOMContentLoaded", function () {
                               <div class="category-for-menu-item"><i class='bx bx-category'></i> Category: ${cat.category}</div>
                               <div class="cost"><i class='bx bx-dollar-circle'></i> Price: RM ${item.price}</div>
                           </div>
-                          <a href="/admin/modifyMenu" class="read-more">Modify</a>
+                          <a href="/admin/modifyMenu" class="modify-button">Modify</a>
+                          <button class="delete-button" data-id="${item._id}" data-category="${cat.category}">Delete</button>
                       </div>
                   </div>`;
         });
       }
     });
     menuElements.innerHTML = MenuHTML;
+
+    document.querySelectorAll(".delete-button").forEach((button) => {
+      button.addEventListener("click", handleDelete);
+    });
+  }
+
+  async function handleDelete(event) {
+    const itemId = event.target.getAttribute("data-id");
+    const category = event.target.getAttribute("data-category");
+
+    console.log(`Deleting item with ID: ${itemId} from category: ${category}`);
+
+    try {
+      const response = await fetch(`/api/menus/${category}/${itemId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      console.log("Item deleted successfully");
+      fetchMenuData(); // Refresh menu data after deletion
+    } catch (error) {
+      console.error("Error deleting menu item:", error);
+    }
   }
 
   displayMenuItems();
