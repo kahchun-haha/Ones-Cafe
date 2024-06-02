@@ -66,9 +66,7 @@
     </div>
   </div>
 
-  <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
   <script src="/js/admin/dashboard.js"></script>
-  <script src="/js/admin/main.js"></script>
 
   <script>
     function modifyMenu() {
@@ -76,21 +74,6 @@
       alert("Menu has been modified successfully.");
       window.location.href = "/admin/menuManagement";
     }
-
-    ClassicEditor
-      .create(document.querySelector('.body'), {
-        toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-        heading: {
-          options: [
-            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-          ]
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
   </script>
 </body>
 
