@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/admin/main.css">
   <link rel="stylesheet" href="/css/admin/add-menu.css">
 
-  <title>Change Menu: Ones Café</title>
+  <title>Modify Menu: Ones Café</title>
   <link rel="icon" type="image/png" href="/images/icons/cafe.png">
 
 </head>
@@ -60,7 +60,7 @@
           </select>
         </div>
         <div class="add-text btn-place">
-          <button onclick="changeMenu()" type="submit" class="add-menu">Change menu</button>
+          <button onclick="modifyMenu()" type="submit" class="add-menu">Modify menu</button>
         </div>
       </div>
     </div>
@@ -71,9 +71,9 @@
   <script src="/js/admin/main.js"></script>
 
   <script>
-    function changeMenu() {
-      console.log("Menu changed");
-      alert("Menu has been changed successfully.");
+    function modifyMenu() {
+      console.log("Menu modified");
+      alert("Menu has been modified successfully.");
       window.location.href = "/admin/menuManagement";
     }
 

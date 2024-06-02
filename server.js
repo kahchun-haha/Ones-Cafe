@@ -60,7 +60,7 @@ const routes = [
   { path: "/admin/menuManagement", file: "admin/menuManagement.html" },
   { path: "/admin/orderManagement", file: "admin/orderManagement.html" },
   { path: "/admin/addMenu", file: "admin/addMenu.html" },
-  { path: "/admin/changeMenu", file: "admin/changeMenu.html" },
+  { path: "/admin/modifyMenu", file: "admin/modifyMenu.html" },
   { path: "/admin/inventory", file: "admin/inventory.html" },
   { path: "/admin/salesReport", file: "admin/salesReport.html" },
   { path: "/404", file: "404.html" },

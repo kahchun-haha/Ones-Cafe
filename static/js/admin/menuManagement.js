@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                               <div class="category-for-menu-item"><i class='bx bx-category'></i> Category: ${cat.category}</div>
                               <div class="cost"><i class='bx bx-dollar-circle'></i> Price: RM ${item.price}</div>
                           </div>
-                          <a href="/admin/changeMenu" class="read-more">Change</a>
+                          <a href="/admin/modifyMenu" class="read-more">Modify</a>
                       </div>
                   </div>`;
         });
