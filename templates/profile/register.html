@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="/images/icons/cafe.png">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/navbar-footer.css">
+    <script src="/js/profile/register.js"></script>
 </head>
 
 <body>
@@ -22,7 +23,7 @@
 
             <ul class="navbar-nav-left">
                 <li>
-                    <a href="/home">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
                     <a href="/menu">Menu</a>
@@ -44,9 +45,9 @@
                     </a>
                 </li>
                 <li>
-                    <button class="btn btn-dark-outline" onclick="location.href='/login';">Sign
+                    <button class="button btn-dark-outline" onclick="location.href='/login';">Sign
                         in</button>
-                    <button class="btn btn-dark" onclick="location.href='/register';">Join
+                    <button class="button btn-dark" onclick="location.href='/register';">Join
                         now</button>
                 </li>
             </ul>
@@ -64,8 +65,14 @@
         <div class="form-field">
             <input type="password" id="password" name="password" placeholder="Password" required>
         </div>
-        <div class="button-container">
+        <div class="btn-container">
             <button type="submit" id="register">Register</button>
+        </div>
+        <div class="form-field">
+            <input type="text" id="otp" name="otp" placeholder="Enter OTP" required disabled>
+        </div>
+        <div class="btn-container">
+            <button type="submit" id="verify-otp" disabled>Verify OTP</button>
         </div>
     </div>
 
@@ -146,30 +153,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const registerButton = document.getElementById('register');
-            if (registerButton) {
-                registerButton.addEventListener('click', function () {
-                    const username = document.getElementById('username').value;
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-
-                    if (username && email && password) {
-                        localStorage.setItem('user', JSON.stringify({ username, email, password }));
-                        alert('Registration successful!');
-                        window.location.href = '/login';
-                    } else {
-                        alert('Please fill all the fields.');
-                    }
-                });
-            } else {
-                console.error('Register button not found');
-            }
-        });
-    </script>
-
 </body>
 
 </html>

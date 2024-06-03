@@ -1,15 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Assuming you have a User model
+const profileController = require('../controllers/profileController');
 
-// Test endpoint
-router.get('/test', async (req, res) => {
-  try {
-    const users = await User.find(); // Retrieve all users
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Ensure all routes have valid callback functions
+router.post('/api/users/register', profileController.registerUser);
+router.post('/api/users/verify-otp', profileController.verifyOtp);
+router.post('/api/users/login', profileController.loginUser);
+router.put('/api/users/profile', profileController.updateUserProfile);
+router.post('/api/users/check-email', profileController.checkEmail);
+router.post('/api/users/forgot-password', profileController.forgotPassword);
+router.post('/api/users/reset-password', profileController.resetPassword);
+router.post('/api/users/logout', (req, res) => {
+  req.session.destroy(err => {
+      if (err) {
+          return res.status(500).send('Error logging out');
+      }
+      res.clearCookie('connect.sid'); // Clear the cookie
+      res.status(200).send('Logged out successfully');
+  });
 });
+router.get('/api/users/check-auth', profileController.checkAuth);
+router.post('/api/users/check-old-password', profileController.checkOldPassword);
+router.post('/api/users/change-password', profileController.changePassword);
 
 module.exports = router;

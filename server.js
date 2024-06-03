@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const path = require("path");
 const dotenv = require("dotenv");
 const multer = require("multer");
@@ -13,9 +15,20 @@ const orderRoutes = require('./routes/orders');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: 'sessions'
+  }),
+  cookie: { secure: false }
+}));
+
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 
 // Use the defined routes for menus, users, and orders
@@ -28,6 +41,14 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
+    const db = mongoose.connection;
+    db.collection('sessions').deleteMany({}, (err, result) => {
+      if (err) {
+        console.error("Error clearing sessions:", err);
+      } else {
+        console.log("Sessions cleared");
+      }
+    });
   })
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
@@ -58,6 +79,7 @@ const routes = [
   { path: "/forgotPassword", file: "profile/forgotPassword.html" },
   { path: "/resetPassword", file: "profile/resetPassword.html" },
   { path: "/profile", file: "profile/profile.html" },
+  { path: "/changePassword", file: "profile/changePassword.html" },
   { path: "/admin/menuManagement", file: "admin/menuManagement.html" },
   { path: "/admin/orderManagement", file: "admin/orderManagement.html" },
   { path: "/admin/orderHistory", file: "admin/orderHistory.html" },
