@@ -1,6 +1,7 @@
 const Menu = require("../models/Menu");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -64,8 +65,23 @@ exports.deleteMenuItem = async (req, res) => {
     if (itemIndex === -1) {
       return res.status(404).json({ message: "Item not found" });
     }
+
+    const imagePath = path.join(
+      __dirname,
+      "..",
+      "static",
+      menu.items[itemIndex].image
+    );
+
     menu.items.splice(itemIndex, 1); // Remove the item from the array
     await menu.save(); // Save the updated menu
+
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.error("Error deleting image file:", err);
+      }
+    });
+
     res.status(200).json({ message: "Item deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting item: " + error.message });
