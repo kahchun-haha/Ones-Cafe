@@ -99,13 +99,15 @@
   width: 25px;
 }
 
-.add-menu {
+.add-menu,
+.history {
   display: flex;
   align-items: center;
   justify-content: end;
 }
 
-.add-menu button {
+.add-menu button,
+.history button {
   display: inline-block;
   font-size: 1rem;
   color: #fff;
@@ -117,17 +119,16 @@
   transition: all .2s linear;
 }
 
-.add-menu button:hover {
+.add-menu button:hover,
+.history button:hover {
   background: #907a68;
   letter-spacing: .1rem;
-
 }
 
-
-.add-menu button:active {
+.add-menu button:active,
+.history button:active {
   cursor: pointer;
   opacity: 0.5;
-
 }
 
 .flex-layout {

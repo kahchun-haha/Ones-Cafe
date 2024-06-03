@@ -77,9 +77,11 @@ exports.modifyMenuItem = (req, res) => {
   upload(req, res, async (err) => {
     if (err) {
       console.error("Error in file upload:", err);
-      return res.status(500).json({ message: "Error in file upload: " + err.message });
+      return res
+        .status(500)
+        .json({ message: "Error in file upload: " + err.message });
     }
-    
+
     const { category, itemId } = req.params;
     const { title, description, price, topic_id } = req.body; // topic_id is the new category
     const image = req.file ? `/images/menu/${req.file.filename}` : null;
@@ -91,10 +93,14 @@ exports.modifyMenuItem = (req, res) => {
         return res.status(404).json({ message: "Old category not found" });
       }
 
-      const itemIndex = oldCategory.items.findIndex((item) => item._id.toString() === itemId);
+      const itemIndex = oldCategory.items.findIndex(
+        (item) => item._id.toString() === itemId
+      );
       if (itemIndex === -1) {
         console.error("Item not found in old category");
-        return res.status(404).json({ message: "Item not found in old category" });
+        return res
+          .status(404)
+          .json({ message: "Item not found in old category" });
       }
 
       const updatedFields = {};
@@ -111,7 +117,10 @@ exports.modifyMenuItem = (req, res) => {
           return res.status(404).json({ message: "New category not found" });
         }
 
-        const itemToMove = { ...oldCategory.items[itemIndex]._doc, ...updatedFields };
+        const itemToMove = {
+          ...oldCategory.items[itemIndex]._doc,
+          ...updatedFields,
+        };
         oldCategory.items.splice(itemIndex, 1);
         newCategory.items.push(itemToMove);
         await oldCategory.save();
@@ -121,13 +130,21 @@ exports.modifyMenuItem = (req, res) => {
       }
 
       // If category has not changed, update the item in place
-      oldCategory.items[itemIndex] = { ...oldCategory.items[itemIndex]._doc, ...updatedFields };
+      oldCategory.items[itemIndex] = {
+        ...oldCategory.items[itemIndex]._doc,
+        ...updatedFields,
+      };
       await oldCategory.save();
-      console.log("Menu item updated in the same category:", oldCategory.items[itemIndex]);
+      console.log(
+        "Menu item updated in the same category:",
+        oldCategory.items[itemIndex]
+      );
       res.status(200).json(oldCategory.items[itemIndex]);
     } catch (error) {
       console.error("Error modifying item:", error);
-      res.status(400).json({ message: "Error modifying item: " + error.message });
+      res
+        .status(400)
+        .json({ message: "Error modifying item: " + error.message });
     }
   });
 };

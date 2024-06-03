@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/css/admin/sidebar.css">
   <link rel="stylesheet" href="/css/admin/menuManagement.css">
   <link rel="stylesheet" href="/css/admin/order.css">
-  <title>Order Management: Ones Café</title>
+  <title>Order History: Ones Café</title>
   <link rel="icon" type="image/png" href="/images/icons/cafe.png">
 </head>
 
@@ -26,18 +26,13 @@
     </nav>
     <div class="main">
       <div class="search-section">
-        <div class="title-part">Order Management</div>
+        <div class="title-part">Order History</div>
         <div class="search-part">
           <input class="search-bar" type="text" placeholder="Search">
           <button class="search-button">
             <i class='bx bx-search '></i>
             <div class="tooltip">Search</div>
           </button>
-          <div class="history">
-            <a href="/admin/orderHistory">
-              <button class="order-history">History</button>
-            </a>
-          </div>
         </div>
       </div>
       <div class="main-section table-layout">
@@ -48,9 +43,8 @@
               <th>Order ID</th>
               <th>Item Titles & Quantities</th>
               <th>Total Amount</th>
-              <th>Actions on orders</th>
             </thead>
-            <tbody id="order-table-body">
+            <tbody id="order-history-table-body">
               <!-- Orders will be populated here -->
             </tbody>
           </table>
@@ -61,7 +55,7 @@
   <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
   <script src="/js/admin/dashboard.js"></script>
   <script src="/js/admin/main.js"></script>
-  <script src="/js/admin/orderManagement.js"></script>
+  <script src="/js/admin/orderHistory.js"></script>
 </body>
 
 </html>
