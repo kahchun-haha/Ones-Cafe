@@ -44,7 +44,7 @@ async function fetchOrders() {
     document.querySelectorAll(".order-delete").forEach((button) => {
       button.addEventListener("click", async (event) => {
         const orderId = event.target.getAttribute("data-order-id");
-        await deleteOrder(orderId);
+        await updateOrderStatus2(orderId, "cancelled");
       });
     });
   } catch (error) {
@@ -83,6 +83,45 @@ async function updateOrderStatus(orderId, status) {
     console.error("Error:", error);
   }
 }
+
+
+async function updateOrderStatus2(orderId, status) {
+  try {
+    const response = await fetch(`/api/orders/${orderId}/status`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status }),
+    });
+
+    if (response.ok) {
+      // Remove the order row from the table
+      const orderRow = document.querySelector(`tr[data-order-id="${orderId}"]`);
+      if (orderRow) {
+        orderRow.remove();
+      }
+
+      // Update the order index numbers
+      updateOrderIndices();
+
+      // Optionally, update the order history list if it is visible
+      if (document.querySelector("#order-history-table-body")) {
+        fetchOrderHistory(); // Refresh order history
+      }
+    } else {
+      console.error("Failed to update order status");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
+
+
+
+
 
 async function deleteOrder(orderId) {
   try {

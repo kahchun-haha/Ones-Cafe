@@ -22,6 +22,7 @@ async function fetchOrderHistory() {
           <td class="order-id">${order._id.slice(-8)}</td>
           <td class="item-details">${itemDetails}</td>
           <td>RM ${order.totalAmount.toFixed(2)}</td>
+          <td> ${order.status}</td>
         `;
       orderHistoryTableBody.appendChild(row);
     });
@@ -29,5 +30,9 @@ async function fetchOrderHistory() {
     console.error("Failed to fetch order history:", error);
   }
 }
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", fetchOrderHistory);
