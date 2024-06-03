@@ -3,11 +3,12 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
 const multer = require("multer");
+
+dotenv.config();
+
 const menuRoutes = require('./routes/menus');
 const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -4,20 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="/css/admin/general.css">
   <link rel="stylesheet" href="/css/admin/sidebar.css">
   <link rel="stylesheet" href="/css/admin/menuManagement.css">
   <link rel="stylesheet" href="/css/admin/order.css">
-
   <title>Order Management: Ones Café</title>
   <link rel="icon" type="image/png" href="/images/icons/cafe.png">
-
 </head>
 
 <body>
-
   <div class="whole-page">
     <nav class="sidebar">
       <div class="image-text">
@@ -28,13 +24,9 @@
       </div>
       <ul id="js-menu-links" class="nav-links"></ul>
     </nav>
-
-
     <div class="main">
       <div class="search-section">
-
         <div class="title-part">Order Management</div>
-
         <div class="search-part">
           <input class="search-bar" type="text" placeholder="Search">
           <button class="search-button">
@@ -42,49 +34,29 @@
             <div class="tooltip">Search</div>
           </button>
         </div>
-
       </div>
       <div class="main-section table-layout">
         <div class="order-elements">
           <table>
             <thead>
               <th>No</th>
-              <th>Order</th>
-              <th>Customer</th>
+              <th>Order ID</th>
+              <th>Item Titles & Quantities</th>
+              <th>Total Amount</th>
               <th>Actions on orders</th>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Order - number 1</td>
-                <td>Alikhan</td>
-                <td><button class="button1 order-update">Mark as Done</button><button
-                    class="button1 order-delete">Cancel Order</button></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Order - number 2</td>
-                <td>Michael Jackson</td>
-                <td><button class="button1 order-update">Mark as Done</button><button
-                    class="button1 order-delete">Cancel Order</button></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Order - number 3</td>
-                <td>Zhong Cha</td>
-                <td><button class="button1 order-update">Mark as Done</button><button
-                    class="button1 order-delete">Cancel Order</button></td>
-              </tr>
+            <tbody id="order-table-body">
+              <!-- Orders will be populated here -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
-
   </div>
   <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
   <script src="/js/admin/dashboard.js"></script>
   <script src="/js/admin/main.js"></script>
+  <script src="/js/admin/orderManagement.js"></script>
 </body>
 
 </html>

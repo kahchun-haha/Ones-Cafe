@@ -5,13 +5,11 @@
 	align-items: center;
 	flex-direction: column;
 	padding: 1.5rem 1.5rem;
-	margin-top: 10px;
-	margin: 10px 30px auto;
+	margin: 20px 30px;
 	border-radius: 1rem;
 	background-color: white;
 	box-shadow: 0 0.4rem 3rem rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
 }
-
 
 table {
 	width: 100%;
@@ -61,4 +59,14 @@ td {
 
 form div {
 	margin-bottom: 15px;
+}
+
+.order-id {
+	word-break: break-all;
+	max-width: 150px;
+}
+
+.item-details div {
+	display: flex;
+	justify-content: space-between;
 }
