@@ -32,7 +32,4 @@ async function fetchOrderHistory() {
 }
 
 
-
-
-
 document.addEventListener("DOMContentLoaded", fetchOrderHistory);
