@@ -131,15 +131,7 @@ img {
     margin: 0 5px;
 }
 
-.button-container {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-}
-
-.button {
+.btn {
     cursor: pointer;
     display: inline-block;
     background: none;
@@ -149,8 +141,8 @@ img {
     line-height: 1.2;
     text-align: center;
     text-decoration: none;
-    font-weight: bold;
     font-family: 'Open Sans', sans-serif;
+    font-weight: 550;
 }
 
 .btn-dark-outline {
