@@ -61,7 +61,6 @@ const routes = [
   { path: "/profile", file: "profile/profile.html" },
   { path: "/admin/menuManagement", file: "admin/menuManagement.html" },
   { path: "/admin/orderManagement", file: "admin/orderManagement.html" },
-  { path: "/admin/orderHistory", file: "admin/orderHistory.html" },
   { path: "/admin/addMenu", file: "admin/addMenu.html" },
   { path: "/admin/modifyMenu", file: "admin/modifyMenu.html" },
   { path: "/admin/inventory", file: "admin/inventory.html" },

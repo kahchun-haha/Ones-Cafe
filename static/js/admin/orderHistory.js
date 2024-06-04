@@ -17,14 +17,14 @@ async function fetchOrderHistory() {
     const doneCount = data3.doneCount;
     const cancelledCount = data3.cancelledCount;
 
-
-
     // Update the total earnings in the HTML
     const totalAmountElement = document.querySelector(".total-money");
     totalAmountElement.innerHTML = `RM ${totalAmount.toFixed(2)}`;
 
     // Update the latest order amount in the HTML
-    const latestOrderElement = document.querySelector(".latest-order-money .text");
+    const latestOrderElement = document.querySelector(
+      ".latest-order-money .text"
+    );
     latestOrderElement.innerHTML = `
       <img class="plus-button" src="/images/admin/plus.png" alt="">
       Latest Order: +RM ${latestOrderAmount.toFixed(2)}
@@ -44,7 +44,9 @@ async function fetchOrderHistory() {
 
     // Function to render orders
     const renderOrders = (ordersToRender) => {
-      const orderHistoryTableBody = document.getElementById("order-history-table-body");
+      const orderHistoryTableBody = document.getElementById(
+        "order-history-table-body"
+      );
       orderHistoryTableBody.innerHTML = "";
 
       ordersToRender.forEach((order, index) => {
@@ -76,19 +78,19 @@ async function fetchOrderHistory() {
 
     searchButton.addEventListener("click", () => {
       const searchTerm = searchInput.value.toLowerCase();
-      const filteredOrders = orders.filter(order =>
-        order.items.some(item => item.title.toLowerCase().includes(searchTerm))
+      const filteredOrders = orders.filter((order) =>
+        order.items.some((item) =>
+          item.title.toLowerCase().includes(searchTerm)
+        )
       );
       renderOrders(filteredOrders);
     });
-
   } catch (error) {
     console.error("Failed to fetch order history:", error);
   }
 }
 
 document.addEventListener("DOMContentLoaded", fetchOrderHistory);
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const fetchTotalStock = async () => {
@@ -108,11 +110,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
       const latestStock = data.latestStock;
 
-      const stockDetailsElement = document.querySelector(".latest-stock .stock-details");
+      const stockDetailsElement = document.querySelector(
+        ".latest-stock .stock-details"
+      );
       stockDetailsElement.innerHTML = `
         <div class="stock-name">Stock: ${latestStock.item_name}</div>
         <div class="count">Count: ${latestStock.amount}</div>
-        <div class="stocked-person">Worker: ${latestStock.userId ? latestStock.userId.name : 'Unknown'}</div>
+        <div class="stocked-person">Worker: ${
+          latestStock.userId ? latestStock.userId.name : "Unknown"
+        }</div>
       `;
     } catch (error) {
       console.error("Failed to fetch latest stock details:", error);
@@ -126,4 +132,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initializePage();
 });
-
