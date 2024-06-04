@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" href="/images/icons/cafe.png">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/navbar-footer.css">
-    <script src="/js/profile/login.js"></script>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
 
             <ul class="navbar-nav-left">
                 <li>
-                    <a href="/">Home</a>
+                    <a href="/home">Home</a>
                 </li>
                 <li>
                     <a href="/menu">Menu</a>
@@ -46,9 +45,9 @@
                     </a>
                 </li>
                 <li>
-                    <button class="button btn-dark-outline" onclick="location.href='/login';">Sign
+                    <button class="btn btn-dark-outline" onclick="location.href='/login';">Sign
                         in</button>
-                    <button class="button btn-dark" onclick="location.href='/register';">Join
+                    <button class="btn btn-dark" onclick="location.href='/register';">Join
                         now</button>
                 </li>
             </ul>
@@ -57,7 +56,6 @@
 
     <div class="login-container">
         <h2>Login to Your Account</h2>
-        <form id="login-form">
         <div class="form-field">
             <input type="email" id="login-email" name="email" placeholder="Username or email address" required>
         </div>
@@ -72,7 +70,7 @@
             <a href="/forgotPassword">Forgot your password?</a>
             <a href="/register">Register</a>
         </div>
-        <div class="btn-container">
+        <div class="button-container">
             <button type="submit" id="login">Sign in</button>
             <button type="submit" id="loginAdmin" onclick="location.href='/admin/menuManagement'">Log in as
                 Admin</button>
@@ -157,6 +155,30 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginButton = document.getElementById('login');
+            if (loginButton) {
+                loginButton.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent the form from submitting traditionally
+                    const email = document.getElementById('login-email').value;
+                    const password = document.getElementById('login-password').value;
+                    // Assuming 'user' was stored as an object {email, password} during registration
+                    const storedUser = JSON.parse(localStorage.getItem('user'));
+
+                    if (storedUser && email === storedUser.email && password === storedUser.password) {
+                        localStorage.setItem('isLoggedIn', 'true');
+                        alert('Login successful!');
+                        window.location.href = '/'; // Redirect after successful login
+                    } else {
+                        alert('Invalid credentials. Please try again.');
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

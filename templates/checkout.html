@@ -22,7 +22,7 @@
 
             <ul class="navbar-nav-left">
                 <li>
-                    <a href="/">Home</a>
+                    <a href="/home">Home</a>
                 </li>
                 <li>
                     <a href="/menu">Menu</a>
@@ -43,7 +43,10 @@
                         <span>Locate Us</span>
                     </a>
                 </li>
-                <li id="auth-buttons">
+                <li>
+                    <button class="btn btn-dark-outline" id="signInBtn"
+                        onclick="location.href='/profile';">Profile</button>
+                    <button class="btn btn-dark" id="joinNowBtn" onclick="location.href='/';">Log Out</button>
                 </li>
             </ul>
         </div>
@@ -160,8 +163,7 @@
             </div>
         </div>
     </footer>
-    <script src="/js/checkout.js"></script>
-    <script src="/js/profile/button.js"></script>
+    <script src="/js/checkout/checkout.js"></script>
 </body>
 
 </html>

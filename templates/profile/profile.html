@@ -8,8 +8,6 @@
     <link rel="icon" type="image/png" href="/images/icons/cafe.png">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/navbar-footer.css">
-    <script src="/js/profile/general.js"></script>
-    <script src="/js/profile/button.js"></script>
 </head>
 
 <style>
@@ -33,7 +31,7 @@
 
         <ul class="navbar-nav-left">
             <li>
-                <a href="/">Home</a>
+                <a href="/home">Home</a>
             </li>
             <li>
                 <a href="/menu">Menu</a>
@@ -54,7 +52,9 @@
                     <span>Locate Us</span>
                 </a>
             </li>
-            <li id="auth-buttons">
+            <li>
+                <button class="btn btn-dark-outline" id="signInBtn" onclick="location.href='/profile';">Profile</button>
+                <button class="btn btn-dark" id="joinNowBtn" onclick="location.href='/';">Log Out</button>
             </li>
         </ul>
     </div>
@@ -68,8 +68,8 @@
         </div>
 
         <div class="form-field">
-            <label for="birthday">Birthday *</label>
-            <input type="date" id="birthday" name="birthday" value="" readonly>
+            <label for="birthday">Birthday Month *</label>
+            <input type="text" id="birthday" name="birthday" value="" readonly>
         </div>
 
         <div class="form-field">
@@ -78,13 +78,8 @@
         </div>
 
         <div class="form-field">
-            <label for="gender">Gender *</label>
-            <select id="gender" name="gender" disabled>
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
+            <label for="gender">Gender</label>
+            <input type="text" id="gender" name="gender" value="" readonly>
         </div>
 
         <div class="form-field">
@@ -112,16 +107,19 @@
             <input type="text" id="postcode" name="postcode" readonly>
         </div>
 
-        <div class=changePassword>
-            <button type=button id="change-password-button" disabled>Change Password</button>
+        <div class="form-field">
+            <label for="password">Password *</label>
+            <input type="password" id="password" name="password" value="" readonly>
         </div>
 
-        <div class="btn-container">
+        <div class="button-container">
             <button type="button" id="edit-button" class="edit-button">Edit</button>
             <button type="button" id="discard-button" class="save-discard-buttons">Discard</button>
             <button type="submit" id="save-button" class="save-discard-buttons">Save Changes</button>
         </div>
-    </form>
+
+</div>
+</form>
 </div>
 
 <div class="divider"></div>
@@ -201,6 +199,22 @@
         </div>
     </div>
 </footer>
+
+<script src="/js/profile/general.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (isLoggedIn === 'true' && user) {
+            document.getElementById('name').value = user.username;
+            document.getElementById('email').value = user.email;
+        } else {
+            window.location.href = '/login';
+        }
+    });
+</script>
+
 </body>
 
 </html>
