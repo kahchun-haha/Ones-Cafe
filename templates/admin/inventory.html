@@ -4,20 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="/css/admin/general.css">
   <link rel="stylesheet" href="/css/admin/sidebar.css">
   <link rel="stylesheet" href="/css/admin/menuManagement.css">
-  <link rel="stylesheet" href="/css/admin/order.css">
-
+  <link rel="stylesheet" href="/css/admin/inventory.css">
   <title>Inventory: Ones Café</title>
   <link rel="icon" type="image/png" href="/images/icons/cafe.png">
-
 </head>
 
 <body>
-
   <div class="whole-page">
     <nav class="sidebar">
       <div class="image-text">
@@ -28,60 +24,52 @@
       </div>
       <ul id="js-menu-links" class="nav-links"></ul>
     </nav>
-
-
     <div class="main">
       <div class="search-section">
-
         <div class="title-part">Inventory Management</div>
-
         <div class="search-part">
           <input class="search-bar" type="text" placeholder="Search">
           <button class="search-button">
-            <i class='bx bx-search '></i>
+            <i class='bx bx-search'></i>
             <div class="tooltip">Search</div>
           </button>
         </div>
-
       </div>
-      <div class="main-section table-layout">
-        <div class="order-elements">
-          <table>
-            <thead>
-              <th>No</th>
-              <th>Inventory</th>
-              <th>Customer</th>
-              <th>Actions on orders</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Inventory-number 1</td>
-                <td>Beef burger meat</td>
-                <td><button class="button1 order-update">Restock</button>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Inventory-number 2</td>
-                <td>Chicken chop</td>
-                <td><button class="button1 order-update">Restock</button>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Inventory-number 3</td>
-                <td>Pasta</td>
-                <td><button class="button1 order-update">Restock</button>
-              </tr>
-            </tbody>
-          </table>
+      <div class="inventory">
+        <div class="restock-section">
+          <select class="restock-item">
+            <!-- Inventory items will be populated here -->
+          </select>
+          <input type="number" class="restock-amount" placeholder="Amount">
+          <button class="restock-button">Restock</button>
+        </div>
+
+        <div class="history">
+          <div class="main-section table-layout">
+              <div class="order-elements">
+                <table>
+                  <thead>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>User ID</th>
+                    <th>Item Name</th>
+                    <th>Amount</th>
+                    
+                  </thead>
+                  <tbody id="inventory-table-body">
+                    <!-- Orders will be populated here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
         </div>
       </div>
     </div>
-
   </div>
   <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
   <script src="/js/admin/dashboard.js"></script>
   <script src="/js/admin/main.js"></script>
+  <script src="/js/admin/inventory.js"></script>
 </body>
 
 </html>

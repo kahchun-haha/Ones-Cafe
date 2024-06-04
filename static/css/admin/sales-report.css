@@ -130,7 +130,7 @@
 
 
 .history {
-  margin: 30px;
+  margin: 30px 45px;
   padding: 15px;
   background-color: white;
 	box-shadow: 0 0.4rem 3rem rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
@@ -159,50 +159,7 @@ td {
 }
 
 
-.restock-section {
-  padding: 15px;
-  background-color: white;
-  margin: 30px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-.restock-item {
-  margin-right: 10px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 16px;
-  background-color: #f9f9f9;
-}
-
-.restock-amount {
-  margin-right: 10px;
-  padding: 5px;
-  width: 100px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 16px;
-  background-color: #f9f9f9;
-}
-
-.restock-button {
-  padding: 5px 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.restock-button:hover {
-  background-color: #45a049;
-}
 
 
 
