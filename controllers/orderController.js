@@ -1,4 +1,3 @@
-// controllers/orderController.js
 const Order = require("../models/Order");
 
 exports.createOrder = async (req, res) => {
@@ -64,7 +63,7 @@ exports.deleteOrder = async (req, res) => {
 
 exports.getCompletedOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ status: "done" }).populate("userId");
+    const orders = await Order.find().populate("userId");
     res.status(200).send({ orders });
   } catch (error) {
     res
@@ -72,3 +71,29 @@ exports.getCompletedOrders = async (req, res) => {
       .send({ message: "Failed to fetch completed orders", error });
   }
 };
+
+exports.getTotalOrderAmount = async (req, res) => {
+  try {
+    const orders = await Order.find({ status: "done" }).sort({ date: -1 });
+    const totalAmount = orders.reduce((sum, order) => sum + order.totalAmount, 0);
+    const latestOrderAmount = orders.length > 0 ? orders[0].totalAmount : 0;
+
+    res.status(200).send({ totalAmount, latestOrderAmount });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to fetch total order amount", error });
+  }
+};
+
+
+exports.getOrderStatusCounts = async (req, res) => {
+  try {
+    const doneCount = await Order.countDocuments({ status: "done" });
+    const cancelledCount = await Order.countDocuments({ status: "cancelled" });
+
+    res.status(200).send({ doneCount, cancelledCount });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to fetch order status counts", error });
+  }
+};
+
+

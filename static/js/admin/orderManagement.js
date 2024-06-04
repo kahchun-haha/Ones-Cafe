@@ -44,7 +44,7 @@ async function fetchOrders() {
     document.querySelectorAll(".order-delete").forEach((button) => {
       button.addEventListener("click", async (event) => {
         const orderId = event.target.getAttribute("data-order-id");
-        await deleteOrder(orderId);
+        await updateOrderStatus(orderId, "cancelled");
       });
     });
   } catch (error) {
@@ -83,6 +83,7 @@ async function updateOrderStatus(orderId, status) {
     console.error("Error:", error);
   }
 }
+
 
 async function deleteOrder(orderId) {
   try {

@@ -11,6 +11,7 @@ dotenv.config();
 const menuRoutes = require('./routes/menus');
 const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
+const inventoryRoutes = require('./routes/inventoryRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,7 +36,7 @@ app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 app.use(menuRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);
-
+app.use(inventoryRoutes);
 // MongoDB connection
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -82,7 +83,6 @@ const routes = [
   { path: "/changePassword", file: "profile/changePassword.html" },
   { path: "/admin/menuManagement", file: "admin/menuManagement.html" },
   { path: "/admin/orderManagement", file: "admin/orderManagement.html" },
-  { path: "/admin/orderHistory", file: "admin/orderHistory.html" },
   { path: "/admin/addMenu", file: "admin/addMenu.html" },
   { path: "/admin/modifyMenu", file: "admin/modifyMenu.html" },
   { path: "/admin/inventory", file: "admin/inventory.html" },

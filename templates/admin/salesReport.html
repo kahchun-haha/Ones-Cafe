@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
     <link rel="stylesheet" href="/css/admin/general.css">
     <link rel="stylesheet" href="/css/admin/sidebar.css">
+    <link rel="stylesheet" href="/css/admin/sales-report.css">
     <link rel="stylesheet" href="/css/admin/menuManagement.css">
-    <link rel="stylesheet" href="/css/admin/add-menu.css">
+
     <title>Sales Report: Ones Café</title>
     <link rel="icon" type="image/png" href="/images/icons/cafe.png">
 </head>
@@ -27,30 +27,100 @@
           </div>
           <ul id="js-menu-links" class="nav-links"></ul>
       </nav>
+
+
+    <div class="main">
+
+        <div class="search-section">
+            <div class="title-part">Sales Report</div>
+            <div class="search-part">
+              <input class="search-bar" type="text" placeholder="Search">
+              <button class="search-button">
+                <i class='bx bx-search '></i>
+                <div class="tooltip">Search</div>
+              </button>
+            </div>
+        </div>
+          
+        <div class="general-stats">
+            <div class="total">
+                <div class="title">Total Earnings</div>
+                <div class="inner-total">
+                    <div class="big-part">
+                        <div class="total-money"> 8451</div>
+                        <div class="latest-order-money">
+                            <div class="text">
+                                <img class="plus-button" src="/images/admin/plus.png" alt="">
+                                Latest done order: +59
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="total" id="totalOrder">
+                <div class="title">Total Orders</div>
+                <div class="inner-total">
+                    <div class="big-part">
+                        <div class="total-ord accepted">
+                            <img class="plus-button" src="/images/admin/icons8-arrow-up-40.png" alt="">
+                            151 accepted
+                        </div>
+                        <div class="total-ord declined">
+                            <img class="plus-button" src="/images/admin/icons8-arrow-down-40.png" alt="">
+                            12 declined
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="total">
+                <div class="title">Inventory stock</div>
+                <div class="inner-total">
+                  <div class="big-part">
+                    <div class="total-stock">0</div>
+                    <div class="latest-stock">
+                      <div class="inner-title">
+                        <img class="inv-img" src="/images/admin/icons8-inventory-40.png" alt="">
+                        Latest stock:
+                      </div>
+                      <div class="stock-details">
+                        <div class="stock-name">Stock: N/A</div>
+                        <div class="count">Count: N/A</div>
+                        <div class="stocked-person">Worker: N/A</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <h2>Order History</h2>
+
+        <div class="history">
+            <div class="main-section table-layout">
+                <div class="order-elements">
+                  <table>
+                    <thead>
+                      <th>No</th>
+                      <th>Order ID</th>
+                      <th>Item Titles & Quantities</th>
+                      <th>Total Amount</th>
+                      <th>Order Status</th>
+                    </thead>
+                    <tbody id="order-history-table-body">
+                      <!-- Orders will be populated here -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
     </div>
 
-    <img src="/images/admin/monthly-sales-report-template.png" alt="">
     <script src="https://kit.fontawesome.com/bbd49eb172.js" crossorigin="anonymous"></script>
-    <script src="/js/admin/dashboard.js"></script>
     <script src="/js/admin/main.js"></script>
+    <script src="/js/admin/dashboard.js"></script>
+    <script src="/js/admin/orderHistory.js"></script>
 
-    <script>
-        ClassicEditor
-            .create(document.querySelector('.body'), {
-                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                    ]
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-    </script>
 </body>
 
 </html>
