@@ -57,13 +57,15 @@ async function fetchOrderHistory() {
           )
           .join("");
 
+        const statusClass = `status-${order.status}`;
+
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${index + 1}</td>
             <td class="order-id">${order._id.slice(-8)}</td>
             <td class="item-details">${itemDetails}</td>
             <td>RM ${order.totalAmount.toFixed(2)}</td>
-            <td>${order.status}</td>
+            <td class="${statusClass}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</td>
           `;
         orderHistoryTableBody.appendChild(row);
       });
@@ -85,12 +87,25 @@ async function fetchOrderHistory() {
       );
       renderOrders(filteredOrders);
     });
+
+    const filterButtons = document.querySelectorAll(".filter-button");
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const status = button.getAttribute("data-status");
+        const filteredOrders = status === "all"
+          ? orders
+          : orders.filter((order) => order.status === status);
+        renderOrders(filteredOrders);
+      });
+    });
+
   } catch (error) {
     console.error("Failed to fetch order history:", error);
   }
 }
 
 document.addEventListener("DOMContentLoaded", fetchOrderHistory);
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const fetchTotalStock = async () => {

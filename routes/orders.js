@@ -5,7 +5,7 @@ const {
   updateOrderStatus,
   deleteOrder,
   getCompletedOrders,
-  getTotalOrderAmount, // Ensure this is imported
+  getTotalOrderAmount,
   getOrderStatusCounts,
 
 } = require("../controllers/orderController");

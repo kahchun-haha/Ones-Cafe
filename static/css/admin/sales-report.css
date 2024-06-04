@@ -134,13 +134,8 @@
   height: 40px;
 }
 
-h2 {
-  text-align: center;
-  margin: 10px 30px;
-}
-
 .history {
-  margin: 10px 30px;
+  margin: 10px 30px 30px;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0.4rem 3rem rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
@@ -180,6 +175,53 @@ td {
   justify-content: space-between;
 }
 
+.status-done {
+  color: green;
+  font-weight: bold;
+}
+
+.status-cancelled {
+  color: red;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #A9A9A9;
+  font-weight: bold;
+}
+
+.order-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 30px 10px;
+}
+
+.filter-part {
+  text-align: right;
+}
+
+.filter-button {
+  display: inline-block;
+  font-size: 1rem;
+  color: black;
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  border: none;
+  transition: all .2s linear;
+}
+
+.filter-button:hover {
+  background: #907a68;
+  letter-spacing: .1rem;
+  color: white;
+}
+
+.filter-button:active {
+  cursor: pointer;
+  color: white;
+}
 
 
 
