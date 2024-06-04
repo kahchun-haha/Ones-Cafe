@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const menuElements = document.querySelector(".menu-elements");
   const categoryLinks = document.querySelectorAll(".category a");
+  const searchInput = document.querySelector(".search-bar");
+  const searchButton = document.querySelector(".search-button");
   let currentCategory = null;
   let menuData = [];
 
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function displayMenuItems(category) {
+  function displayMenuItems(category, searchTerm = "") {
     if (category === currentCategory) {
       category = null;
       currentCategory = null;
@@ -29,7 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
     menuData.forEach((cat) => {
       if (!category || cat.category === category) {
         cat.items.forEach((item) => {
-          MenuHTML += `<div class="container">
+          if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+            MenuHTML += `<div class="container">
                       <div class="picture">
                           <img src="${item.image}" alt="${item.title}">
                       </div>
@@ -48,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                           <button class="delete-button" data-id="${item._id}" data-category="${cat.category}">Delete</button>
                       </div>
                   </div>`;
+          }
         });
       }
     });
@@ -78,14 +82,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  displayMenuItems();
-
   categoryLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const selectedCategory = e.target.getAttribute("data-category");
       displayMenuItems(selectedCategory);
     });
+  });
+
+  searchButton.addEventListener("click", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    displayMenuItems(currentCategory, searchTerm);
   });
 
   fetchMenuData();

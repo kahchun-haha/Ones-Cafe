@@ -7,6 +7,7 @@ const {
   getCompletedOrders,
   getTotalOrderAmount, // Ensure this is imported
   getOrderStatusCounts,
+
 } = require("../controllers/orderController");
 
 const router = express.Router();
@@ -18,4 +19,5 @@ router.delete("/api/orders/:orderId", deleteOrder);
 router.get("/api/orders/history", getCompletedOrders);
 router.get("/api/orders/TotalAmount", getTotalOrderAmount);
 router.get("/api/orders/statusCounts", getOrderStatusCounts);
+
 module.exports = router;

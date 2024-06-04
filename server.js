@@ -9,6 +9,7 @@ dotenv.config();
 const menuRoutes = require('./routes/menus');
 const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
+const inventoryRoutes = require('./routes/inventoryRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,7 +23,7 @@ app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 app.use(menuRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);
-
+app.use(inventoryRoutes);
 // MongoDB connection
 mongoose
   .connect(process.env.MONGODB_URI)
