@@ -446,10 +446,14 @@ p.address {
     margin: .5rem auto;
 }
 
+#Instructions-label{
+    font-size: 12px;
+}
+
 .modal-content textarea {
     border: 1px solid #888;
     height: 7rem;
-    width: 42rem;
+    width: 100%;
 }
 
 .modal-content #remark {
@@ -482,6 +486,7 @@ p.address {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    background: #fefefe;
 }
 
 .close-btn:hover,
@@ -495,6 +500,7 @@ p.address {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
     font-size: 1.3rem;
     color: var(--black);
 }
@@ -505,6 +511,8 @@ p.address {
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     cursor: pointer;
+    border-radius: .5rem;
+    font-weight: bold;
 }
 
 #quantity-input {
@@ -540,4 +548,15 @@ p.address {
     color: var(--black);
     font-size: 2rem;
     font-weight: 600;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
