@@ -1,0 +1,37 @@
+<%- include('layouts/main', { body: ` <div class="main">
+    <h1>Check and Confirm Orders</h1>
+    <div class="summary-module">
+        <div class="ordersummary">
+            <h2>Order Summary</h2>
+            <div class="promo-code">
+                <input type="text" id="promo-code" placeholder="Promo Code">
+                <button class="apply-btn" onclick="applyPromoCode()">Apply</button>
+            </div>
+            <div class="Total-Price">
+                <div class="subtotal">
+                    <span>Sub-total:</span>
+                    <span id="subtotal">RM 0.00</span>
+                </div>
+                <div class="service-tax">
+                    <span>Service tax:</span>
+                    <span id="tax">RM 0.00</span>
+                </div>
+                <div class="total">
+                    <span>Amount:</span>
+                    <span id="total">RM 0.00</span>
+                </div>
+                <button onclick="confirmOrder()" class="confirm-btn">Confirm Order</button>
+            </div>
+        </div>
+    </div>
+    <div class="order-module">
+
+        <div class="cart">
+            <div class="cart-items">
+                <!-- Items will be added dynamically here -->
+            </div>
+        </div>
+    </div>
+    </div>
+
+    ` }) %>

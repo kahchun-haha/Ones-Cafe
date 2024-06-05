@@ -1,0 +1,74 @@
+<%- include('layouts/main', { body: ` <div class="main_container">
+    <div class="main_header">
+        <div class="header_left">
+            <div>Customer feedback portal</div>
+        </div>
+        <button class="header_left_btn">Access to</button>
+        <button class="header_right_btn">Search</button>
+    </div>
+
+    <div class="main_center">
+        <div class="center_left">
+            <img src="/images/feedback/feedback_background.webp" alt="Feedback Background Image">
+        </div>
+        <div class="center_right">
+            <h3>We'll follow up</h3>
+            <p class="p1">One of our workspace experts will contact you based on your communication preferences.</p>
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="Full Name">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" placeholder="Phone Number">
+            <div class="divider"></div>
+            <p class="p2">
+                By clicking the above you agree to our <a href="#">Terms of Service</a> and have read and understood
+                our <a href="#">Privacy Policy</a>.
+            </p>
+            <button class="center_btn">Submit</button>
+        </div>
+    </div>
+
+    <div class="main_footer">
+        <div class="footer_left">
+            <p class="main_footer_title">Give Review</p>
+            <p class="p3">Give us your ratings about our cafe</p>
+            <div class="stars">
+                <img src="/images/icons/star.svg" alt="Star Rating 1" onclick="rateStar(this, 1)">
+                <img src="/images/icons/star.svg" alt="Star Rating 2" onclick="rateStar(this, 2)">
+                <img src="/images/icons/star.svg" alt="Star Rating 3" onclick="rateStar(this, 3)">
+                <img src="/images/icons/star.svg" alt="Star Rating 4" onclick="rateStar(this, 4)">
+                <img src="/images/icons/star.svg" alt="Star Rating 5" onclick="rateStar(this, 5)">
+            </div>
+            <div class="divider"></div>
+        </div>
+        <div class="footer_center">
+            <p class="main_footer_title">Submit Request</p>
+            <p class="p3">Give us some suggestions about our cafe's menu, service quality, and more.</p>
+            <p class="p4">
+                <label for="suggestion">*Please detail the issue you're experiencing.</label>
+                <textarea id="suggestion" name="suggestion" required></textarea>
+            </p>
+            <button class="footer_btn">Submit</button>
+        </div>
+        <div class="footer_right">
+            <p class="main_footer_title">Report Issue</p>
+            <p class="p3">We take every reported issue seriously</p>
+            <div class="divider"></div>
+            <p class="p4">
+                <label for="report">*Please detail the issue you're experiencing.</label>
+                <textarea id="report" name="report" required></textarea>
+            </p>
+            <div class="divider"></div>
+            <p class="p4">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Please enter your email">
+            </p>
+            <div class="divider"></div>
+            <div class="footer_right_input">
+                <input type="radio" id="replyByEmail">
+                <label for="replyByEmail" class="p3">Allow us to reply to you by email</label>
+            </div>
+            <button class="footer_btn">Submit</button>
+        </div>
+    </div>
+    </div>
+    ` }) %>

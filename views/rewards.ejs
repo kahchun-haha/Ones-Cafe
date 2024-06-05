@@ -1,0 +1,49 @@
+<%- include('layouts/main', { body: ` <div class="Promotions">
+    <h1 class="promotion-title">Our Special Promotions</h1>
+    <button id="voucher-collector-btn" onclick="location.href='/voucher'" class="voucher-collector-img">
+        <img src="/images/rewards/collector.jpg" alt="Voucher Collector">
+        </div>
+
+        <div class="promotion-container">
+            <div class="promotion" id="discount-offer">
+                <img src="/images/checkout/Discount.webp" alt="10%off" class="promotion-image"></img>
+                <ul>
+                    <li class="title">
+                        <p>10% Off on Your Next Visit</p>
+                    </li>
+                    <li class="description">
+                        <p>Enjoy a 10% discount on your total bill on your next visit!</p>
+                        <p>*Valid for 30 days from the date of issuing.</p>
+                    </li>
+                </ul>
+                <button onclick="claimOffer('discount')">Claim Offer</button>
+            </div>
+            <div class="promotion" id="free-food">
+                <img src="/images/rewards/freefood.jpg" alt="Free Food" class="promotion-image"></img>
+                <ul>
+                    <li class="title">
+                        <p>Free Redemption Food Item</p>
+                    </li>
+                    <li class="description">
+                        <p>Get a free item from our selected menu with your next purchase!</p>
+                        <p>*Offer valid only on weekdays for the next month.</p>
+                    </li>
+                </ul>
+                <button onclick="claimOffer('food')">Claim Offer</button>
+            </div>
+            <div class="promotion" id="birthday-voucher">
+                <img src="/images/rewards/birthday.jpg" alt="Birthday Voucher" class="promotion-image"></img>
+                <ul>
+                    <li class="title">
+                        <p>Birthday Voucher</p>
+                    </li>
+                    <li class="description">
+                        <p>Celebrate your birthday with us and get a special birthday treat!</p>
+                        <p>*Voucher valid on birthday month, ID verification required.</p>
+                    </li>
+                </ul>
+                <button onclick="claimOffer('birthday')">Claim Offer</button>
+            </div>
+        </div>
+
+        ` }) %>

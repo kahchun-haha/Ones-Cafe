@@ -1,0 +1,23 @@
+<%- include('../layouts/main', { body: ` <div class="login-container">
+    <h2>Login to Your Account</h2>
+    <div class="form-field">
+        <input type="email" id="login-email" name="email" placeholder="Username or email address" required>
+    </div>
+    <div class="form-field">
+        <input type="password" id="login-password" name="password" placeholder="Password" required>
+    </div>
+    <div class="checkbox-container">
+        <input type="checkbox" id="keep-signed-in" name="keep-signed-in">
+        <label for="keep-signed-in">Keep me signed in.</label>
+    </div>
+    <div class="links-container">
+        <a href="/forgotPassword">Forgot your password?</a>
+        <a href="/register">Register</a>
+    </div>
+    <div class="button-container">
+        <button type="submit" id="login">Sign in</button>
+        <button type="submit" id="loginAdmin" onclick="location.href='/admin/menuManagement'">Log in as Admin</button>
+    </div>
+    </form>
+    </div>
+    ` }) %>

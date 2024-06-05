@@ -180,7 +180,7 @@ section {
     margin-top: 5px;
 }
 
-section:nth-child(even) {
+section:nth-child(odd) {
     background: #fff;
 }
 
@@ -197,7 +197,7 @@ section:nth-child(even) {
     text-transform: uppercase;
 }
 
-.btn {
+.order-btn {
     margin-top: 1rem;
     display: inline-block;
     font-size: 1.7rem;
@@ -208,7 +208,7 @@ section:nth-child(even) {
     color: #fff;
 }
 
-.btn:hover {
+.order-btn:hover {
     background: var(--peaches4);
     letter-spacing: .1rem;
 }
