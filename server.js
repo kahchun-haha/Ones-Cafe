@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
-const multer = require("multer");
 
 dotenv.config();
 
@@ -24,6 +23,7 @@ app.use(menuRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);
 app.use(inventoryRoutes);
+
 // MongoDB connection
 mongoose
   .connect(process.env.MONGODB_URI)
