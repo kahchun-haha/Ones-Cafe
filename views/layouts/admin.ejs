@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="icon" type="image/png" href="/images/icons/cafe.png">
+    <% if (css && css.length> 0) { css.forEach(file => { %>
+        <link rel="stylesheet" href="<%= file %>">
+        <% }) } %>
+</head>
+
+<body>
+
+    <main>
+        <%- body %>
+    </main>
+
+
+    <% if (js && js.length> 0) { js.forEach(file => { %>
+        <script src="<%= file %>"></script>
+        <% }) } %>
+</body>
+
+</html>

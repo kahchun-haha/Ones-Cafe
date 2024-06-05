@@ -1,0 +1,56 @@
+<%- include('../layouts/admin', { body: ` <div class="whole-page">
+  <nav class="sidebar">
+    <div class="image-text">
+      <span class="image">
+        <img src="/images/icons/cafe.png" alt="Dashboard Icon">
+      </span>
+      <div class="text">Dashboard</div>
+    </div>
+    <ul id="js-menu-links" class="nav-links"></ul>
+  </nav>
+  <div class="main">
+    <div class="search-section">
+      <div class="title-part">Inventory Management</div>
+      <div class="search-part">
+        <input class="search-bar" type="text" placeholder="Search">
+        <button class="search-button">
+          <i class='bx bx-search'></i>
+          <div class="tooltip">Search</div>
+        </button>
+      </div>
+    </div>
+    <div class="inventory">
+      <div class="restock-section">
+        <select class="restock-item">
+          <!-- Inventory items will be populated here -->
+        </select>
+        <input type="number" class="restock-amount" placeholder="Amount">
+        <button class="restock-button">Restock</button>
+      </div>
+
+      <div class="history">
+        <div class="main-section table-layout">
+          <div class="order-elements">
+            <table>
+              <thead>
+                <th>#</th>
+                <th>Date</th>
+                <th>User ID</th>
+                <th>Item Name</th>
+                <th>Amount</th>
+
+              </thead>
+              <tbody id="inventory-table-body">
+                <!-- Orders will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  </html>
+  ` }) %>

@@ -13,6 +13,10 @@ const inventoryRoutes = require('./routes/inventoryRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,46 +38,36 @@ mongoose
     console.error("Error connecting to MongoDB:", err);
   });
 
-// Serve HTML files for specific routes
-const sendFileWithLogging = (res, filePath) => {
-  console.log(`Serving file: ${filePath}`);
-  res.sendFile(filePath, { root: path.join(__dirname, "templates") }, (err) => {
-    if (err) {
-      console.error(`Error sending file: ${filePath}`, err);
-      res.status(err.status || 500).end();
-    }
-  });
-};
-
-// Define route handlers for serving HTML files
+// Route definitions with explicit layout specification
 const routes = [
-  { path: "/", file: "index.html" },
-  { path: "/home", file: "home.html" },
-  { path: "/menu", file: "menu.html" },
-  { path: "/checkout", file: "checkout.html" },
-  { path: "/rewards", file: "rewards.html" },
-  { path: "/voucher", file: "voucher.html" },
-  { path: "/feedback", file: "feedback.html" },
-  { path: "/login", file: "profile/login.html" },
-  { path: "/register", file: "profile/register.html" },
-  { path: "/forgotPassword", file: "profile/forgotPassword.html" },
-  { path: "/resetPassword", file: "profile/resetPassword.html" },
-  { path: "/profile", file: "profile/profile.html" },
-  { path: "/admin/menuManagement", file: "admin/menuManagement.html" },
-  { path: "/admin/orderManagement", file: "admin/orderManagement.html" },
-  { path: "/admin/addMenu", file: "admin/addMenu.html" },
-  { path: "/admin/modifyMenu", file: "admin/modifyMenu.html" },
-  { path: "/admin/inventory", file: "admin/inventory.html" },
-  { path: "/admin/salesReport", file: "admin/salesReport.html" },
-  { path: "/404", file: "404.html" },
+  { path: "/", view: "index", title: "Ones Café", layout: "main", css: ['https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css', '/css/home.css'], js: ['https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js', '/js/home/home.js'] },
+  { path: "/menu", view: "menu", title: "Menu: Ones Café", layout: "main", css: ['/css/menu.css'], js: ['/js/menu/menu.js'] },
+  { path: "/checkout", view: "checkout", title: "Checkout: Ones Café", layout: "main", css: ['/css/checkout.css'], js: ['/js/checkout/checkout.js'] },
+  { path: "/rewards", view: "rewards", title: "Rewards: Ones Café", layout: "main", css: ['/css/rewards.css'], js: ['/js/rewards/rewards.js'] },
+  { path: "/voucher", view: "voucher", title: "Rewards: Ones Café", layout: "main", css: ['/css/rewards.css'], js: ['/js/rewards/rewards.js'] },
+  { path: "/feedback", view: "feedback", title: "Feedback: Ones Café", layout: "main", css: ['/css/feedback.css'], js: ['/js/feedback/feedback.js'] },
+  { path: "/login", view: "profile/login", title: "Login Page: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/login.js'] },
+  { path: "/register", view: "profile/register", title: "Register: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/register.js'] },
+  { path: "/forgotPassword", view: "profile/forgotPassword", title: "Forgot Password: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/forgotPassword.js'] },
+  { path: "/resetPassword", view: "profile/resetPassword", title: "Reset Password: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/resetPassword.js'] },
+  { path: "/profile", view: "profile/profile", title: "Profile: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/general.js','/js/profile/profile.js'] },
+  { path: "/admin/menuManagement", view: "admin/menuManagement", title: "Menu Management: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css'], js: ['/js/admin/dashboard.js', '/js/admin/menuManagement.js'] },
+  { path: "/admin/orderManagement", view: "admin/orderManagement", title: "Order Management: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/order.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderManagement.js'] },
+  { path: "/admin/addMenu", view: "admin/addMenu", title: "Add Menu: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/add-menu.css'], js: ['/js/admin/dashboard.js', '/js/admin/addMenu.js'] },
+  { path: "/admin/modifyMenu", view: "admin/modifyMenu", title: "Modify Menu: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/add-menu.css'], js: ['https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js', '/js/admin/dashboard.js', '/js/admin/modifyMenu.js'] },
+  { path: "/admin/inventory", view: "admin/inventory", title: "Inventory: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/inventory.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/inventory.js'] },
+  { path: "/admin/salesReport", view: "admin/salesReport", title: "Sales Report: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/sales-report.css', '/css/admin/menuManagement.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderHistory.js'] },
+  { path: "/404", view: "404", title: "404 Not Found", layout: "admin", css: ['/css/404.css'], js: ['https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'] },
 ];
 
 routes.forEach(route => {
-  app.get(route.path, (req, res) => sendFileWithLogging(res, route.file));
+  app.get(route.path, (req, res) => {
+    res.render(route.view, { title: route.title, layout: `layouts/${route.layout}`, css: route.css, js: route.js });
+  });
 });
 
 // Fallback route for handling 404 errors
-app.use((req, res) => sendFileWithLogging(res, "404.html"));
+app.use((req, res) => res.status(404).render('404', { title: '404 Not Found', layout: 'layouts/admin', css: ['/css/404.css'], js: ['https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'] }));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -47,7 +47,7 @@
 }
 
 #promo-code {
-  width: 18rem;
+  width: 17rem;
   border-radius: .5rem;
   padding: .5rem;
 }
@@ -124,11 +124,13 @@
 }
 
 .item-actions .quantity-btn {
-  width: 25px;
-  margin: 0 5px;
-  border: 1px solid #ccc;
-  background-color: #f8f8f8;
-  cursor: pointer;
+    width: 25px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    border-radius: .5rem;
+    font-weight: bold;
 }
 
 .item-actions .quantity-input {

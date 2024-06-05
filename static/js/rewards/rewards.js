@@ -109,3 +109,8 @@ function redeemVoucher(voucherId) {
     alert("Not enough points to redeem this voucher.");
   }
 }
+
+function navigate() {
+  window.location.href = "/voucher";
+  showVouchers();
+}
