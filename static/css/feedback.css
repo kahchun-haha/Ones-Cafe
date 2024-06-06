@@ -96,7 +96,7 @@
   margin: 10px;
   border: 3px solid black;
   border-radius: 40px;
-  padding-left: 40px;
+  padding-left: 20px;
   color: #000000;
 }
 
@@ -185,11 +185,12 @@
 .main_footer_title {
   font-weight: bold;
   margin-left: 10px;
+  font-size: larger;
 }
 
 .p3 {
   margin-left: 10px;
-  font-size: 10px;
+  font-size: 12px;
   margin-top: -5px;
 }
 
@@ -237,7 +238,7 @@
   border-radius: 40px;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 10px;
 }
 
@@ -331,4 +332,21 @@
 
 .footer_right_input input {
   margin-top: -5px;
+}
+
+label[for="fullName"],
+label[for="phoneNumber"] {
+    margin-left: 20px;
+}
+
+#report{
+  width: 100%;
+}
+
+p.p4{
+  padding-right: 15px
+}
+
+.footer_right .divider{
+  margin:auto
 }
