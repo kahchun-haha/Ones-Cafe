@@ -66,19 +66,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const itemId = event.target.getAttribute("data-id");
     const category = event.target.getAttribute("data-category");
 
-    console.log(`Deleting item with ID: ${itemId} from category: ${category}`);
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      console.log(
+        `Deleting item with ID: ${itemId} from category: ${category}`
+      );
 
-    try {
-      const response = await fetch(`/api/menus/${category}/${itemId}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      try {
+        const response = await fetch(`/api/menus/${category}/${itemId}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        console.log("Item deleted successfully");
+        fetchMenuData(); // Refresh menu data after deletion
+      } catch (error) {
+        console.error("Error deleting menu item:", error);
       }
-      console.log("Item deleted successfully");
-      fetchMenuData(); // Refresh menu data after deletion
-    } catch (error) {
-      console.error("Error deleting menu item:", error);
+    } else {
+      console.log("Item deletion canceled");
     }
   }
 
