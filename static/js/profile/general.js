@@ -1,57 +1,96 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var formFields = document.querySelectorAll('#manage-account-form input');
-    
-    // Load saved state if it exists
-    formFields.forEach(function(field) {
-      if (sessionStorage.getItem(field.id)) {
-        field.value = sessionStorage.getItem(field.id); // Set field value from session storage if available
+document.addEventListener('DOMContentLoaded', function () {
+  async function checkLoginStatus() {
+      try {
+          const response = await fetch('/api/users/check-auth', {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          });
+          if (response.ok) {
+              const user = await response.json();
+              loadUserData(user);
+          } else {
+              window.location.href = '/login';
+          }
+      } catch (error) {
+          console.error('Error checking login status:', error);
       }
-    });
-  
-    // Event listener for the edit button
-    document.getElementById('edit-button').addEventListener('click', function() {
+  }
+
+  function loadUserData(user) {
+      document.getElementById('name').value = user.username || '';
+      document.getElementById('email').value = user.email || '';
+      document.getElementById('birthday').value = user.birthday || '';
+      document.getElementById('gender').value = user.gender || '';
+      document.getElementById('contact-number').value = user.contactNumber || '';
+      document.getElementById('address').value = user.address || '';
+      document.getElementById('city').value = user.city || '';
+      document.getElementById('state').value = user.state || '';
+      document.getElementById('postcode').value = user.postcode || '';
+  }
+
+  document.getElementById('save-button').addEventListener('click', async function (event) {
+      event.preventDefault();
+      const updatedUser = {
+          username: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          birthday: document.getElementById('birthday').value,
+          gender: document.getElementById('gender').value,
+          contactNumber: document.getElementById('contact-number').value,
+          address: document.getElementById('address').value,
+          city: document.getElementById('city').value,
+          state: document.getElementById('state').value,
+          postcode: document.getElementById('postcode').value,
+      };
+
+      try {
+          const response = await fetch('/api/users/profile', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedUser)
+          });
+          if (response.ok) {
+              alert('Profile updated successfully!');
+              loadUserData(updatedUser); // Update client-side with new data
+              setEditMode(false); // Switch back to read-only mode
+          } else {
+              alert('Failed to update profile.');
+          }
+      } catch (error) {
+          console.error('Error updating profile:', error);
+          alert('An error occurred while updating the profile.');
+      }
+  });
+
+  document.getElementById('discard-button').addEventListener('click', function () {
+      checkLoginStatus();
+      setEditMode(false);
+  });
+
+  document.getElementById('edit-button').addEventListener('click', function () {
       setEditMode(true);
-    });
-  
-    // Event listener for the save button
-    document.getElementById('save-button').addEventListener('click', function() {
-      formFields.forEach(function(field) {
-        sessionStorage.setItem(field.id, field.value); // Save each field's value in session storage
+  });
+
+  document.getElementById('change-password-button').addEventListener('click', function () {
+      window.location.href = '/changePassword'; // Navigate to changePassword.html
+  });
+
+  function setEditMode(editing) {
+      const formFields = document.querySelectorAll('#manage-account-form input, #manage-account-form select');
+      formFields.forEach(function (field) {
+          field.readOnly = !editing;
+          field.disabled = !editing;
+          field.style.backgroundColor = editing ? "#fff" : "#e9ecef";
       });
-      setEditMode(false);
-    });
-  
-    // Event listener for the discard button
-    document.getElementById('discard-button').addEventListener('click', function() {
-      // Revert each field to the last saved value in session storage
-      formFields.forEach(function(field) {
-        field.value = sessionStorage.getItem(field.id) || field.value; // Use saved value or current if not available
-      });
-      setEditMode(false);
-    });
-  
-    // Function to toggle the readonly state of form fields and button visibility
-    function setEditMode(editing) {
-      formFields.forEach(function(field) {
-        field.readOnly = !editing;
-        field.style.backgroundColor = editing ? "#fff" : "#e9ecef";
-      });
-  
-      // Toggle button visibility
+
       document.getElementById('edit-button').style.display = editing ? 'none' : 'inline-block';
       document.getElementById('save-button').style.display = editing ? 'inline-block' : 'none';
       document.getElementById('discard-button').style.display = editing ? 'inline-block' : 'none';
-    }
-  });
-  
-  fetch('/templates/menu.html')
-    .then(response => response.text())
-    .then(navbarHtml => {
-      document.getElementById('navbar').innerHTML = navbarHtml;
-    });
-  
-  fetch('/templates/menu.html')
-    .then(response => response.text())
-    .then(navbarHtml => {
-      document.getElementById('footer').innerHTML = navbarHtml;
-    });
+      document.getElementById('change-password-button').disabled = !editing;
+  }
+
+  checkLoginStatus();
+});

@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
+const session = require("express-session");
+const MongoStore = require('connect-mongo');
 
 dotenv.config();
 
@@ -22,21 +24,33 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 
-// Use the defined routes for menus, users, and orders
-app.use(menuRoutes);
-app.use(userRoutes);
-app.use(orderRoutes);
-app.use(inventoryRoutes);
+
+// Use session with MongoStore
+app.use(session({
+  secret: 'your-secret-key', // Replace with your own secret key
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: 'sessions'
+  }),
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
 
 // MongoDB connection
-mongoose
-  .connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
   });
+
+// Middleware to set isAuthenticated in res.locals
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isAuthenticated || false;
+  next();
+});
 
 // Route definitions with explicit layout specification
 const routes = [
@@ -50,7 +64,8 @@ const routes = [
   { path: "/register", view: "profile/register", title: "Register: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/register.js'] },
   { path: "/forgotPassword", view: "profile/forgotPassword", title: "Forgot Password: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/forgotPassword.js'] },
   { path: "/resetPassword", view: "profile/resetPassword", title: "Reset Password: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/resetPassword.js'] },
-  { path: "/profile", view: "profile/profile", title: "Profile: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/general.js','/js/profile/profile.js'] },
+  { path: "/changePassword", view: "profile/changePassword", title: "Change Password: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/changePassword.js'] },
+  { path: "/profile", view: "profile/profile", title: "Profile: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/general.js'] },
   { path: "/admin/menuManagement", view: "admin/menuManagement", title: "Menu Management: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css'], js: ['/js/admin/dashboard.js', '/js/admin/menuManagement.js'] },
   { path: "/admin/orderManagement", view: "admin/orderManagement", title: "Order Management: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/order.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderManagement.js'] },
   { path: "/admin/addMenu", view: "admin/addMenu", title: "Add Menu: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/add-menu.css'], js: ['/js/admin/dashboard.js', '/js/admin/addMenu.js'] },
@@ -60,9 +75,15 @@ const routes = [
   { path: "/404", view: "404", title: "404 Not Found", layout: "admin", css: ['/css/404.css'], js: ['https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'] },
 ];
 
+// Use the defined routes for menus, users, and orders
+app.use(menuRoutes);
+app.use(userRoutes);
+app.use(orderRoutes);
+app.use(inventoryRoutes);
+
 routes.forEach(route => {
   app.get(route.path, (req, res) => {
-    res.render(route.view, { title: route.title, layout: `layouts/${route.layout}`, css: route.css, js: route.js });
+    res.render(route.view, { title: route.title, layout: `layouts/${route.layout}`, css: route.css, js: route.js, isAuthenticated: res.locals.isAuthenticated });
   });
 });
 

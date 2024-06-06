@@ -1,5 +1,6 @@
-<%- include('../layouts/main', { body: ` <div class="login-container">
+<%- include('../layouts/main', { body: `     <div class="login-container">
     <h2>Login to Your Account</h2>
+    <form id="login-form">
     <div class="form-field">
         <input type="email" id="login-email" name="email" placeholder="Username or email address" required>
     </div>
@@ -14,10 +15,11 @@
         <a href="/forgotPassword">Forgot your password?</a>
         <a href="/register">Register</a>
     </div>
-    <div class="button-container">
+    <div class="btn-container">
         <button type="submit" id="login">Sign in</button>
-        <button type="submit" id="loginAdmin" onclick="location.href='/admin/menuManagement'">Log in as Admin</button>
+        <button type="submit" id="loginAdmin" onclick="location.href='/admin/menuManagement'">Log in as
+            Admin</button>
     </div>
     </form>
-    </div>
+</div>
     ` }) %>

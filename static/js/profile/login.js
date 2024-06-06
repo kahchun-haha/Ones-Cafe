@@ -1,20 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const loginButton = document.getElementById('login');
-    if (loginButton) {
-        loginButton.addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the form from submitting traditionally
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            // Assuming 'user' was stored as an object {email, password} during registration
-            const storedUser = JSON.parse(localStorage.getItem('user'));
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
 
-            if (storedUser && email === storedUser.email && password === storedUser.password) {
-                localStorage.setItem('isLoggedIn', 'true');
-                alert('Login successful!');
-                window.location.href = '/'; // Redirect after successful login
-            } else {
-                alert('Invalid credentials. Please try again.');
+        if (email && password) {
+            try {
+                const response = await fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alert('Login successful!');
+                    window.location.href = '/';
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
             }
-        });
-    }
+        } else {
+            alert('Please fill in all the fields.');
+        }
+    });
 });

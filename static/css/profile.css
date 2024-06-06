@@ -1,6 +1,7 @@
 .login-container,
 .forgot-password-container,
-.register-container {
+.register-container,
+.change-password-container {
   height: auto;
   width: 24rem;
   margin: auto;
@@ -47,44 +48,48 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  /* Ensure padding doesn't affect overall width */
 }
 
+#change-password-button {
+  background-color: #f1ede967;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  margin-top: 10px;
+}
 
-/* Align buttons and links inside their containers */
-.button-container button,
+#change-password-button:hover {
+  background-color: #f1ede967;
+}
+#change-password-button:disabled {
+background-color: #ccc; /* Grey color for disabled state */
+cursor: not-allowed;
+}
+
+.btn-container button,
 .links-container a {
   display: block;
-  /* Make them block elements to take the full width */
-  /* Center them horizontally */
   padding: 5px 5px;
-  /* Add some padding */
 }
 
-.button-container button,
-.button-logout {
+.btn-container button{
   display: block;
-  /* Full-width block elements */
   width: 100%;
-  /* Full container width */
   padding: 10px;
   border: none;
   border-radius: 4px;
   margin-top: 10px;
-  /* Space between buttons */
   font-size: 16px;
-  /* Readable font size */
   font-weight: bold;
-  /* Bold font for the button text */
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */
   transition: background-color 0.3s;
-  /* Smooth background color transition for hover effect */
 }
 
-
-/* Style links to look more like buttons (if needed) */
 .links-container a {
   background-color: transparent;
   color: blue;
@@ -120,4 +125,35 @@ input:not([readonly]) {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* CSS for gender select */
+#gender {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
+#gender:disabled {
+  background-color: #e9ecef;
+}
+/* Style for the date input */
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
+input[type="date"]:disabled {
+  background-color: #e9ecef;
+}
+
+#profile-save-button {
+  display: none;
+}
+
+#profile-discard-button {
+  display: none;
 }

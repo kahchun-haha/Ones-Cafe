@@ -6,8 +6,8 @@
         </div>
 
         <div class="form-field">
-            <label for="birthday">Birthday Month *</label>
-            <input type="text" id="birthday" name="birthday" value="" readonly>
+            <label for="birthday">Birthday *</label>
+            <input type="date" id="birthday" name="birthday" value="" readonly>
         </div>
 
         <div class="form-field">
@@ -16,8 +16,13 @@
         </div>
 
         <div class="form-field">
-            <label for="gender">Gender</label>
-            <input type="text" id="gender" name="gender" value="" readonly>
+            <label for="gender">Gender *</label>
+            <select id="gender" name="gender" disabled>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
         </div>
 
         <div class="form-field">
@@ -45,17 +50,14 @@
             <input type="text" id="postcode" name="postcode" readonly>
         </div>
 
-        <div class="form-field">
-            <label for="password">Password *</label>
-            <input type="password" id="password" name="password" value="" readonly>
+        <div class=changePassword>
+            <button type=button id="change-password-button" disabled>Change Password</button>
         </div>
 
-        <div class="button-container">
+        <div class="btn-container">
             <button type="button" id="edit-button" class="edit-button">Edit</button>
-            <button type="button" id="discard-button" class="save-discard-buttons">Discard</button>
-            <button type="submit" id="save-button" class="save-discard-buttons">Save Changes</button>
-        </div>
-
+            <button type="button" id="profile-discard-button" class="save-discard-buttons">Discard</button>
+            <button type="submit" id="profile-save-button" class="save-discard-buttons">Save Changes</button>
         </div>
     </form>
     </div>

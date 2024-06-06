@@ -8,18 +8,10 @@
         </div>
 
         <ul class="navbar-nav-left">
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="/menu">Menu</a>
-            </li>
-            <li>
-                <a href="/rewards">Rewards</a>
-            </li=>
-            <li>
-                <a href="/feedback">Feedback</a>
-            </li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/rewards">Rewards</a></li>
+            <li><a href="/feedback">Feedback</a></li>
         </ul>
 
         <ul class="navbar-nav-right">
@@ -30,11 +22,20 @@
                     <span>Locate Us</span>
                 </a>
             </li>
-            <li>
-                <button class="button btn-dark-outline" id="signInBtn" onclick="location.href='/profile';">Profile</button>
-                <button class="button btn-dark" id="joinNowBtn" onclick="location.href='/';">Log
-                    Out</button>
-            </li>
+            <% if (isAuthenticated) { %>
+                <li><button class="button btn-dark-outline" id="profileBtn"
+                        onclick="location.href='/profile';">Profile</button></li>
+                <li>
+                    <form id="logoutForm" action="/api/users/logout" method="POST" style="display: inline;">
+                        <button type="submit" class="button btn-dark" id="logoutBtn">Logout</button>
+                    </form>
+                </li>
+                <% } else { %>
+                    <li><button class="button btn-dark-outline" id="loginBtn"
+                            onclick="location.href='/login';">Login</button></li>
+                    <li><button class="button btn-dark" id="signUpBtn" onclick="location.href='/register';">Sign
+                            Up</button></li>
+                    <% } %>
         </ul>
     </div>
 </nav>
