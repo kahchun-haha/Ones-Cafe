@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const { sendVerificationEmail, generateOTP } = require('../emailsender');
+const { sendVerificationEmail, generateOTP } = require('../services/emailSender');
 
 exports.registerUser = async (req, res) => {
     try {
