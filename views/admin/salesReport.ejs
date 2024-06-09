@@ -9,15 +9,13 @@
     <ul id="js-menu-links" class="nav-links"></ul>
   </nav>
 
-
   <div class="main">
-
     <div class="search-section">
       <div class="title-part">Sales Report</div>
       <div class="search-part">
         <input class="search-bar" type="text" placeholder="Search">
         <button class="search-button">
-          <i class='bx bx-search '></i>
+          <i class='bx bx-search'></i>
           <div class="tooltip">Search</div>
         </button>
       </div>
@@ -54,19 +52,15 @@
         </div>
       </div>
       <div class="total">
-        <div class="title">Inventory stock</div>
+        <div class="title-with-image">
+          <div class="title">Inventory stock</div>
+          <img class="inv-img" src="/images/admin/icons8-inventory-40.png" alt="">
+        </div>
         <div class="inner-total">
           <div class="big-part">
-            <div class="total-stock">0</div>
             <div class="latest-stock">
-              <div class="inner-title">
-                <img class="inv-img" src="/images/admin/icons8-inventory-40.png" alt="">
-                Latest stock:
-              </div>
-              <div class="stock-details">
-                <div class="stock-name">Stock: N/A</div>
-                <div class="count">Count: N/A</div>
-                <div class="stocked-person">Worker: N/A</div>
+              <div class="stock-details" id="inventory-low-stock">
+                <!-- Low stock items will be populated here -->
               </div>
             </div>
           </div>
@@ -103,6 +97,5 @@
       </div>
     </div>
   </div>
-
-
+  </div>
   ` }) %>

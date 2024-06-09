@@ -25,7 +25,8 @@
   transition: transform 0.2s, box-shadow 0.2s;
 
 }
-.total .inner-total{
+
+.total .inner-total {
   border-bottom: 1px solid black;
   height: 80%;
 }
@@ -62,7 +63,7 @@
   font-size: 14px;
 }
 
-.latest-order-money .text{
+.latest-order-money .text {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -72,7 +73,8 @@
   color: rgb(50, 177, 50);
 }
 
-.big-part .total-money ,.big-part .total-stock {
+.big-part .total-money,
+.big-part .total-stock {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -80,13 +82,13 @@
   font-weight: 700;
 }
 
-.latest-stock{
+.latest-stock {
   display: flex;
   font-size: 14px;
   flex-direction: column;
 }
 
-.latest-stock .inner-title{
+.latest-stock .inner-title {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -118,9 +120,10 @@
 .orders-stats .accepted {
   color: rgb(50, 177, 50);
 }
+
 .orders-stats .declined {
   color: rgb(180, 26, 52);
-  
+
 }
 
 .plus-button {
@@ -133,42 +136,44 @@
   margin: 30px;
   padding: 15px;
   background-color: white;
-	box-shadow: 0 0.4rem 3rem rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0.4rem 3rem rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
 }
+
 table {
-	width: 100%;
-	border-collapse: collapse;
-	font-size: 1.1rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
 }
 
 th,
 td {
-	padding: 15px;
-	text-align: center;
-	border-bottom: 1px solid #d3d3d3;
-	min-width: 100px;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #d3d3d3;
+  min-width: 100px;
 }
 
 .order-good {
-	color: #00b14f;
+  color: #00b14f;
 
 }
 
 .order-bad {
-	color: #df2525;
+  color: #df2525;
 }
 
 
 .restock-section {
-  padding: 15px;
-  background-color: white;
-  margin: 30px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  padding: 1.5rem 1.5rem;
+  margin: 20px 30px;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0 0.4rem 3rem rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .restock-item {
@@ -180,28 +185,45 @@ td {
   background-color: #f9f9f9;
 }
 
-.restock-amount {
-  margin-right: 10px;
-  padding: 5px;
-  width: 100px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+.restock-amount,
+.decrease-amount {
+	width:6rem;
+	text-align:center;
+  height: 40px;
+  padding-left: 10px;
   font-size: 16px;
-  background-color: #f9f9f9;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(192, 192, 192);
+  box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
+  outline: none;
+  border-radius: 20px;
+}
+
+.restock-button, .decrease-button {
+	padding: 15px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	font-weight: 700;
+	color: #fff;
+	margin: 7px;
+	font-size: 1rem;
+}
+
+.restock-button:hover, .decrease-button:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+  transition: all .2s linear;
 }
 
 .restock-button {
-  padding: 5px 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 16px;
+	background-color: #00b14f;
+
 }
 
-.restock-button:hover {
-  background-color: #45a049;
+.decrease-button {
+	background-color: #df2525;
 }
 
 

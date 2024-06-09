@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const Inventory = require("../models/Inventory");
 
 exports.createOrder = async (req, res) => {
   const { userId, items, totalAmount } = req.body;
@@ -41,6 +42,18 @@ exports.updateOrderStatus = async (req, res) => {
     if (!order) {
       return res.status(404).send({ message: "Order not found" });
     }
+
+    // If the order is marked as done, update the inventory
+    if (status === 'done') {
+      for (const item of order.items) {
+        const inventoryItem = await Inventory.findOne({ title: item.title });
+        if (inventoryItem) {
+          inventoryItem.quantity -= item.quantity;
+          await inventoryItem.save();
+        }
+      }
+    }
+
     res.status(200).send({ message: "Order status updated", order });
   } catch (error) {
     res.status(500).send({ message: "Failed to update order status", error });
@@ -66,9 +79,7 @@ exports.getCompletedOrders = async (req, res) => {
     const orders = await Order.find().populate("userId");
     res.status(200).send({ orders });
   } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Failed to fetch completed orders", error });
+    res.status(500).send({ message: "Failed to fetch completed orders", error });
   }
 };
 
@@ -84,7 +95,6 @@ exports.getTotalOrderAmount = async (req, res) => {
   }
 };
 
-
 exports.getOrderStatusCounts = async (req, res) => {
   try {
     const doneCount = await Order.countDocuments({ status: "done" });
@@ -95,5 +105,3 @@ exports.getOrderStatusCounts = async (req, res) => {
     res.status(500).send({ message: "Failed to fetch order status counts", error });
   }
 };
-
-

@@ -1,20 +1,21 @@
 const mongoose = require("mongoose");
 
 const inventorySchema = new mongoose.Schema({
-  userId: {
+  menuItemId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: false,
+    ref: 'Menu',
+    required: true
   },
-  item_name: {
+  title: {
     type: String,
-    required: true,
+    required: true
   },
-  amount: {
+  quantity: {
     type: Number,
-    required: true,
-  },
-  date: { type: Date, default: Date.now },
+    default: 100
+  }
 });
 
-module.exports = mongoose.model("Inventory", inventorySchema);
+const Inventory = mongoose.model("Inventory", inventorySchema);
+
+module.exports = Inventory;

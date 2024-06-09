@@ -107,43 +107,27 @@ async function fetchOrderHistory() {
 document.addEventListener("DOMContentLoaded", fetchOrderHistory);
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const fetchTotalStock = async () => {
-    try {
-      const response = await fetch("/api/inventory/totalStock");
-      const data = await response.json();
-      const totalStockElement = document.querySelector(".total-stock");
-      totalStockElement.innerHTML = data.totalAmount;
-    } catch (error) {
-      console.error("Failed to fetch total stock amount:", error);
-    }
-  };
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch low stock items
+  fetch('/api/inventory-low-stock')
+    .then(response => response.json())
+    .then(data => {
+      const lowStockContainer = document.getElementById('inventory-low-stock');
+      lowStockContainer.innerHTML = '';
 
-  const fetchLatestStock = async () => {
-    try {
-      const response = await fetch("/api/inventory/latestStock");
-      const data = await response.json();
-      const latestStock = data.latestStock;
-
-      const stockDetailsElement = document.querySelector(
-        ".latest-stock .stock-details"
-      );
-      stockDetailsElement.innerHTML = `
-        <div class="stock-name">Stock: ${latestStock.item_name}</div>
-        <div class="count">Count: ${latestStock.amount}</div>
-        <div class="stocked-person">Worker: ${
-          latestStock.userId ? latestStock.userId.name : "Unknown"
-        }</div>
-      `;
-    } catch (error) {
-      console.error("Failed to fetch latest stock details:", error);
-    }
-  };
-
-  const initializePage = async () => {
-    await fetchTotalStock();
-    await fetchLatestStock();
-  };
-
-  initializePage();
+      if (data.length === 0) {
+        lowStockContainer.innerHTML = '<div>No low stock items found.</div>';
+      } else {
+        data.forEach(item => {
+          const stockItem = document.createElement('div');
+          stockItem.className = 'stock-item';
+          stockItem.innerHTML = `
+            <div class="stock-name">${item.title}</div>
+            <div class="count">${item.quantity}</div>
+          `;
+          lowStockContainer.appendChild(stockItem);
+        });
+      }
+    })
+    .catch(error => console.error('Error fetching low stock items:', error));
 });

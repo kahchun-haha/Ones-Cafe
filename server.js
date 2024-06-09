@@ -10,7 +10,7 @@ dotenv.config();
 const menuRoutes = require('./routes/menus');
 const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
-const inventoryRoutes = require('./routes/inventoryRoutes');
+const inventoryRoutes = require('./routes/inventories');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -70,7 +70,7 @@ const routes = [
   { path: "/admin/orderManagement", view: "admin/orderManagement", title: "Order Management: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/order.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderManagement.js'] },
   { path: "/admin/addMenu", view: "admin/addMenu", title: "Add Menu: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/add-menu.css'], js: ['/js/admin/dashboard.js', '/js/admin/addMenu.js'] },
   { path: "/admin/modifyMenu", view: "admin/modifyMenu", title: "Modify Menu: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/add-menu.css'], js: ['https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js', '/js/admin/dashboard.js', '/js/admin/modifyMenu.js'] },
-  { path: "/admin/inventory", view: "admin/inventory", title: "Inventory: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/inventory.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/inventory.js'] },
+  { path: "/admin/inventory", view: "admin/inventory", title: "Inventory: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/inventory.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/inventoryManagement.js'] },
   { path: "/admin/salesReport", view: "admin/salesReport", title: "Sales Report: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/sales-report.css', '/css/admin/menuManagement.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderHistory.js'] },
   { path: "/404", view: "404", title: "404 Not Found", layout: "admin", css: ['/css/404.css'], js: ['https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'] },
 ];

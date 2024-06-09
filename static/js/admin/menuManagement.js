@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const menuElements = document.querySelector(".menu-elements");
   const categoryLinks = document.querySelectorAll(".category a");
   const searchInput = document.querySelector(".search-bar");
-  const searchButton = document.querySelector(".search-button");
   let currentCategory = null;
   let menuData = [];
 
@@ -96,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  searchButton.addEventListener("click", () => {
+  searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase();
     displayMenuItems(currentCategory, searchTerm);
   });
