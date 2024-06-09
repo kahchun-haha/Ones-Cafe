@@ -27,7 +27,7 @@ async function fetchOrderHistory() {
     );
     latestOrderElement.innerHTML = `
       <img class="plus-button" src="/images/admin/plus.png" alt="">
-      Latest Order: +RM ${latestOrderAmount.toFixed(2)}
+      Latest Order: + RM ${latestOrderAmount.toFixed(2)}
     `;
 
     // Update the order counts in the HTML

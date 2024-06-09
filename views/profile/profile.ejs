@@ -1,6 +1,10 @@
 <%- include('../layouts/main', { body: ` <div class="main-content-container">
     <form id="manage-account-form">
         <div class="form-field">
+            <label for="userId">User ID:</label>
+            <span id="userId"></span>
+        </div>
+        <div class="form-field">
             <label for="name">Name *</label>
             <input type="text" id="name" name="name" value="" readonly>
         </div>
@@ -52,12 +56,13 @@
 
         <div class=changePassword>
             <button type=button id="change-password-button" disabled>Change Password</button>
+            <button type=button id="delete-account-button">Delete Account</button>
         </div>
 
         <div class="btn-container">
             <button type="button" id="edit-button" class="edit-button">Edit</button>
-            <button type="button" id="profile-discard-button" class="save-discard-buttons">Discard</button>
-            <button type="submit" id="profile-save-button" class="save-discard-buttons">Save Changes</button>
+            <button type="button" id="discard-button" style="display:none" class="save-discard-buttons">Discard</button>
+            <button type="submit" id="save-button" style="display:none" class="save-discard-buttons">Save Changes</button>
         </div>
     </form>
     </div>

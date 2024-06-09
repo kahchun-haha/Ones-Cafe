@@ -50,7 +50,8 @@
   box-sizing: border-box;
 }
 
-#change-password-button {
+#change-password-button,
+#delete-account-button {
   background-color: #f1ede967;
   color: #000;
   border: none;
@@ -63,7 +64,8 @@
   margin-top: 10px;
 }
 
-#change-password-button:hover {
+#change-password-button:hover,
+#delete-account-button:hover {
   background-color: #f1ede967;
 }
 #change-password-button:disabled {

@@ -1,0 +1,20 @@
+<%- include('../layouts/main', { body: `     <div class="login-container">
+    <div id="admin-register-container">
+        <h1>Admin Register</h1>
+            <div class="form-field">
+                <input type="email" id="admin-email" name="admin-email" placeholder="admin email" required>
+            </div>
+            <div class="form-field">
+                <input type="password" id="admin-password" name="admin-password" placeholder="admin password" required>
+            </div>
+            <div class="btn-container">
+                <button type="submit" id="admin-register">Register</button>
+            </div>
+            <div class="form-field">
+                <input type="text" id="otp" name="otp" placeholder="Enter OTP" required disabled>
+            </div>
+            <div class="btn-container">
+                <button type="submit" id="verify-otp" disabled>Verify OTP</button>
+            </div>
+    </div>
+    ` }) %>
