@@ -9,6 +9,13 @@ exports.registerUser = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: 'Email already in use' });
         }
+        const lastUser = await User.findOne({}, {}, { sort: { 'createdAt': -1 } });
+        let newUserId = "O-C-1";
+        if (lastUser && lastUser.userId) {
+            const lastUserId = lastUser.userId;
+            const lastIdNumber = parseInt(lastUserId.split("-")[2]);
+            newUserId = `O-C-${lastIdNumber + 1}`;
+        }
         const otp = generateOTP();
         const otpExpires = Date.now() + 10 * 60 * 1000; // OTP expires in 10 minutes
         const user = new User({
@@ -18,6 +25,7 @@ exports.registerUser = async (req, res) => {
             otp,
             otpExpires,
             verified: false,
+            userId: newUserId
         });
         await user.save();
         await sendVerificationEmail(email, otp);
@@ -62,7 +70,7 @@ exports.loginUser = async (req, res) => {
         console.log('Password match:', isMatch);
         if (isMatch) {
             req.session.isAuthenticated = true; // Set isAuthenticated in session
-            req.session.user = user; // Store user info in session
+            req.session.user = user;
             res.status(200).json(user);
         } else {
             res.status(401).send('Invalid credentials');
@@ -72,7 +80,6 @@ exports.loginUser = async (req, res) => {
         res.status(500).send('Error logging in');
     }
 };
-
 
 exports.updateUserProfile = async (req, res) => {
     try {
@@ -220,5 +227,23 @@ exports.deleteAccount = async (req, res) => {
     } catch (err) {
         console.error('Error deleting account:', err);
         return res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+exports.getProfile = async (req, res) => {
+    try {
+        const email = req.session.user.email;
+        if (!email) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        const user = await User.findOne({email : email});
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error fetching profile:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
