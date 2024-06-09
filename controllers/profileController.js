@@ -200,3 +200,25 @@ exports.changePassword = async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+exports.deleteAccount = async (req, res) => {
+    if (!req.session.user) {
+        return res.status(400).json({ message: 'User not found' });
+    }
+    const userEmail = req.session.user.email;
+    try {
+        const user = await User.findOneAndDelete({ email: userEmail });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        req.session.destroy(err => {
+            if (err) {
+                return res.status(500).json({ message: 'Error deleting session' });
+            }
+            res.status(200).json({ message: 'Account deleted successfully' });
+        });
+    } catch (err) {
+        console.error('Error deleting account:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};

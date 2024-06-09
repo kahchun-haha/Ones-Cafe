@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('login-form');
+    const adminLoginButton = document.getElementById('admin-login-button');
     loginForm.addEventListener('submit', async function (event) {
         event.preventDefault();
         const email = document.getElementById('login-email').value;
@@ -29,5 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             alert('Please fill in all the fields.');
         }
+    });
+
+    adminLoginButton.addEventListener('click', function () {
+        window.location.href = '/admin/adminLogin';
     });
 });

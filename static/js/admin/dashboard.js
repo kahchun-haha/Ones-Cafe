@@ -3,7 +3,7 @@ const categories = [
   { id: "2", icon: "bx bxs-book-content", name: "Order Management", link: "/admin/orderManagement" },
   { id: "3", icon: "bx bxs-shopping-bag", name: "Inventory Management", link: "/admin/inventory" },
   { id: "4", icon: "bx bx-pie-chart-alt", name: "Sales reporting", link: "/admin/salesReport" },
-  { id: "5", icon: "bx bx-log-out", name: "Log Out", link: "/" }
+  { id: "5", icon: "bx bx-log-out", name: "Log Out", link: "/logout" }
 ];
 
 function initSidebar() {
@@ -14,9 +14,35 @@ function initSidebar() {
       const isActive = currentUrl.endsWith(linkPath);
       const li = document.createElement('li');
       li.className = isActive ? 'nav-link active' : 'nav-link';
-      li.innerHTML = `<a href="${cat.link}" class="${isActive ? 'active' : ''}"><i class="${cat.icon}"></i> ${cat.name}</a>`;
+      li.innerHTML = `<a href="${cat.link}" class="${isActive ? 'active' : ''}" id="${cat.id === '5' ? 'logout-link' : ''}"><i class="${cat.icon}"></i> ${cat.name}</a>`;
       menuLinks.appendChild(li);
   });
 }
 
 document.addEventListener("DOMContentLoaded", initSidebar);
+
+document.addEventListener('DOMContentLoaded', function() {
+  const logoutLink = document.getElementById('logout-link');
+  if (logoutLink) {
+    logoutLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      fetch('/api/admins/logout', {
+        method: 'POST',
+        credentials: 'same-origin'
+      })
+      .then(response => {
+        if (response.ok) {
+          // Clear localStorage/sessionStorage as needed
+          localStorage.removeItem('isAdminLoggedIn');
+          localStorage.removeItem('admin');
+          window.location.href = '/';
+        } else {
+          alert('Error logging out');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  }
+});

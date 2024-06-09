@@ -25,5 +25,6 @@ router.post(
   profileController.checkOldPassword
 );
 router.post("/api/users/change-password", profileController.changePassword);
+router.delete("/api/users/delete", profileController.deleteAccount);
 
 module.exports = router;
