@@ -25,7 +25,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 
-
 // Use session with MongoStore
 app.use(session({
   secret: 'your-secret-key', // Replace with your own secret key
@@ -71,7 +70,7 @@ const routes = [
   { path: "/admin/orderManagement", view: "admin/orderManagement", title: "Order Management: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/order.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderManagement.js'] },
   { path: "/admin/addMenu", view: "admin/addMenu", title: "Add Menu: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/add-menu.css'], js: ['/js/admin/dashboard.js', '/js/admin/addMenu.js'] },
   { path: "/admin/modifyMenu", view: "admin/modifyMenu", title: "Modify Menu: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/add-menu.css'], js: ['https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js', '/js/admin/dashboard.js', '/js/admin/modifyMenu.js'] },
-  { path: "/admin/inventory", view: "admin/inventory", title: "Inventory: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/inventory.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/inventory.js'] },
+  { path: "/admin/inventory", view: "admin/inventory", title: "Inventory: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/inventory.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/inventoryManagement.js'] },
   { path: "/admin/salesReport", view: "admin/salesReport", title: "Sales Report: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/sales-report.css', '/css/admin/menuManagement.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderHistory.js'] },
   { path: "/admin/adminLogin", view: "admin/adminLogin", title: "Admin Login: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/admin/adminLogin.js'] },
   { path: "/admin/adminRegister", view: "admin/adminRegister", title: "Admin Register: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/admin/adminRegister.js'] },
