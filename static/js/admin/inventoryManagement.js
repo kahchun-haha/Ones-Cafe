@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
       data.forEach((item, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td>${index + 1}</td>
+          <td>${item.menuItemId.slice(-8)}</td>
           <td>${item.title}</td>
           <td>${item.quantity}</td>
           <td><input type="number" class="restock-amount" placeholder="Amount" data-id="${item._id}"></td>

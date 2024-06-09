@@ -23,10 +23,11 @@ exports.getInventoryById = async (req, res) => {
 };
 
 exports.createInventory = async (req, res) => {
-  const { title, quantity, lastUpdated } = req.body;
+  const { menuItemId, title, quantity, lastUpdated } = req.body;
 
   try {
     const newItem = new Inventory({
+      menuItemId,
       title,
       quantity,
       lastUpdated: lastUpdated || new Date()
