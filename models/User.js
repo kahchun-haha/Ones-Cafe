@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const userSchema = new mongoose.Schema({
+  userId: { type: String, unique: true},
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },

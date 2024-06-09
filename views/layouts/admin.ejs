@@ -8,9 +8,9 @@
         <%= title %>
     </title>
     <link rel="icon" type="image/png" href="/images/icons/cafe.png">
-    <% if (css && css.length> 0) { css.forEach(file => { %>
+    <% if (css && css.length > 0) { css.forEach(file => { %>
         <link rel="stylesheet" href="<%= file %>">
-        <% }) } %>
+    <% }) } %>
 </head>
 
 <body>
@@ -19,10 +19,14 @@
         <%- body %>
     </main>
 
+    <!-- Logout Form -->
+    <form id="logoutForm" action="/api/users/logout" method="post" style="display: none;">
+        <button type="submit">Logout</button>
+    </form>
 
-    <% if (js && js.length> 0) { js.forEach(file => { %>
+    <% if (js && js.length > 0) { js.forEach(file => { %>
         <script src="<%= file %>"></script>
-        <% }) } %>
+    <% }) } %>
 </body>
 
 </html>
