@@ -124,7 +124,7 @@ async function confirmOrder() {
 
   const userId = getUserId();
   const orderData = {
-    userId: userId, // Include user ID in the order data
+    userId: userId,
     items: cartItems.map(item => ({
       menuItemId: item.id,
       title: item.title,
@@ -145,33 +145,25 @@ async function confirmOrder() {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('Order confirmed', cartItems);
       alert(`Order has been placed successfully. You have earned ${data.pointsEarned} points.`);
 
+      // Fetch updated points from the server and update local storage
+      const pointsResponse = await fetch(`/api/users/${userId}/points`);
+      if (pointsResponse.ok) {
+        const pointsData = await pointsResponse.json();
+        const updatedUser = JSON.parse(localStorage.getItem('user')) || {};
+        updatedUser.loyaltyPoints = pointsData.loyaltyPoints;
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('loyaltyPoints', pointsData.loyaltyPoints);
+      } else {
+        console.error('Failed to fetch updated points:', await pointsResponse.json());
+      }
+
+      // Clear cart and redirect
       cartItems = [];
       updateCartDisplay();
       localStorage.removeItem('cartItems');
       window.location.href = '/menu';
-
-      // Update user points after order confirmation
-      const pointsEarned = Math.floor(orderData.totalAmount); // Earn 1 point per RM1 spent
-      const pointsResponse = await fetch(`/api/users/${userId}/updatePoints`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ pointsEarned })
-      });
-
-      if (pointsResponse.ok) {
-        const pointsData = await pointsResponse.json();
-        const updatedUser = JSON.parse(localStorage.getItem('user'));
-        updatedUser.loyaltyPoints = pointsData.newPoints;
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        localStorage.setItem('loyaltyPoints', pointsData.newPoints);
-      } else {
-        console.error('Error updating points:', await pointsResponse.json());
-      }
     } else {
       const result = await response.json();
       alert(`${result.message}`);
@@ -181,6 +173,7 @@ async function confirmOrder() {
     console.error('Error:', error);
   }
 }
+
 
 
 

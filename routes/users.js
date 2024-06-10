@@ -25,5 +25,6 @@ router.post("/api/users/change-password", profileController.changePassword);
 router.delete("/api/users/delete", profileController.deleteAccount);
 router.get("/api/users/getProfile", profileController.getProfile);
 router.post("/api/users/:userId/updatePoints", profileController.updatePoints);
+router.get('/api/users/:userId/points', profileController.getPoints);
 
 module.exports = router;

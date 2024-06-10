@@ -27,14 +27,37 @@ document.addEventListener("DOMContentLoaded", function () {
   displayPromotions();
 });
 
-function displayPoints() {
-  let points = parseInt(localStorage.getItem("loyaltyPoints")) || 0;
-  console.log("Loyalty points from local storage:", points); // Debug log
-  const pointsDisplayElement = document.getElementById("points-display");
-  if (pointsDisplayElement) {
-    pointsDisplayElement.textContent = points;
-  } else {
-    console.warn("Points display element not found.");
+async function displayPoints() {
+  const userId = getUserId();
+
+  if (!userId) {
+    // Show default message or points as 0 for guest users
+    const pointsDisplayElement = document.getElementById("points-display");
+    if (pointsDisplayElement) {
+      pointsDisplayElement.textContent = '0';
+    }
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/users/${userId}/points`);
+    if (response.ok) {
+      const data = await response.json();
+      const pointsDisplayElement = document.getElementById("points-display");
+      if (pointsDisplayElement) {
+        pointsDisplayElement.textContent = data.loyaltyPoints;
+      }
+
+      // Update local storage with the new points
+      const updatedUser = JSON.parse(localStorage.getItem('user')) || {};
+      updatedUser.loyaltyPoints = data.loyaltyPoints;
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      localStorage.setItem('loyaltyPoints', data.loyaltyPoints);
+    } else {
+      console.error('Error fetching points:', await response.json());
+    }
+  } catch (error) {
+    console.error('Error fetching points:', error);
   }
 }
 
