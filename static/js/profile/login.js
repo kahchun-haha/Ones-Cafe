@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = await response.json();
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('user', JSON.stringify(data.user));
-                console.log('isLoggedIn:', localStorage.getItem('isLoggedIn')); // Check value
-                console.log('user:', localStorage.getItem('user')); // Check value
+                localStorage.setItem('loyaltyPoints', data.user.loyaltyPoints);
                 alert('Login successful!');
                 window.location.href = '/';
             } else {

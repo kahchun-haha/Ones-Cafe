@@ -20,12 +20,28 @@
     overflow-x: hidden;
 }
 
+#voucher-title{
+    width: 300px;
+}
+
+#voucher-collector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr)); /* Two columns */
+    gap: 1.5rem;
+    align-items: stretch;
+    margin: 10px;
+    overflow-x: hidden;
+  }  
+
 .promotion {
     background: #ffffff;
     padding: 20px;
     margin-top: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .promotion-image {
@@ -35,7 +51,6 @@
     overflow: hidden;
     position: relative;
 }
-
 
 .Promotions {
     color: var(--black);
@@ -112,7 +127,7 @@ p {
     font-size: 14px;
 }
 
-.notifications{
+.notifications {
     margin: 20px;
     padding: 20px;
     border-radius: 5px;
@@ -149,4 +164,18 @@ p {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+.claim-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.claim-container .cost {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--light-color);
+    margin-left: 10px;
 }

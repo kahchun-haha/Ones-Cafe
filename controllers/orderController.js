@@ -2,7 +2,12 @@ const Order = require("../models/Order");
 const Inventory = require("../models/Inventory");
 
 exports.createOrder = async (req, res) => {
-  const { userId, items, totalAmount } = req.body;
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
+
+  const { items, totalAmount } = req.body;
+  const userId = req.session.user.userId;
 
   try {
     const newOrder = new Order({
@@ -76,7 +81,7 @@ exports.deleteOrder = async (req, res) => {
 
 exports.getCompletedOrders = async (req, res) => {
   try {
-    const orders = await Order.find().populate("userId");
+    const orders = await Order.find({ status: "done" }).populate("userId");
     res.status(200).send({ orders });
   } catch (error) {
     res.status(500).send({ message: "Failed to fetch completed orders", error });

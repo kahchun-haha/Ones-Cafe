@@ -1,49 +1,63 @@
-<%- include('layouts/main', { body: ` <div class="Promotions">
-    <h1 class="promotion-title">Our Special Promotions</h1>
-    <button id="voucher-collector-btn" onclick="location.href='/voucher'" class="voucher-collector-img">
-        <img src="/images/rewards/collector.jpg" alt="Voucher Collector">
-        </div>
+<%- include('layouts/main', { body: ` <div class="loyalty-points">
+    <h2>Your Loyalty Points: <span id="points-display">0</span></h2>
+    <p>Redeem vouchers with your points. Each voucher redemption requires points.</p>
+    </div>
+    <div class="Promotions">
+        <h1 class="promotion-title">Our Special Promotions</h1>
+        <button id="voucher-collector-btn" class="voucher-collector-img">
+            <img src="/images/rewards/collector.jpg" alt="Voucher Collector">
+        </button>
+    </div>
 
-        <div class="promotion-container">
-            <div class="promotion" id="discount-offer">
-                <img src="/images/checkout/Discount.webp" alt="10%off" class="promotion-image"></img>
-                <ul>
-                    <li class="title">
-                        <p>10% Off on Your Next Visit</p>
-                    </li>
-                    <li class="description">
-                        <p>Enjoy a 10% discount on your total bill on your next visit!</p>
-                        <p>*Valid for 30 days from the date of issuing.</p>
-                    </li>
-                </ul>
-                <button onclick="claimOffer('discount')">Claim Offer</button>
-            </div>
-            <div class="promotion" id="free-food">
-                <img src="/images/rewards/freefood.jpg" alt="Free Food" class="promotion-image"></img>
-                <ul>
-                    <li class="title">
-                        <p>Free Redemption Food Item</p>
-                    </li>
-                    <li class="description">
-                        <p>Get a free item from our selected menu with your next purchase!</p>
-                        <p>*Offer valid only on weekdays for the next month.</p>
-                    </li>
-                </ul>
-                <button onclick="claimOffer('food')">Claim Offer</button>
-            </div>
-            <div class="promotion" id="birthday-voucher">
-                <img src="/images/rewards/birthday.jpg" alt="Birthday Voucher" class="promotion-image"></img>
-                <ul>
-                    <li class="title">
-                        <p>Birthday Voucher</p>
-                    </li>
-                    <li class="description">
-                        <p>Celebrate your birthday with us and get a special birthday treat!</p>
-                        <p>*Voucher valid on birthday month, ID verification required.</p>
-                    </li>
-                </ul>
-                <button onclick="claimOffer('birthday')">Claim Offer</button>
+    <div class="promotion-container">
+        <div class="promotion" id="discount-offer">
+            <img src="/images/checkout/Discount.webp" alt="10%off" class="promotion-image">
+            <ul>
+                <li class="title">
+                    <p>10% Off on Total Bill</p>
+                </li>
+                <li class="description">
+                    <p>Enjoy a 10% discount on your total bill!</p>
+                    <p>*Valid for 30 days from the date of issuing.</p>
+                </li>
+            </ul>
+            <div class="claim-container">
+                <button onclick="claimOffer('discount', 50)">Claim Offer</button>
+                <span class="cost">50 Points</span>
             </div>
         </div>
-
-        ` }) %>
+        <div class="promotion" id="free-food">
+            <img src="/images/rewards/freefood.jpg" alt="Free Food" class="promotion-image">
+            <ul>
+                <li class="title">
+                    <p>Free Redemption of a Milkshake</p>
+                </li>
+                <li class="description">
+                    <p>Get a free milkshake with any purchase!</p>
+                    <p>*Valid for 30 days from the date of issuing.</p>
+                </li>
+            </ul>
+            <div class="claim-container">
+                <button onclick="claimOffer('milkshake', 70)">Claim Offer</button>
+                <span class="cost">70 Points</span>
+            </div>
+        </div>
+        <div class="promotion" id="birthday-voucher">
+            <img src="/images/rewards/birthday.jpg" alt="Birthday Voucher" class="promotion-image">
+            <ul>
+                <li class="title">
+                    <p>Birthday Voucher</p>
+                </li>
+                <li class="description">
+                    <p>Celebrate your birthday with us and get a special birthday treat! Enjoy a 15% discount on your
+                        total bill!</p>
+                    <p>*Voucher valid on birthday month, ID verification required.</p>
+                </li>
+            </ul>
+            <div class="claim-container">
+                <button onclick="claimOffer('birthday', 0)">Claim Offer</button>
+                <span class="cost">0 Points</span>
+            </div>
+        </div>
+    </div>
+    ` }) %>

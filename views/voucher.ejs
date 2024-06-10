@@ -1,16 +1,10 @@
-<%- include('layouts/main', { body: ` <div class="loyalty-points">
-    <h2>Your Loyalty Points: <span id="points-display">0</span></h2>
-    <p>Redeem vouchers with your points. Each voucher redemption requires points.</p>
-    </div>
-
-    <div class="notifications">
-        <h2>Latest Promotions</h2>
-        <ul id="promotion-notifications">
-        </ul>
+<%- include('layouts/main', { body: ` <div class="notifications">
+    <h2>Latest Promotions</h2>
+    <ul id="promotion-notifications"></ul>
     </div>
 
     <div class="Promotions">
-        <h1 class="promotion-title">Collected Vouchers</h1>
+        <h1 class="promotion-title" id="voucher-title">Collected Vouchers</h1>
         <div class="promotion-container" id="voucher-collector">
             <ul class="voucher-detail"></ul>
         </div>

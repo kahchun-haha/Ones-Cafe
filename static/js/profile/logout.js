@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Clear localStorage
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('user');
+            localStorage.removeItem('loyaltyPoints');
             // Redirect to home page after logout
             window.location.href = '/'; 
           } else {

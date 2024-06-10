@@ -13,6 +13,7 @@ const orderRoutes = require('./routes/orders');
 const inventoryRoutes = require('./routes/inventories');
 const adminRoutes = require('./routes/admins');
 const feedbackRoutes = require('./routes/feedbacks');
+const voucherRoutes = require("./routes/vouchers");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -84,6 +85,7 @@ app.use(orderRoutes);
 app.use(inventoryRoutes);
 app.use(adminRoutes);
 app.use(feedbackRoutes);
+app.use(voucherRoutes);
 
 routes.forEach(route => {
   app.get(route.path, (req, res) => {

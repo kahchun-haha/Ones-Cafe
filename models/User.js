@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const userSchema = new mongoose.Schema({
-  userId: { type: String, unique: true},
+  userId: { type: String, unique: true },
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -17,19 +17,10 @@ const userSchema = new mongoose.Schema({
   otp: { type: String },
   otpExpires: { type: Date },
   verified: { type: Boolean, default: false },
+  loyaltyPoints: { type: Number, default: 1000 },
+  vouchers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Voucher" }]
 });
 
 const User = mongoose.model("User", userSchema);
-
-// Logout route
-router.post("/api/users/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send("Error logging out");
-    }
-    res.clearCookie("connect.sid"); // Clear the cookie
-    res.redirect("/"); // Redirect to home page after logout
-  });
-});
 
 module.exports = User;
