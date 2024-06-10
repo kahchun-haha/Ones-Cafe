@@ -20,10 +20,7 @@ router.post("/api/users/logout", (req, res) => {
   });
 });
 router.get("/api/users/check-auth", profileController.checkAuth);
-router.post(
-  "/api/users/check-old-password",
-  profileController.checkOldPassword
-);
+router.post("/api/users/check-old-password", profileController.checkOldPassword);
 router.post("/api/users/change-password", profileController.changePassword);
 router.delete("/api/users/delete", profileController.deleteAccount);
 router.get("/api/users/getProfile", profileController.getProfile);

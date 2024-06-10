@@ -12,6 +12,7 @@ const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
 const inventoryRoutes = require('./routes/inventories');
 const adminRoutes = require('./routes/admins');
+const feedbackRoutes = require('./routes/feedbacks');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -59,7 +60,7 @@ const routes = [
   { path: "/checkout", view: "checkout", title: "Checkout: Ones Café", layout: "main", css: ['/css/checkout.css'], js: ['/js/checkout/checkout.js'] },
   { path: "/rewards", view: "rewards", title: "Rewards: Ones Café", layout: "main", css: ['/css/rewards.css'], js: ['/js/rewards/rewards.js'] },
   { path: "/voucher", view: "voucher", title: "Rewards: Ones Café", layout: "main", css: ['/css/rewards.css'], js: ['/js/rewards/rewards.js'] },
-  { path: "/feedback", view: "feedback", title: "Feedback: Ones Café", layout: "main", css: ['/css/feedback.css'], js: ['/js/feedback/feedback.js'] },
+  { path: "/feedback", view: "feedback", title: "Feedback: Ones Café", layout: "main", css: ['/css/feedback.css'], js: ['https://code.jquery.com/jquery-3.6.0.min.js','/js/feedback/feedback.js'] },
   { path: "/login", view: "profile/login", title: "Login Page: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/login.js'] },
   { path: "/register", view: "profile/register", title: "Register: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/register.js'] },
   { path: "/forgotPassword", view: "profile/forgotPassword", title: "Forgot Password: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/profile/forgotPassword.js'] },
@@ -82,6 +83,7 @@ app.use(userRoutes);
 app.use(orderRoutes);
 app.use(inventoryRoutes);
 app.use(adminRoutes);
+app.use(feedbackRoutes);
 
 routes.forEach(route => {
   app.get(route.path, (req, res) => {
