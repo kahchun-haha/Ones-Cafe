@@ -1,4 +1,3 @@
-const Admin = require("../models/Admin");
 const bcrypt = require("bcrypt");
 
 exports.loginAdmin = async (req, res) => {

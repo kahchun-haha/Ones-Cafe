@@ -80,26 +80,26 @@ exports.verifyOtp = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      console.log("User not found");
-      return res.status(401).send("Invalid credentials");
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    console.log("Password match:", isMatch);
-    if (isMatch) {
-      req.session.isAuthenticated = true; // Set isAuthenticated in session
-      req.session.user = user;
-      res.status(200).json(user);
-    } else {
-      res.status(401).send("Invalid credentials");
-    }
+      const { email, password } = req.body;
+      const user = await User.findOne({ email });
+      if (!user) {
+          return res.status(401).json({ message: "Invalid credentials" });
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+          req.session.isAuthenticated = true;
+          req.session.user = user;
+          res.status(200).json({ user });
+      } else {
+          res.status(401).json({ message: "Invalid credentials" });
+      }
   } catch (error) {
-    console.error("Error logging in:", error);
-    res.status(500).send("Error logging in");
+      console.error("Error logging in:", error);
+      res.status(500).json({ message: "Error logging in" });
   }
 };
+
+
 
 exports.updateUserProfile = async (req, res) => {
   try {
@@ -153,6 +153,7 @@ exports.forgotPassword = async (req, res) => {
     await user.save();
 
     await sendVerificationEmail(email, otp);
+    console.log(`OTP sent to ${email} with OTP ${otp}`);
     res.status(200).json({ message: "OTP sent. Please check your email." });
   } catch (error) {
     console.error("Error sending OTP:", error);
@@ -162,20 +163,23 @@ exports.forgotPassword = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   try {
-    const { token, newPassword } = req.body;
-    const user = await User.findOne({ resetPasswordToken: token });
-    if (!user) {
-      return res.status(400).json({ message: "Invalid or expired token" });
-    }
-    user.password = await bcrypt.hash(newPassword, 10);
-    user.resetPasswordToken = undefined; // Clear the token after password reset
-    await user.save();
-    res
-      .status(200)
-      .json({ message: "Password reset successfully. You can now log in." });
+      const { email, newPassword } = req.body;
+      const user = await User.findOne({ email });
+      if (!user) {
+          return res.status(400).json({ message: "User not found" });
+      }
+
+      const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedNewPassword; 
+      user.otp = undefined; 
+      user.otpExpires = undefined; 
+
+      await user.save(); // Save the updated user
+
+      res.status(200).json({ message: "Password reset successfully. You can now log in." });
   } catch (error) {
-    console.error("Error resetting password:", error);
-    res.status(500).json({ message: "Internal server error" });
+      console.error("Error resetting password:", error);
+      res.status(500).json({ message: "Internal server error" });
   }
 };
 
