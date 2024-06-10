@@ -73,7 +73,6 @@ const routes = [
   { path: "/admin/inventory", view: "admin/inventory", title: "Inventory: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/menuManagement.css', '/css/admin/inventory.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/inventoryManagement.js'] },
   { path: "/admin/salesReport", view: "admin/salesReport", title: "Sales Report: Ones Café", layout: "admin", css: ['https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', '/css/admin/general.css', '/css/admin/sidebar.css', '/css/admin/sales-report.css', '/css/admin/menuManagement.css'], js: ['https://kit.fontawesome.com/bbd49eb172.js', '/js/admin/dashboard.js', '/js/admin/main.js', '/js/admin/orderHistory.js'] },
   { path: "/admin/adminLogin", view: "admin/adminLogin", title: "Admin Login: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/admin/adminLogin.js'] },
-  { path: "/admin/adminRegister", view: "admin/adminRegister", title: "Admin Register: Ones Café", layout: "main", css: ['/css/profile.css'], js: ['/js/admin/adminRegister.js'] },
   { path: "/404", view: "404", title: "404 Not Found", layout: "admin", css: ['/css/404.css'], js: ['https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'] },
 ];
 

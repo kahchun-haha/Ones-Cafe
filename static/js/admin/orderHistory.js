@@ -1,3 +1,4 @@
+// orderHistory.js
 async function fetchOrderHistory() {
   try {
     // Fetch the order history
@@ -76,9 +77,8 @@ async function fetchOrderHistory() {
 
     // Search functionality
     const searchInput = document.querySelector(".search-bar");
-    const searchButton = document.querySelector(".search-button");
 
-    searchButton.addEventListener("click", () => {
+    searchInput.addEventListener("input", () => {
       const searchTerm = searchInput.value.toLowerCase();
       const filteredOrders = orders.filter((order) =>
         order.items.some((item) =>
@@ -105,7 +105,6 @@ async function fetchOrderHistory() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchOrderHistory);
-
 
 document.addEventListener('DOMContentLoaded', function() {
   // Fetch low stock items
