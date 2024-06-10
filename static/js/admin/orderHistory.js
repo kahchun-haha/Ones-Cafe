@@ -2,7 +2,7 @@
 async function fetchOrderHistory() {
   try {
     // Fetch the order history
-    const response = await fetch("/api/orders/history");
+    const response = await fetch("/api/orders/historyTotal");
     const data = await response.json();
     const orders = data.orders;
 
