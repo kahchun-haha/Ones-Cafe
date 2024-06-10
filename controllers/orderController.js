@@ -1,15 +1,17 @@
+const User = require("../models/User");
 const Order = require("../models/Order");
 const Inventory = require("../models/Inventory");
 
 exports.createOrder = async (req, res) => {
-  if (!req.session || !req.session.user) {
-    return res.status(401).json({ message: "Not authenticated" });
-  }
-
-  const { items, totalAmount } = req.body;
-  const userId = req.session.user.userId;
+  const { userId, items, totalAmount } = req.body;
 
   try {
+    const user = await User.findOne({ userId });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const newOrder = new Order({
       userId,
       items,
@@ -17,9 +19,17 @@ exports.createOrder = async (req, res) => {
     });
 
     await newOrder.save();
-    res
-      .status(201)
-      .send({ message: "Order placed successfully", order: newOrder });
+
+    // Calculate points earned (1 point for every RM1 spent)
+    const pointsEarned = Math.floor(totalAmount);
+    user.loyaltyPoints += pointsEarned;
+    await user.save();
+
+    // Clear the applied voucher
+    user.appliedVoucher = null;
+    await user.save();
+
+    res.status(201).json({ message: "Order placed successfully", order: newOrder, pointsEarned });
   } catch (error) {
     res.status(500).send({ message: "Failed to place order", error });
   }
@@ -81,7 +91,7 @@ exports.deleteOrder = async (req, res) => {
 
 exports.getCompletedOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ status: "done" }).populate("userId");
+    const orders = await Order.find().populate("userId");
     res.status(200).send({ orders });
   } catch (error) {
     res.status(500).send({ message: "Failed to fetch completed orders", error });
