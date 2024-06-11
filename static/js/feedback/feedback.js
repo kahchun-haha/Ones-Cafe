@@ -28,7 +28,7 @@ centerButton.addEventListener('click', function () {
 const buttons = document.querySelectorAll('.footer_btn');
 
 buttons[0].addEventListener('click', function () {
-    let request = $("#Suggestion").val();
+    let request = $("#suggestion").val();
 
     if (request === "") {
         alert("incomplete data");
@@ -51,7 +51,7 @@ buttons[0].addEventListener('click', function () {
 });
 
 buttons[1].addEventListener('click', function () {
-    let experiencing = $("#Report").val();
+    let experiencing = $("#report").val();
     let email = $("#email").val();
 
     if (experiencing === "" || email === "") {
