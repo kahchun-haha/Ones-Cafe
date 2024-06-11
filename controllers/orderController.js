@@ -89,6 +89,16 @@ exports.deleteOrder = async (req, res) => {
   }
 };
 
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find().populate("userId");
+    res.status(200).send({ orders });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to fetch orders", error });
+  }
+};
+
+
 exports.getCompletedOrders = async (req, res) => {
   try {
     const orders = await Order.find().populate("userId");
