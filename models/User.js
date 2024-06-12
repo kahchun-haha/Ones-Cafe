@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
   otp: { type: String },
   otpExpires: { type: Date },
   verified: { type: Boolean, default: false },
-  loyaltyPoints: { type: Number, default: 1000 },
+  loyaltyPoints: { type: Number, default: 100 },
   vouchers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Voucher" }]
 });
 

@@ -337,7 +337,7 @@
 }
 
 label[for="fullName"],
-label[for="phoneNumber"] {
+label[for="email"] {
     margin-left: 20px;
 }
 

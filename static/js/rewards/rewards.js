@@ -1,14 +1,3 @@
-function checkAuth() {
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-  const user = JSON.parse(localStorage.getItem('user'));
-  return isLoggedIn && user;
-}
-
-function getUserId() {
-  const user = JSON.parse(localStorage.getItem('user'));
-  return user ? user.userId : null; // Use userId instead of _id
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   const voucherCollectorBtn = document.getElementById('voucher-collector-btn');
   if (voucherCollectorBtn) {
@@ -24,14 +13,24 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   displayPoints();
   showVouchers();
-  displayPromotions();
+  displayAnnouncements();
 });
+
+function checkAuth() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const user = JSON.parse(localStorage.getItem('user'));
+  return isLoggedIn && user;
+}
+
+function getUserId() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user ? user.userId : null;
+}
 
 async function displayPoints() {
   const userId = getUserId();
 
   if (!userId) {
-    // Show default message or points as 0 for guest users
     const pointsDisplayElement = document.getElementById("points-display");
     if (pointsDisplayElement) {
       pointsDisplayElement.textContent = '0';
@@ -48,7 +47,6 @@ async function displayPoints() {
         pointsDisplayElement.textContent = data.loyaltyPoints;
       }
 
-      // Update local storage with the new points
       const updatedUser = JSON.parse(localStorage.getItem('user')) || {};
       updatedUser.loyaltyPoints = data.loyaltyPoints;
       localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -81,10 +79,10 @@ function claimOffer(voucherId, pointsCost) {
     description: voucherDetails.description,
     validity: voucherDetails.validity,
     promocode: voucherDetails.promocode,
-    pointsCost: pointsCost // Pass the points cost to the backend
+    pointsCost: pointsCost
   };
 
-  fetch('/claim', { // Ensure this matches the server route
+  fetch('/claim', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -95,9 +93,9 @@ function claimOffer(voucherId, pointsCost) {
   .then(data => {
     if (data.message === 'Voucher claimed successfully') {
       alert("Voucher claimed successfully!");
-      localStorage.setItem("loyaltyPoints", data.newPoints); // Update local storage
-      localStorage.setItem("user", JSON.stringify({ ...JSON.parse(localStorage.getItem("user")), loyaltyPoints: data.newPoints })); // Update user data in local storage
-      displayPoints(); // Update the displayed points
+      localStorage.setItem("loyaltyPoints", data.newPoints);
+      localStorage.setItem("user", JSON.stringify({ ...JSON.parse(localStorage.getItem("user")), loyaltyPoints: data.newPoints }));
+      displayPoints();
       showVouchers();
     } else {
       alert(data.message);
@@ -125,7 +123,7 @@ function getVoucherDetails(voucherId) {
 
 function showVouchers() {
   const userId = getUserId();
-  fetch(`/getVouchers?userId=${userId}`, { // Ensure this matches the server route
+  fetch(`/getVouchers?userId=${userId}`, {
     method: 'GET',
     headers: {
       'Authorization': localStorage.getItem('token')
@@ -143,8 +141,6 @@ function showVouchers() {
     vouchers.forEach((voucher) => {
       const voucherElement = document.createElement("div");
       voucherElement.className = "voucher-detail";
-      
-      // Format the validity date
       const expiryDate = new Date(voucher.validity).toLocaleDateString();
 
       voucherElement.innerHTML = `
@@ -158,23 +154,23 @@ function showVouchers() {
   .catch(error => console.error('Error:', error));
 }
 
-function displayPromotions() {
-  const promotions = [
-    {
-      title: "New Product Launch",
-      details: "Try our new Caramel Orange Dream Creamsicle available from June 1."
+async function displayAnnouncements() {
+  try {
+    const response = await fetch('/api/admins/announcements');
+    const announcements = await response.json();
+    const announcementsElement = document.getElementById("announcement-list");
+    if (!announcementsElement) {
+      console.error("Announcements display container not found!");
+      return;
     }
-  ];
+    announcementsElement.innerHTML = "";
 
-  const notificationsElement = document.getElementById("promotion-notifications");
-  if (!notificationsElement) {
-    console.error("Promotions display container not found!");
-    return;
+    announcements.forEach(announcement => {
+      const listItem = document.createElement("li");
+      listItem.innerHTML = `<strong>${announcement.title}</strong>: ${announcement.message}`;
+      announcementsElement.appendChild(listItem);
+    });
+  } catch (error) {
+    console.error('Error fetching announcements:', error);
   }
-
-  promotions.forEach(promo => {
-    const listItem = document.createElement("li");
-    listItem.textContent = `${promo.title} - ${promo.details}`;
-    notificationsElement.appendChild(listItem);
-  });
 }

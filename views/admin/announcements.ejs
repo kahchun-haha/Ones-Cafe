@@ -1,0 +1,45 @@
+<%- include('../layouts/admin', { body: `
+    <div class="whole-page">
+      <nav class="sidebar">
+        <div class="image-text">
+          <span class="image">
+            <img src="/images/icons/cafe.png" alt="Dashboard Icon">
+          </span>
+          <div class="text">Dashboard</div>
+        </div>
+        <ul id="js-menu-links" class="nav-links"></ul>
+      </nav>
+  
+      <div class="main">
+        <div class="announcement-section">
+          <h2>Create Announcement</h2>
+        </div>
+        <div class="announcement-container">
+          <form id="announcement-form">
+            <label for="announcement-title">Title</label>
+            <input type="text" id="announcement-title" required><br>
+            <label for="announcement-message">Message</label>
+            <textarea id="announcement-message" required></textarea><br>
+            <button type="submit">Create Announcement</button>
+          </form>
+        </div>
+  
+        <div class="announcements-display">
+          <h2>Announcements</h2>
+          <table id="announcements-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Actions on Announcement</th>
+              </tr>
+            </thead>
+            <tbody id="announcements"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  ` }) %>
+  

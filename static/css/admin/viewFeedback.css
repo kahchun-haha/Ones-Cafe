@@ -1,0 +1,232 @@
+.general-stats {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .total {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .inner-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .big-part {
+    font-size: 2em;
+    color: #666;
+  }
+  
+  .total-feedback, .latest-feedback {
+    font-size: 1.2em;
+    color: #666;
+  }
+  
+  .feedback-sections {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.5rem;
+    margin-top: 10px;
+    border-radius: 1rem;
+  }
+  
+  .feedback-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  #contacts, #suggestions, #issues, #reviews {
+    padding: 10px;
+    background: #e3e3e3;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  #contacts div, #suggestions div, #issues div, #reviews div {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
+  }
+
+  .main .search-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+    border-radius: 1rem;
+    margin: 10px 30px;
+  }
+  
+  .search-section .title-part {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  
+  .search-section .search-part {
+    flex: 1;
+    margin-left: 70px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar {
+    flex: 1;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
+    width: 0;
+    outline: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  
+  .search-bar::placeholder {
+    font-family: Nunito, Arial;
+    font-size: 16px;
+  }
+  
+  .search-button {
+    height: 40px;
+    width: 66px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    margin-left: -1px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .search-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .search-button .tooltip {
+    position: absolute;
+    background-color: gray;
+    color: white;
+    padding: 4px;
+    border-radius: 2px;
+    font-size: 12px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+  
+  }
+  
+  .search-button:hover .tooltip,
+  .voice-search-button:hover .tooltip {
+    opacity: 1;
+  }
+  
+  .search-button i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+  }
+
+  /* Feedback container styling */
+.feedback-item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .feedback-item hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+  }
+  
+  .feedback-item strong {
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .feedback-item select,
+  .feedback-item input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .feedback-item button {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .feedback-item button:hover {
+    background: #218838;
+  }
+  
+  .feedback-item .progress-select {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .feedback-item .reply-input {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  

@@ -1,0 +1,61 @@
+<%- include('../layouts/admin', { body: `
+    <div class="whole-page">
+      <nav class="sidebar">
+        <div class="image-text">
+          <span class="image">
+            <img src="/images/icons/cafe.png" alt="Dashboard Icon">
+          </span>
+          <div class="text">Dashboard</div>
+        </div>
+        <ul id="js-menu-links" class="nav-links"></ul>
+      </nav>
+  
+      <div class="main">
+        <div class="search-section">
+          <div class="title-part">Feedback</div>
+          <div class="search-part">
+            <input class="search-bar" type="text" placeholder="Search">
+            <button class="search-button">
+              <i class='bx bx-search'></i>
+              <div class="tooltip">Search</div>
+            </button>
+          </div>
+        </div>
+  
+        <div class="general-stats">
+          <div class="total">
+            <div class="title">Total Feedback Received</div>
+            <div class="inner-total">
+              <div class="big-part">
+                <div class="total-feedback" id="total-feedback-count">0</div>
+                <div class="latest-feedback">
+                  <div class="text">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="feedback-sections">
+          <div class="feedback-section">
+            <h2>Contacts</h2>
+            <div id="contacts"></div>
+          </div>
+          <div class="feedback-section">
+            <h2>Suggestions</h2>
+            <div id="suggestions"></div>
+          </div>
+          <div class="feedback-section">
+            <h2>Issues</h2>
+            <div id="issues"></div>
+          </div>
+          <div class="feedback-section">
+            <h2>Reviews</h2>
+            <div id="reviews"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ` }) %>
+  
