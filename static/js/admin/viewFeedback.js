@@ -26,15 +26,17 @@ async function fetchFeedback() {
 function displayFeedback(type, data, isIssue = false) {
   const container = document.getElementById(type);
   container.innerHTML = '';
+
   data.forEach(item => {
-    const content = item.content || item.request || item.experiencing || item.ratings;
+    const content = type === 'contacts' ? '' : (item.content || item.request || item.experiencing || item.ratings);
     const div = document.createElement('div');
     div.className = 'feedback-item';
+
     div.innerHTML = `
       <strong>ID:</strong> ${item._id}<br>
       <strong>User:</strong> ${item.user}<br>
       <strong>Email:</strong> ${item.email}<br>
-      <strong>Content:</strong> ${content}<br>
+      ${type !== 'contacts' ? `<strong>Content:</strong> ${content}<br>` : ''}
       ${isIssue ? `
       <strong>Progress:</strong>
       <select id="progress-${item._id}" class="progress-select" ${item.progress === 'Solved' ? 'disabled' : ''}>

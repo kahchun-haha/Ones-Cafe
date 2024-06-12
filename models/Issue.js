@@ -4,7 +4,6 @@ const issueSchema = new mongoose.Schema({
     user: String,
     experiencing: String,
     email: String,
-    status: String,
     create_time: {
         type: Date,
         default: Date.now

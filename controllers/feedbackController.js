@@ -41,7 +41,7 @@ exports.handleSuggestions = async (req, res) => {
 };
 
 exports.handleIssue = async (req, res) => {
-    console.log('Received issue request:', req.body); // Log request body
+    console.log('Received issue request:', req.body);
     try {
         const { experiencing, email } = req.body;
         const user = "visitor-" + new Date().getTime();

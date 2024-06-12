@@ -10,7 +10,7 @@ const { sendNotificationEmail, sendIssueUpdateEmail } = require('../services/ema
 // Fetch all contacts
 exports.getAllContacts = async (req, res) => {
     try {
-        const contacts = await Contact.find({}, '_id user email content');
+        const contacts = await Contact.find({}, '_id user email');
         res.status(200).json(contacts);
     } catch (error) {
         console.error('Error retrieving contacts:', error);
