@@ -75,12 +75,14 @@
   color: white;
 }
 
-.sidebar li a.active{
+.sidebar li a.active {
   background-color: #907a68;
   color: white;
 }
 
-.sidebar li a.active i, .sidebar li a.active .text,
-.sidebar li a:hover i, .sidebar li a:hover .text {
+.sidebar li a.active i,
+.sidebar li a.active .text,
+.sidebar li a:hover i,
+.sidebar li a:hover .text {
   color: white;
 }

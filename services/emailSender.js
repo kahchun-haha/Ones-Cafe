@@ -50,7 +50,7 @@ async function sendIssueUpdateEmail(toEmail, progress, reply) {
 async function sendNotificationEmail(subject, text, recipients) {
   const mailOptions = {
     from: senderEmail,
-    to: recipients.join(','), // Join multiple emails with commas
+    to: recipients.join(","), // Join multiple emails with commas
     subject: subject,
     text: text,
   };

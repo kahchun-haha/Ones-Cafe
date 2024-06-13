@@ -29,14 +29,14 @@ app.use(express.static(path.join(__dirname, "static"))); // Serve static files
 
 // Use session with MongoStore
 app.use(session({
-  secret: 'your-secret-key', // Replace with your own secret key
+  secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI,
     collectionName: 'sessions'
   }),
-  cookie: { secure: false } // Set to true if using HTTPS
+  cookie: { secure: false }
 }));
 
 // MongoDB connection
@@ -80,7 +80,6 @@ const routes = [
   { path: "/404", view: "404", title: "404 Not Found", layout: "admin", css: ['/css/404.css'], js: ['https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'] },
 ];
 
-// Use the defined routes for menus, users, and orders
 app.use(menuRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);

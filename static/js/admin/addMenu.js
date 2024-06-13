@@ -1,7 +1,7 @@
 document
   .getElementById("add-menu-form")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
     const formData = new FormData(this);
 
     fetch("/api/menus", {

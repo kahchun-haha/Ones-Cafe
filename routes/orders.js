@@ -8,7 +8,6 @@ const {
   getTotalOrderAmount,
   getOrderStatusCounts,
   getAllOrders,
-
 } = require("../controllers/orderController");
 
 const router = express.Router();

@@ -1,4 +1,3 @@
-// orderHistory.js
 async function fetchOrderHistory() {
   try {
     // Fetch the order history
@@ -66,7 +65,9 @@ async function fetchOrderHistory() {
             <td class="order-id">${order._id.slice(-8)}</td>
             <td class="item-details">${itemDetails}</td>
             <td>RM ${order.totalAmount.toFixed(2)}</td>
-            <td class="${statusClass}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</td>
+            <td class="${statusClass}">${
+          order.status.charAt(0).toUpperCase() + order.status.slice(1)
+        }</td>
           `;
         orderHistoryTableBody.appendChild(row);
       });
@@ -92,13 +93,13 @@ async function fetchOrderHistory() {
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const status = button.getAttribute("data-status");
-        const filteredOrders = status === "all"
-          ? orders
-          : orders.filter((order) => order.status === status);
+        const filteredOrders =
+          status === "all"
+            ? orders
+            : orders.filter((order) => order.status === status);
         renderOrders(filteredOrders);
       });
     });
-
   } catch (error) {
     console.error("Failed to fetch order history:", error);
   }
@@ -106,20 +107,20 @@ async function fetchOrderHistory() {
 
 document.addEventListener("DOMContentLoaded", fetchOrderHistory);
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Fetch low stock items
-  fetch('/api/inventory-low-stock')
-    .then(response => response.json())
-    .then(data => {
-      const lowStockContainer = document.getElementById('inventory-low-stock');
-      lowStockContainer.innerHTML = '';
+  fetch("/api/inventory-low-stock")
+    .then((response) => response.json())
+    .then((data) => {
+      const lowStockContainer = document.getElementById("inventory-low-stock");
+      lowStockContainer.innerHTML = "";
 
       if (data.length === 0) {
-        lowStockContainer.innerHTML = '<div>No low stock items found.</div>';
+        lowStockContainer.innerHTML = "<div>No low stock items found.</div>";
       } else {
-        data.forEach(item => {
-          const stockItem = document.createElement('div');
-          stockItem.className = 'stock-item';
+        data.forEach((item) => {
+          const stockItem = document.createElement("div");
+          stockItem.className = "stock-item";
           stockItem.innerHTML = `
             <div class="stock-name">${item.title}</div>
             <div class="count">${item.quantity}</div>
@@ -128,5 +129,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
     })
-    .catch(error => console.error('Error fetching low stock items:', error));
+    .catch((error) => console.error("Error fetching low stock items:", error));
 });

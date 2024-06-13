@@ -6,7 +6,7 @@ const voucherSchema = new mongoose.Schema({
   promocode: { type: String, required: true },
   userId: { type: String, required: true },
   discountPercentage: { type: Number, required: true },
-  used: { type: Boolean, default: false }
+  used: { type: Boolean, default: false },
 });
 
 const Voucher = mongoose.model("Voucher", voucherSchema);

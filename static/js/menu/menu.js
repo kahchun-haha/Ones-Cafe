@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
         `;
-}
+  }
 
   function renderMenu(menuData) {
     const container = document.getElementById("menuContainer");
@@ -114,7 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addToLocalStorage(item) {
       const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-      const existingItemIndex = cart.findIndex(cartItem => cartItem.title === item.title);
+      const existingItemIndex = cart.findIndex(
+        (cartItem) => cartItem.title === item.title
+      );
 
       if (existingItemIndex > -1) {
         cart[existingItemIndex].quantity += item.quantity;

@@ -80,26 +80,24 @@ exports.verifyOtp = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
-      if (!user) {
-          return res.status(401).json({ message: "Invalid credentials" });
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (isMatch) {
-          req.session.isAuthenticated = true;
-          req.session.user = user;
-          res.status(200).json({ user });
-      } else {
-          res.status(401).json({ message: "Invalid credentials" });
-      }
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      req.session.isAuthenticated = true;
+      req.session.user = user;
+      res.status(200).json({ user });
+    } else {
+      res.status(401).json({ message: "Invalid credentials" });
+    }
   } catch (error) {
-      console.error("Error logging in:", error);
-      res.status(500).json({ message: "Error logging in" });
+    console.error("Error logging in:", error);
+    res.status(500).json({ message: "Error logging in" });
   }
 };
-
-
 
 exports.updateUserProfile = async (req, res) => {
   try {
@@ -163,23 +161,25 @@ exports.forgotPassword = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   try {
-      const { email, newPassword } = req.body;
-      const user = await User.findOne({ email });
-      if (!user) {
-          return res.status(400).json({ message: "User not found" });
-      }
+    const { email, newPassword } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
 
-      const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-      user.password = hashedNewPassword; 
-      user.otp = undefined; 
-      user.otpExpires = undefined; 
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedNewPassword;
+    user.otp = undefined;
+    user.otpExpires = undefined;
 
-      await user.save(); // Save the updated user
+    await user.save(); // Save the updated user
 
-      res.status(200).json({ message: "Password reset successfully. You can now log in." });
+    res
+      .status(200)
+      .json({ message: "Password reset successfully. You can now log in." });
   } catch (error) {
-      console.error("Error resetting password:", error);
-      res.status(500).json({ message: "Internal server error" });
+    console.error("Error resetting password:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -292,13 +292,15 @@ exports.updatePoints = async (req, res) => {
     user.loyaltyPoints += pointsEarned;
     await user.save();
 
-    res.status(200).json({ message: "Points updated successfully", newPoints: user.loyaltyPoints });
+    res.status(200).json({
+      message: "Points updated successfully",
+      newPoints: user.loyaltyPoints,
+    });
   } catch (error) {
     console.error("Error updating points:", error);
     res.status(500).json({ message: "Failed to update points", error });
   }
 };
-
 
 exports.getPoints = async (req, res) => {
   const { userId } = req.params;

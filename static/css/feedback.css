@@ -302,17 +302,17 @@
 
 label[for="fullName"],
 label[for="email"] {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
-#report{
+#report {
   width: 100%;
 }
 
-p.p4{
+p.p4 {
   padding-right: 15px
 }
 
-.footer_right .divider{
-  margin:auto
+.footer_right .divider {
+  margin: auto
 }

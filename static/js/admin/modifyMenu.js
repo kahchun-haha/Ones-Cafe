@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("modify-menu-form");
 
-  // Extract parameters from URL
   const urlParams = new URLSearchParams(window.location.search);
   const itemId = urlParams.get("id");
   const category = urlParams.get("category");

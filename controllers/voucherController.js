@@ -12,7 +12,9 @@ exports.claimVoucher = async (req, res) => {
     }
 
     if (user.loyaltyPoints < pointsCost) {
-      return res.status(400).json({ message: "Not enough points to claim this voucher" });
+      return res
+        .status(400)
+        .json({ message: "Not enough points to claim this voucher" });
     }
 
     const currentDate = new Date();
@@ -20,11 +22,11 @@ exports.claimVoucher = async (req, res) => {
 
     let discountPercentage;
     if (promocode === "10%off") {
-      discountPercentage = 0.10;
+      discountPercentage = 0.1;
     } else if (promocode === "birthday") {
       discountPercentage = 0.15;
     } else {
-      discountPercentage = 0.00;
+      discountPercentage = 0.0;
     }
 
     const voucher = new Voucher({
@@ -41,7 +43,12 @@ exports.claimVoucher = async (req, res) => {
     user.loyaltyPoints -= pointsCost;
     await user.save();
 
-    res.status(201).json({ message: "Voucher claimed successfully", newPoints: user.loyaltyPoints });
+    res
+      .status(201)
+      .json({
+        message: "Voucher claimed successfully",
+        newPoints: user.loyaltyPoints,
+      });
   } catch (error) {
     console.error("Error claiming voucher:", error);
     res.status(500).json({ message: "Failed to claim voucher", error });
@@ -74,7 +81,9 @@ exports.applyVoucher = async (req, res) => {
 
     const voucher = await Voucher.findOne({ userId, promocode, used: false });
     if (!voucher) {
-      return res.status(404).json({ message: "Voucher not found or already used" });
+      return res
+        .status(404)
+        .json({ message: "Voucher not found or already used" });
     }
 
     const currentDate = new Date();
@@ -92,7 +101,9 @@ exports.applyVoucher = async (req, res) => {
     user.appliedVoucher = voucher._id;
     await user.save();
 
-    res.status(200).json({ message: "Voucher applied successfully", discountPercentage });
+    res
+      .status(200)
+      .json({ message: "Voucher applied successfully", discountPercentage });
   } catch (error) {
     console.error("Error applying voucher:", error);
     res.status(500).json({ message: "Failed to apply voucher", error });

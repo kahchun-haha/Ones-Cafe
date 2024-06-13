@@ -1,13 +1,13 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const searchInput = document.querySelector('.search-bar'); // Assuming you have a search bar with this class
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.querySelector(".search-bar");
 
   async function fetchOrders() {
     try {
-      const response = await fetch('/api/orders');
+      const response = await fetch("/api/orders");
       const data = await response.json();
       const orders = data.orders;
-      const orderTableBody = document.getElementById('order-table-body');
-      orderTableBody.innerHTML = '';
+      const orderTableBody = document.getElementById("order-table-body");
+      orderTableBody.innerHTML = "";
 
       orders.forEach((order, index) => {
         const itemDetails = order.items
@@ -18,21 +18,24 @@ document.addEventListener('DOMContentLoaded', function () {
           .join("");
 
         const row = document.createElement("tr");
-        row.setAttribute("data-order-id", order._id); // Add data-order-id attribute to the row
+        row.setAttribute("data-order-id", order._id);
         row.innerHTML = `
           <td class="order-index">${index + 1}</td>
           <td class="order-id">${order._id.slice(-8)}</td>
           <td class="item-details">${itemDetails}</td>
           <td>RM ${order.totalAmount.toFixed(2)}</td>
           <td>
-            <button class="button1 order-update" data-order-id="${order._id}">Mark as Done</button>
-            <button class="button1 order-delete" data-order-id="${order._id}">Cancel Order</button>
+            <button class="button1 order-update" data-order-id="${
+              order._id
+            }">Mark as Done</button>
+            <button class="button1 order-delete" data-order-id="${
+              order._id
+            }">Cancel Order</button>
           </td>
         `;
         orderTableBody.appendChild(row);
       });
 
-      // Add event listeners to buttons
       document.querySelectorAll(".order-update").forEach((button) => {
         button.addEventListener("click", async (event) => {
           const orderId = event.target.getAttribute("data-order-id");
@@ -47,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
 
-      // Apply the filter after fetching orders
       filterOrders();
     } catch (error) {
       console.error("Failed to fetch orders:", error);
@@ -57,31 +59,31 @@ document.addEventListener('DOMContentLoaded', function () {
   async function updateOrderStatus(orderId, status) {
     try {
       const response = await fetch(`/api/orders/${orderId}/status`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ status }),
       });
 
       if (response.ok) {
         // Remove the order row from the table
-        const orderRow = document.querySelector(`tr[data-order-id="${orderId}"]`);
+        const orderRow = document.querySelector(
+          `tr[data-order-id="${orderId}"]`
+        );
         if (orderRow) {
           orderRow.remove();
         }
 
-        // Update the order index numbers
         updateOrderIndices();
 
-        // Optionally, update the order history list if it is visible
         if (document.querySelector("#order-history-table-body")) {
-          fetchOrderHistory(); // Refresh order history
+          fetchOrderHistory();
         }
 
         // Refresh inventory data after marking order as done
-        if (status === 'done') {
-          fetchInventory(); // Implement this function to refresh inventory data
+        if (status === "done") {
+          fetchInventory();
         }
       } else {
         console.error("Failed to update order status");
@@ -103,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   async function fetchInventory() {
     try {
-      const response = await fetch('/api/inventory');
+      const response = await fetch("/api/inventory");
       const data = await response.json();
-      const tableBody = document.getElementById('inventory-table-body');
-      tableBody.innerHTML = '';
+      const tableBody = document.getElementById("inventory-table-body");
+      tableBody.innerHTML = "";
 
       data.forEach((item, index) => {
-        const row = document.createElement('tr');
+        const row = document.createElement("tr");
         row.innerHTML = `
           <td>${index + 1}</td>
           <td>${new Date(item.lastUpdated).toLocaleDateString()}</td>
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tableBody.appendChild(row);
       });
     } catch (error) {
-      console.error('Error fetching inventory:', error);
+      console.error("Error fetching inventory:", error);
     }
   }
 
@@ -128,8 +130,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const rows = document.querySelectorAll("#order-table-body tr");
     rows.forEach((row) => {
       const orderId = row.querySelector(".order-id").textContent.toLowerCase();
-      const itemDetails = row.querySelector(".item-details").textContent.toLowerCase();
-      const isVisible = orderId.includes(searchValue) || itemDetails.includes(searchValue);
+      const itemDetails = row
+        .querySelector(".item-details")
+        .textContent.toLowerCase();
+      const isVisible =
+        orderId.includes(searchValue) || itemDetails.includes(searchValue);
       row.style.display = isVisible ? "" : "none";
     });
   }

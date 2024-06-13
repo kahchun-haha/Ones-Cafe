@@ -13,7 +13,7 @@ router.post("/api/admins/createAnnouncement", adminController.createAnnouncement
 router.get("/api/admins/announcements", adminController.getAnnouncements);
 router.delete("/api/admins/deleteAnnouncement/:id", adminController.deleteAnnouncement);
 router.get('/admin/viewFeedback', (req, res) => {
-  res.render('admin/viewFeedback', { 
+  res.render('admin/viewFeedback', {
     title: "Feedback: Ones Café",
     css: [
       'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css',
@@ -31,7 +31,7 @@ router.get('/admin/viewFeedback', (req, res) => {
 });
 
 router.get('/admin/announcements', (req, res) => {
-    res.render('admin/announcements', { 
+    res.render('admin/announcements', {
       title: "Announcements: Ones Café",
       css: [
         'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css',

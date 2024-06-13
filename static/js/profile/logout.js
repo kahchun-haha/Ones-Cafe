@@ -1,26 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const logoutForm = document.getElementById('logoutForm');
+  const logoutForm = document.getElementById("logoutForm");
   if (logoutForm) {
-    logoutForm.addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent the default form submission
-      fetch('/api/users/logout', {
-        method: 'POST',
-        credentials: 'same-origin' // Include cookies with the request
+    logoutForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      fetch("/api/users/logout", {
+        method: "POST",
+        credentials: "same-origin",
       })
-        .then(response => {
+        .then((response) => {
           if (response.ok) {
             // Clear localStorage
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('user');
-            localStorage.removeItem('loyaltyPoints');
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("user");
+            localStorage.removeItem("loyaltyPoints");
             // Redirect to home page after logout
-            window.location.href = '/'; 
+            window.location.href = "/";
           } else {
-            alert('Error logging out');
+            alert("Error logging out");
           }
         })
-        .catch(error => {
-          console.error('Error:', error);
+        .catch((error) => {
+          console.error("Error:", error);
         });
     });
   }

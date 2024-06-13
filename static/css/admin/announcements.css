@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   padding: 0px 15px;
-
 }
 
 .announcement-section {
@@ -26,7 +25,8 @@
   justify-content: start;
 }
 
-.announcement-container h2, .announcements-display h2 {
+.announcement-container h2,
+.announcements-display h2 {
   font-size: 1.5em;
   margin-bottom: 20px;
 }

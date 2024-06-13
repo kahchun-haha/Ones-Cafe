@@ -13,7 +13,6 @@
   justify-content: space-between;
 }
 
-
 .general-stats .total {
   height: 250px;
   flex: 1;
@@ -98,13 +97,11 @@
 }
 
 .latest-stock .stock-details {
-  padding: 0px 15px ;
+  padding: 0px 15px;
   display: flex;
   flex-direction: column;
   font-size: 16px;
 }
-
-
 
 .big-part .total-ord {
   padding: 15px;
@@ -117,7 +114,6 @@
   display: flex;
   align-items: center;
   font-weight: 700;
-
 }
 
 .orders-stats .accepted {
@@ -126,7 +122,6 @@
 
 .orders-stats .declined {
   color: rgb(180, 26, 52);
-
 }
 
 .plus-button {
@@ -238,21 +233,21 @@ td {
   color: #f00;
 }
 
-
 .title-with-image {
   display: flex;
   align-items: center;
 }
 
 .title-with-image .title {
-  margin-right: 10px; /* Adjust as needed */
+  margin-right: 10px;
+  /* Adjust as needed */
 }
 
 .inv-img {
-  width: 40px; /* Adjust as needed */
+  width: 40px;
+  /* Adjust as needed */
   height: auto;
 }
-
 
 
 

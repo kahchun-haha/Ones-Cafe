@@ -187,8 +187,8 @@ td {
 
 .restock-amount,
 .decrease-amount {
-	width:6rem;
-	text-align:center;
+  width: 6rem;
+  text-align: center;
   height: 40px;
   padding-left: 10px;
   font-size: 16px;
@@ -200,30 +200,32 @@ td {
   border-radius: 20px;
 }
 
-.restock-button, .decrease-button {
-	padding: 15px;
-	border: none;
-	border-radius: 10px;
-	cursor: pointer;
-	font-weight: 700;
-	color: #fff;
-	margin: 7px;
-	font-size: 1rem;
+.restock-button,
+.decrease-button {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  margin: 7px;
+  font-size: 1rem;
 }
 
-.restock-button:hover, .decrease-button:hover {
+.restock-button:hover,
+.decrease-button:hover {
   opacity: 0.8;
   transform: scale(1.1);
   transition: all .2s linear;
 }
 
 .restock-button {
-	background-color: #00b14f;
+  background-color: #00b14f;
 
 }
 
 .decrease-button {
-	background-color: #df2525;
+  background-color: #df2525;
 }
 
 

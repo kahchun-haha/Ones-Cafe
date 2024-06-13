@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   otpExpires: { type: Date },
   verified: { type: Boolean, default: false },
   loyaltyPoints: { type: Number, default: 100 },
-  vouchers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Voucher" }]
+  vouchers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Voucher" }],
 });
 
 const User = mongoose.model("User", userSchema);

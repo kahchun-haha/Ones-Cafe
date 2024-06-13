@@ -1,13 +1,14 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const Menu = require('../models/Menu');
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const Menu = require("../models/Menu");
 const Inventory = require("../models/Inventory");
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error("Error connecting to MongoDB:", err));
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 async function populateInventory() {
   try {
@@ -19,8 +20,8 @@ async function populateInventory() {
       for (const item of menu.items) {
         const newInventoryItem = new Inventory({
           menuItemId: item._id,
-          title: item.title, // Setting the title from the Menu item
-          quantity: 100
+          title: item.title,
+          quantity: 100,
         });
         await newInventoryItem.save();
       }

@@ -29,7 +29,13 @@ exports.createOrder = async (req, res) => {
     user.appliedVoucher = null;
     await user.save();
 
-    res.status(201).json({ message: "Order placed successfully", order: newOrder, pointsEarned });
+    res
+      .status(201)
+      .json({
+        message: "Order placed successfully",
+        order: newOrder,
+        pointsEarned,
+      });
   } catch (error) {
     res.status(500).send({ message: "Failed to place order", error });
   }
@@ -59,7 +65,7 @@ exports.updateOrderStatus = async (req, res) => {
     }
 
     // If the order is marked as done, update the inventory
-    if (status === 'done') {
+    if (status === "done") {
       for (const item of order.items) {
         const inventoryItem = await Inventory.findOne({ title: item.title });
         if (inventoryItem) {
@@ -98,25 +104,31 @@ exports.getAllOrders = async (req, res) => {
   }
 };
 
-
 exports.getCompletedOrders = async (req, res) => {
   try {
     const orders = await Order.find().populate("userId");
     res.status(200).send({ orders });
   } catch (error) {
-    res.status(500).send({ message: "Failed to fetch completed orders", error });
+    res
+      .status(500)
+      .send({ message: "Failed to fetch completed orders", error });
   }
 };
 
 exports.getTotalOrderAmount = async (req, res) => {
   try {
     const orders = await Order.find({ status: "done" }).sort({ date: -1 });
-    const totalAmount = orders.reduce((sum, order) => sum + order.totalAmount, 0);
+    const totalAmount = orders.reduce(
+      (sum, order) => sum + order.totalAmount,
+      0
+    );
     const latestOrderAmount = orders.length > 0 ? orders[0].totalAmount : 0;
 
     res.status(200).send({ totalAmount, latestOrderAmount });
   } catch (error) {
-    res.status(500).send({ message: "Failed to fetch total order amount", error });
+    res
+      .status(500)
+      .send({ message: "Failed to fetch total order amount", error });
   }
 };
 
@@ -127,6 +139,8 @@ exports.getOrderStatusCounts = async (req, res) => {
 
     res.status(200).send({ doneCount, cancelledCount });
   } catch (error) {
-    res.status(500).send({ message: "Failed to fetch order status counts", error });
+    res
+      .status(500)
+      .send({ message: "Failed to fetch order status counts", error });
   }
 };

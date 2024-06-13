@@ -124,13 +124,13 @@
 }
 
 .item-actions .quantity-btn {
-    width: 25px;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    background-color: #f8f8f8;
-    cursor: pointer;
-    border-radius: .5rem;
-    font-weight: bold;
+  width: 25px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  border-radius: .5rem;
+  font-weight: bold;
 }
 
 .item-actions .quantity-input {
@@ -194,6 +194,6 @@
   border: 1px solid #ccc;
 }
 
-.item-info h3{
+.item-info h3 {
   text-transform: capitalize;
 }

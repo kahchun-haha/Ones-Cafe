@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
           throw new Error("Network response was not ok");
         }
         console.log("Item deleted successfully");
-        fetchMenuData(); // Refresh menu data after deletion
+        fetchMenuData();
       } catch (error) {
         console.error("Error deleting menu item:", error);
       }

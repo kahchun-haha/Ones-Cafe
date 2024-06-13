@@ -1,51 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const announcementForm = document.getElementById('announcement-form');
-  const announcementsTableBody = document.getElementById('announcements');
+document.addEventListener("DOMContentLoaded", function () {
+  const announcementForm = document.getElementById("announcement-form");
+  const announcementsTableBody = document.getElementById("announcements");
 
-  announcementForm.addEventListener('submit', async function(e) {
+  announcementForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const title = document.getElementById('announcement-title').value;
-    const message = document.getElementById('announcement-message').value;
+    const title = document.getElementById("announcement-title").value;
+    const message = document.getElementById("announcement-message").value;
 
     try {
-      const response = await fetch('/api/admins/createAnnouncement', {
-        method: 'POST',
+      const response = await fetch("/api/admins/createAnnouncement", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, message })
+        body: JSON.stringify({ title, message }),
       });
 
       if (response.ok) {
         const announcement = await response.json();
-        displayAnnouncement(announcement, announcementsTableBody.children.length + 1);
+        displayAnnouncement(
+          announcement,
+          announcementsTableBody.children.length + 1
+        );
         announcementForm.reset();
       } else {
         const error = await response.json();
-        console.error('Error response from server:', error);
-        alert('Error creating announcement: ' + error.message);
+        console.error("Error response from server:", error);
+        alert("Error creating announcement: " + error.message);
       }
     } catch (error) {
-      console.error('Error creating announcement:', error);
-      alert('Error creating announcement');
+      console.error("Error creating announcement:", error);
+      alert("Error creating announcement");
     }
   });
 
   async function fetchAnnouncements() {
     try {
-      const response = await fetch('/api/admins/announcements');
+      const response = await fetch("/api/admins/announcements");
       const announcements = await response.json();
-      announcements.forEach((announcement, index) => displayAnnouncement(announcement, index + 1));
+      announcements.forEach((announcement, index) =>
+        displayAnnouncement(announcement, index + 1)
+      );
     } catch (error) {
-      console.error('Error fetching announcements:', error);
+      console.error("Error fetching announcements:", error);
     }
   }
 
   function displayAnnouncement(announcement, index) {
-    const row = document.createElement('tr');
+    const row = document.createElement("tr");
     const date = new Date(announcement.create_time);
-    const formattedDate = date instanceof Date && !isNaN(date) ? date.toLocaleString() : 'Invalid Date';
+    const formattedDate =
+      date instanceof Date && !isNaN(date)
+        ? date.toLocaleString()
+        : "Invalid Date";
 
     row.innerHTML = `
       <td>${index}</td>
@@ -59,23 +67,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
   fetchAnnouncements();
 
-  document.getElementById('announcements-table').addEventListener('click', async function(e) {
-    if (e.target.classList.contains('delete-button')) {
-      const announcementId = e.target.dataset.id;
-      try {
-        const response = await fetch(`/api/admins/deleteAnnouncement/${announcementId}`, {
-          method: 'DELETE'
-        });
-        if (response.ok) {
-          e.target.closest('tr').remove();
-          alert('Announcement deleted successfully');
-        } else {
-          alert('Error deleting announcement');
+  document
+    .getElementById("announcements-table")
+    .addEventListener("click", async function (e) {
+      if (e.target.classList.contains("delete-button")) {
+        const announcementId = e.target.dataset.id;
+        try {
+          const response = await fetch(
+            `/api/admins/deleteAnnouncement/${announcementId}`,
+            {
+              method: "DELETE",
+            }
+          );
+          if (response.ok) {
+            e.target.closest("tr").remove();
+            alert("Announcement deleted successfully");
+          } else {
+            alert("Error deleting announcement");
+          }
+        } catch (error) {
+          console.error("Error deleting announcement:", error);
+          alert("Error deleting announcement");
         }
-      } catch (error) {
-        console.error('Error deleting announcement:', error);
-        alert('Error deleting announcement');
       }
-    }
-  });
+    });
 });
