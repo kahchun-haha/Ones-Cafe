@@ -37,36 +37,23 @@ function displayFeedback(type, data, isIssue = false) {
     const div = document.createElement("div");
     div.className = "feedback-item";
 
+    // Conditionally include email field based on type
     div.innerHTML = `
       <strong>ID:</strong> ${item._id}<br>
       <strong>User:</strong> ${item.user}<br>
-      <strong>Email:</strong> ${item.email}<br>
+      ${type === "contacts" || isIssue ? `<strong>Email:</strong> ${item.email}<br>` : ""}
       ${type !== "contacts" ? `<strong>Content:</strong> ${content}<br>` : ""}
       ${
         isIssue
           ? `
       <strong>Progress:</strong>
-      <select id="progress-${item._id}" class="progress-select" ${
-              item.progress === "Solved" ? "disabled" : ""
-            }>
-        <option value="Pending" ${
-          item.progress === "Pending" ? "selected" : ""
-        }>Pending</option>
-        <option value="In Progress" ${
-          item.progress === "In Progress" ? "selected" : ""
-        }>In Progress</option>
-        <option value="Solved" ${
-          item.progress === "Solved" ? "selected" : ""
-        }>Solved</option>
+      <select id="progress-${item._id}" class="progress-select" ${item.progress === "Solved" ? "disabled" : ""}>
+        <option value="Pending" ${item.progress === "Pending" ? "selected" : ""}>Pending</option>
+        <option value="In Progress" ${item.progress === "In Progress" ? "selected" : ""}>In Progress</option>
+        <option value="Solved" ${item.progress === "Solved" ? "selected" : ""}>Solved</option>
       </select><br>
-      <strong>Reply:</strong> <input type="text" id="reply-${
-        item._id
-      }" class="reply-input" value="${item.reply || ""}" ${
-              item.progress === "Solved" ? "disabled" : ""
-            }><br>
-      <button id="update-${item._id}" onclick="updateIssue('${item._id}')" ${
-              item.progress === "Solved" ? "disabled" : ""
-            }>Update</button>`
+      <strong>Reply:</strong> <input type="text" id="reply-${item._id}" class="reply-input" value="${item.reply || ""}" ${item.progress === "Solved" ? "disabled" : ""}><br>
+      <button id="update-${item._id}" onclick="updateIssue('${item._id}')" ${item.progress === "Solved" ? "disabled" : ""}>Update</button>`
           : ""
       }
       <hr>

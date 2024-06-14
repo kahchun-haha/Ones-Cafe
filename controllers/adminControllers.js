@@ -24,7 +24,7 @@ exports.getAllContacts = async (req, res) => {
 // Fetch all suggestions
 exports.getAllSuggestions = async (req, res) => {
   try {
-    const suggestions = await Suggestion.find({}, "_id user email request");
+    const suggestions = await Suggestion.find({}, "_id user request");
     res.status(200).json(suggestions);
   } catch (error) {
     console.error("Error retrieving suggestions:", error);
@@ -49,7 +49,7 @@ exports.getAllIssues = async (req, res) => {
 // Fetch all reviews
 exports.getAllReviews = async (req, res) => {
   try {
-    const reviews = await Review.find({}, "_id user email content ratings");
+    const reviews = await Review.find({}, "_id user ratings create_time");
     res.status(200).json(reviews);
   } catch (error) {
     console.error("Error retrieving reviews:", error);

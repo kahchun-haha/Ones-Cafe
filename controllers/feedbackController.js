@@ -6,12 +6,12 @@ const Review = require("../models/Review");
 exports.handleContact = async (req, res) => {
   console.log("Received contact request:", req.body);
   try {
-    const { fullName, phoneNumber } = req.body;
+    const { fullName, email } = req.body;
     const user = "visitor-" + new Date().getTime();
     const contact = new Contact({
       user: user,
       fullName: fullName,
-      phoneNumber: phoneNumber,
+      email: email,
       create_time: new Date(),
     });
     await contact.save();
